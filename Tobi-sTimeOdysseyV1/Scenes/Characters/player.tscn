@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Chararcters/Player.cs" type="Script" id=1]
+
+[node name="player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+checkColliderContainerPath = NodePath("checkColliderContainer")
+killerContainerPath = NodePath("killerContainer")
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+
+[node name="checkColliderContainer" type="Node2D" parent="."]
+
+[node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.0472
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.523599
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.523599
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.0472
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="killerContainer" type="Node2D" parent="."]
+
+[node name="killer" type="RayCast2D" parent="killerContainer"]
+position = Vector2( 0, -16 )
+enabled = true
+cast_to = Vector2( 50, 0 )
+
+[node name="killer2" type="RayCast2D" parent="killerContainer"]
+position = Vector2( 0, 16 )
+enabled = true
+cast_to = Vector2( 50, 0 )

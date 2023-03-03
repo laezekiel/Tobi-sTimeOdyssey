@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Chararcters/Enemy.cs" type="Script" id=1]
+
+[node name="Enemy" type="KinematicBody2D"]
+script = ExtResource( 1 )
+checkColliderContainerPath = NodePath("checkColliderContainer")
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+
+[node name="range" type="Polygon2D" parent="body"]
+z_index = -1
+color = Color( 1, 0.772549, 0, 0.501961 )
+polygon = PoolVector2Array( 0, 0, 248, -104, 260, -79, 267, -53, 270, -31, 272, 0, 270, 31, 267, 53, 260, 79, 248, 104 )
+
+[node name="checkColliderContainer" type="Node2D" parent="."]
+
+[node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.392699
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.197222
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.197222
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.392699
+enabled = true
+cast_to = Vector2( 272, 0 )
