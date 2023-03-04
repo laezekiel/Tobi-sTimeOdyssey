@@ -1,27 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Chararcters/Player.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
 
 [node name="player" type="KinematicBody2D"]
+collision/safe_margin = 1.0
 script = ExtResource( 1 )
 checkColliderContainerPath = NodePath("checkColliderContainer")
 killerContainerPath = NodePath("killerContainer")
 
-[node name="collider" type="CollisionPolygon2D" parent="."]
+[node name="body" type="Polygon2D" parent="."]
+color = Color( 0.164706, 0, 0.211765, 1 )
 polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
 
-[node name="body" type="Polygon2D" parent="."]
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -7, -15, 7, -15, 15, -7, 15, 7, 7, 15, -7, 15, -15, 7, -15, -7 )
 
 [node name="checkColliderContainer" type="Node2D" parent="."]
 
 [node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
-enabled = true
-cast_to = Vector2( 24, 0 )
-
-[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
-rotation = 1.0472
 enabled = true
 cast_to = Vector2( 24, 0 )
 
@@ -35,19 +32,34 @@ rotation = -0.523599
 enabled = true
 cast_to = Vector2( 24, 0 )
 
-[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
-rotation = -1.0472
-enabled = true
-cast_to = Vector2( 24, 0 )
-
 [node name="killerContainer" type="Node2D" parent="."]
 
 [node name="killer" type="RayCast2D" parent="killerContainer"]
 position = Vector2( 0, -16 )
 enabled = true
-cast_to = Vector2( 50, 0 )
+cast_to = Vector2( 100, 0 )
 
 [node name="killer2" type="RayCast2D" parent="killerContainer"]
 position = Vector2( 0, 16 )
 enabled = true
-cast_to = Vector2( 50, 0 )
+cast_to = Vector2( 100, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="ambiance" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+texture_scale = 0.5
+color = Color( 1, 1, 1, 0.501961 )
+mode = 2
+shadow_enabled = true
+shadow_filter = 1
+
+[node name="ambiance2" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+texture_scale = 2.0
+color = Color( 1, 1, 1, 0.25098 )
+mode = 2
+shadow_enabled = true
+shadow_filter = 1

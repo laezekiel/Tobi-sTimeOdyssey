@@ -8,21 +8,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
 
     public class Player : Character
     {
-        #region singleton
-        static private Player instance;
-		
-		static public Player GetInstance() 
-        {
-            if (instance == null) instance = new Player ();
-            return instance;
-
-        }
-
-        static private Player Instance { get {return GetInstance(); } }
-        #endregion
-
-        private Player (): base() {}
-
         [Export]
         private NodePath
             killerContainerPath;
@@ -44,15 +29,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         public override void _Ready()
         {
             base._Ready();
-            #region singleton
-            if (instance != null){  
-                QueueFree();
-                GD.Print(nameof(Player) + " Instance already exist, destroying the last added.");
-                return;
-            }
-            
-            instance = this;
-            #endregion
         }
 
         #region State Machine
@@ -63,6 +39,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         #endregion
         // Action 
         #region Game State Action
+        protected override void DoGameModePlay()
+        {
+            base.DoGameModePlay();
+        }
         protected override void DoGameModeLose()
         {
             Modulate = POC.Invisible;
@@ -87,7 +67,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
                     target.QueueFree();
                 }
             }
-            MoveAndCollide(new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)).Normalized());
+            MoveAndCollide(new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)).Normalized() * 25);
             foreach (RayCast2D check in checkCollider)
             {
                 if (check.IsColliding())
@@ -102,9 +82,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
 
         protected override void Dispose(bool pDisposing)
         {
-            #region singleton
-            if (pDisposing && instance == this) instance = null;
-            #endregion
             base.Dispose(pDisposing);
         }
     }

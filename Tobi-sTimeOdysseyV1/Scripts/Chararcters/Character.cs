@@ -32,7 +32,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
 		public override void _Ready()
 		{
 			base._Ready();
-			Init();
+            Init();
 		}
 
         #region State Machine
@@ -96,9 +96,9 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         #endregion
         #endregion
 
-        public override void _Process(float delta)
+        public override void _PhysicsProcess(float delta)
         {
-            base._Process(delta);
+            base._PhysicsProcess(delta);
             gameState();
         }
 	}

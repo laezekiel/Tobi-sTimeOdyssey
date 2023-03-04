@@ -1,22 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Chararcters/Enemy.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sight/guardSight.png" type="Texture" id=2]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+cull_mode = 2
+polygon = PoolVector2Array( 16, -8, 8, -16, -8, -16, -16, -8, -16, 8, -8, 16, 8, 16, 16, 8, 16, 7.39063, 0, 0.765625, 0, -0.765625, 16, -7.39063 )
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 1 )
 checkColliderContainerPath = NodePath("checkColliderContainer")
 
-[node name="collider" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
-
 [node name="body" type="Polygon2D" parent="."]
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.164706, 0, 0.211765, 1 )
 polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
 
-[node name="range" type="Polygon2D" parent="body"]
-z_index = -1
-color = Color( 1, 0.772549, 0, 0.501961 )
-polygon = PoolVector2Array( 0, 0, 248, -104, 260, -79, 267, -53, 270, -31, 272, 0, 270, 31, 267, 53, 260, 79, 248, 104 )
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -9, -17, 9, -17, 17, -9, 17, 9, 9, 17, -9, 17, -17, 9, -17, -9 )
 
 [node name="checkColliderContainer" type="Node2D" parent="."]
 
@@ -43,3 +43,12 @@ cast_to = Vector2( 272, 0 )
 rotation = 0.392699
 enabled = true
 cast_to = Vector2( 272, 0 )
+
+[node name="sight" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+mode = 2
+shadow_enabled = true
+shadow_filter = 1
+
+[node name="shadow" type="LightOccluder2D" parent="."]
+occluder = SubResource( 1 )

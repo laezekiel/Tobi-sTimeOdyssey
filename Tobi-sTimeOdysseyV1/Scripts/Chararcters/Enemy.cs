@@ -45,7 +45,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
             {
                 if (check.GetCollider() is Player)
                 {
-                    Player.GetInstance().SetGameModeLose();
+                    MOC.Quit(this);
                 }
             }
         }
