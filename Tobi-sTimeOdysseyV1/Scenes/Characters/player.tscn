@@ -46,7 +46,7 @@ cast_to = Vector2( 100, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.75, 0.75 )
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="ambiance" type="Light2D" parent="."]
 texture = ExtResource( 2 )
