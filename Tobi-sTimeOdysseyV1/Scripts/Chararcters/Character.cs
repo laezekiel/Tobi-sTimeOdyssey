@@ -16,8 +16,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
 			checkCollider = new List<RayCast2D>();
 
 		protected Action
-			gameState,
-			characterState;
+			gameState;
 
 		protected virtual void Init()
         {
@@ -37,7 +36,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
 
         #region State Machine
         // Mode 
-        #region game State Mode
         public virtual void SetGameModePlay()
         {
 		    gameState = DoGameModePlay;
@@ -54,22 +52,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         {
 		    gameState = DoGameModeWin;
         }
-        #endregion
-        #region character State mode
-        public virtual void SetCharacterModeMove()
-        {
-            characterState = DoCharacterModeMove;
-        }
-        public virtual void SetCharacterModeStatic()
-        {
-            characterState = DoCharacterModeStatic;
-        }
-        #endregion
         // Action 
-        #region Game State Action
         protected virtual void DoGameModePlay()
         {
-            characterState();
+
         }
 	    protected virtual void DoGameModePause()
         {
@@ -83,17 +69,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         {
 
         }
-        #endregion
-        #region character State action
-        protected virtual void DoCharacterModeMove()
-        {
-
-        }
-        protected virtual void DoCharacterModeStatic()
-        {
-
-        }
-        #endregion
         #endregion
 
         public override void _PhysicsProcess(float delta)

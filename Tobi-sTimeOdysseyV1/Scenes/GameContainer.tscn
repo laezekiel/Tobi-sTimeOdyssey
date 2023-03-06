@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Managers/PlayerManager.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/ground/ground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Managers/FieldManager.cs" type="Script" id=5]
-[ext_resource path="res://Scenes/Walls/Wall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Characters/Enemy.tscn" type="PackedScene" id=7]
 
 [node name="GameContainer" type="Node2D"]
@@ -20,19 +19,15 @@ playerContainerPath = NodePath("../../player")
 
 [node name="FieldManager" type="Node" parent="GameManager"]
 script = ExtResource( 5 )
-wallFactory = ExtResource( 6 )
 enemyfactory = ExtResource( 7 )
 groundPath = NodePath("../../ground")
 enemiesPath = NodePath("../../enemies")
-wallsPath = NodePath("../../walls")
 
 [node name="ground" parent="." instance=ExtResource( 4 )]
 
 [node name="player" type="Node2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="."]
-
-[node name="walls" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )

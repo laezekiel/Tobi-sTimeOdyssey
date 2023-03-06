@@ -27,14 +27,12 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         [Export]
         private PackedScene
-            wallFactory,
             enemyfactory;
 
         [Export]
         private NodePath
             groundPath,
-            enemiesPath,
-            wallsPath;
+            enemiesPath;
 
         private Node2D
             enemies,
@@ -51,7 +49,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             base.Init();
             ground = GetNode<TileMap>(groundPath);
             enemies = GetNode<Node2D>(enemiesPath);
-            walls = GetNode<Node2D>(wallsPath);
             SetField();
         }
 
@@ -76,14 +73,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         private void SetField()
         {
-            PlayerManager.GetInstance().Player.GlobalPosition = (GameManager.Level.Player * OFFSET * 2) + Vector2.One * OFFSET;
-            foreach (List<int> enemy in GameManager.Level.Enemies)
-            {
-                Enemy lEnemy = enemyfactory.Instance<Enemy>();
-                enemies.AddChild(lEnemy);
-                lEnemy.GlobalPosition = (new Vector2(enemy[1], enemy[0]) * OFFSET * 2) + Vector2.One * OFFSET;
-                lEnemy.RotationDegrees = enemy[2];
-            }
+            int lEnemiesIndex = 0;
             for (int i = 0; i < GameManager.Level.Ground.Count; i++)
             {
                 for (int j = 0; j < GameManager.Level.Ground[i].Length; j++)
@@ -91,9 +81,25 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                     switch (GameManager.Level.Ground[i][j])
                     {
                         case '#':
-                            Wall lWall = wallFactory.Instance<Wall>();
-                            walls.AddChild(lWall);
-                            lWall.GlobalPosition = (new Vector2(j, i) * OFFSET * 2) + Vector2.One * OFFSET;
+                            ground.SetCell(j, i, 1);
+                            break;
+                        case '@':
+                            PlayerManager.GetInstance().Player.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
+                            ground.SetCell(j, i, 0);
+                            break;
+                        case '.':
+                            Enemy lEnemy = enemyfactory.Instance<Enemy>();
+                            enemies.AddChild(lEnemy);
+                            lEnemy.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
+                            lEnemy.GlobalRotationDegrees = GameManager.Level.Enemies_Rotation[lEnemiesIndex][0];
+                            lEnemy.rotation = GameManager.Level.Enemies_Rotation[lEnemiesIndex];
+                            lEnemy.path = GameManager.Level.Enemies_Path[lEnemiesIndex];
+                            for (int k = 0; k < lEnemy.path.Count; k++)
+                            {
+                                lEnemy.path[k] = lEnemy.path[k] * OFFSET * 2 + Vector2.One * OFFSET;
+                            }
+                            ground.SetCell(j, i, 0);
+                            lEnemiesIndex++;
                             break;
                         case ' ':
                             ground.SetCell(j, i, 0);

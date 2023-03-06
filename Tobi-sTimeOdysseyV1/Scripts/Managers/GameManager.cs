@@ -24,7 +24,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         private GameManager (): base() {}
 
-        private static int _index = Levels_JSON.GetStart();
+        private static int _index = 1;// Levels_JSON.GetStart();
 
         public static int Index { get { return _index; } private set { _index = value; } }
 
