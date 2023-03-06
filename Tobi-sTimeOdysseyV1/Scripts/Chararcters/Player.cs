@@ -15,6 +15,9 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         private List<RayCast2D>
             killerContainer = new List<RayCast2D>();
 
+        private Action
+            playerState;
+
         protected override void Init()
         {
             foreach (RayCast2D killer in GetNode<Node2D>(killerContainerPath).GetChildren())
@@ -22,8 +25,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
                 killerContainer.Add(killer);
                 killer.AddException(this);
             }
+            SetPlayerModeStatic();
             base.Init();
-            SetCharacterModeStatic();
         }
 
         public override void _Ready()
@@ -36,28 +39,38 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
         #region game State Mode
         #endregion
         #region character State mode
+        public void SetPlayerModeMove()
+        {
+            playerState = DoPlayerModeMove;
+        }
+        public void SetPlayerModeStatic()
+        {
+            playerState = DoplayerModeStatic;
+        }
         #endregion
         // Action 
         #region Game State Action
         protected override void DoGameModePlay()
         {
             base.DoGameModePlay();
+            playerState();
         }
+
         protected override void DoGameModeLose()
         {
-            Modulate = POC.Invisible;
+            Visible = false;
         }
         #endregion
         #region character State action
-        protected override void DoCharacterModeStatic()
+        protected void DoplayerModeStatic()
         {
             LookAt(GetGlobalMousePosition());
             if (Input.IsActionJustPressed("Move_Player"))
             {
-                SetCharacterModeMove();
+                SetPlayerModeMove();
             }
         }
-        protected override void DoCharacterModeMove()
+        protected void DoPlayerModeMove()
         {
             foreach (RayCast2D killer in killerContainer)
             {
@@ -72,7 +85,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Characters
             {
                 if (check.IsColliding())
                 {
-                    SetCharacterModeStatic();
+                    SetPlayerModeStatic();
                     break;
                 }
             }
