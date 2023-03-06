@@ -32,25 +32,26 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             {
                 _ground.Add(ground.ToString());
             }
-            Godot.Collections.Array lEnemys = lMap["enemys"] as Godot.Collections.Array;
-            List<Godot.Collections.Array> lEnemysPosition = new List<Godot.Collections.Array>();
-            _enemys = new List<List<int>>();
-            int lenemyIndex = 0;
-            foreach (var e in lEnemys)
+            Godot.Collections.Array lEnemies = lMap["enemys"] as Godot.Collections.Array;
+            int lEnemiesIndex = 0;
+            _enemyRotation = new List<List<float>>();
+            _enemyPath = new List<List<Vector2>>();
+            foreach (Godot.Collections.Dictionary enemy in lEnemies)
             {
-                lEnemysPosition.Add(e as Godot.Collections.Array);
-            }
-            foreach (var eValue in lEnemysPosition)
-            {
-                _enemys.Add(new List<int>());
-                foreach (var val in eValue)
+                Godot.Collections.Array lEnemyRotation = enemy["rotation"] as Godot.Collections.Array;
+                _enemyRotation.Add(new List<float>());
+                foreach (var rotation in lEnemyRotation)
                 {
-                    _enemys[lenemyIndex].Add(val.ToString().ToInt());
+                    _enemyRotation[lEnemiesIndex].Add(rotation.ToString().ToInt());
                 }
-                lenemyIndex++;
+                Godot.Collections.Array lEnemyPath = enemy["path"] as Godot.Collections.Array;
+                _enemyPath.Add(new List<Vector2>());
+                foreach (Godot.Collections.Array path in lEnemyPath)
+                {
+                    _enemyPath[lEnemiesIndex].Add(new Vector2(path[1].ToString().ToInt(), path[0].ToString().ToInt()));
+                }
+                lEnemiesIndex++;
             }
-            Godot.Collections.Array lPlayer = lMap["player"] as Godot.Collections.Array;
-            _player = new Vector2(lPlayer[1].ToString().ToInt(), lPlayer[0].ToString().ToInt());
         }
 
         private int 
@@ -58,10 +59,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             _skin;
         private List<string>
             _ground;
-        private List<List<int>>
-            _enemys;
-        private Vector2
-            _player;
+        private List<List<float>>
+            _enemyRotation;
+        private List<List<Vector2>>
+            _enemyPath;
 
         /// <summary>
         /// return the value of Par in int
@@ -76,12 +77,12 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
         /// </summary>
         public List<string> Ground { get { return _ground; } }
         /// <summary>
-        /// return the value of Enemys in a list of a list of int
+        /// return the value of Enemys Position in a list of list of int
         /// </summary>
-        public List<List<int>> Enemies { get { return _enemys; } }
+        public List<List<float>> Enemies_Rotation { get { return _enemyRotation; } }
         /// <summary>
-        /// return the value of Player in a Vector 2 
+        /// return the value of Enemys Rotation in a list of list of Vector 2
         /// </summary>
-        public Vector2 Player { get { return _player; } }
+        public List<List<Vector2>> Enemies_Path { get { return _enemyPath; } }
     }
 }
