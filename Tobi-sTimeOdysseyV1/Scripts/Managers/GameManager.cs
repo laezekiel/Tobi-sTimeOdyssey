@@ -1,4 +1,3 @@
-using Com.IronicEntertainment.TobisTimeOdyssey.Characters;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs;
 using Godot;
@@ -24,7 +23,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         private GameManager (): base() {}
 
-        private static int _index = 1;// Levels_JSON.GetStart();
+        private static int _index = Levels_JSON.GetStart();
 
         public static int Index { get { return _index; } private set { _index = value; } }
 
@@ -46,6 +45,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             
             instance = this;
             #endregion
+            SetGameModePlay();
+            FieldManager.GetInstance().SetField();
         }
 
         #region State Machine
@@ -54,11 +55,17 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         {
             base.SetGameModePlay();
             PlayerManager.GetInstance().SetGameModePlay();
+            EnemyManager.GetInstance().SetGameModePlay();
+            SkinManager.GetInstance().SetGameModePlay();
+            FieldManager.GetInstance().SetGameModePlay();
         }
         public override void SetGameModePause()
         {
             base.SetGameModePause();
             PlayerManager.GetInstance().SetGameModePause();
+            EnemyManager.GetInstance().SetGameModePause();
+            SkinManager.GetInstance().SetGameModePause();
+            FieldManager.GetInstance().SetGameModePause();
         }
         // Action
         protected override void DoGameModePlay()
@@ -67,6 +74,18 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             if (Input.IsActionJustPressed("pause"))
             {
                 SetGameModePause();
+            }
+            if (EnemyManager.GetInstance().Number == 0)
+            {
+                Index++;
+                if (Index < AllLevels.GetAllLevel().Count)
+                {
+                    FieldManager.GetInstance().Retry();
+                }
+                else
+                {
+                    MOC.Quit(this);
+                }
             }
         }
         protected override void DoGameModePause()
