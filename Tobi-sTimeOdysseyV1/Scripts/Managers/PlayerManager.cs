@@ -1,4 +1,4 @@
-using Com.IronicEntertainment.TobisTimeOdyssey.Characters;
+using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
@@ -63,20 +63,26 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         public override void SetGameModePlay()
         {
             base.SetGameModePlay();
-
+            Player.SetGameModePlay();
         }
         public override void SetGameModePause()
         {
             base.SetGameModePause();
-
+            Player.SetGameModePause();
         }
         // Action
         #endregion
+
+        public void ResetPlayer()
+        {
+            Player.SetPlayerModeStatic();
+        }
 
         public Player CreatePlayer()
         {
             if (_player == null)
             {
+                playerContainer = GetNode<Node2D>(playerContainerPath);
                 _player = playerFactory.Instance<Player>();
                 playerContainer.AddChild(_player);
             }

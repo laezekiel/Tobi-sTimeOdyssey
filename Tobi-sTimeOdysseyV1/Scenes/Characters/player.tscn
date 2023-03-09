@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Chararcters/Player.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Elements/Chararcters/Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Character/Tobi/TobiIdle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Character/Tobi/TobiSpotted.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "caught",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "living",
+"speed": 5.0
+} ]
 
 [node name="player" type="KinematicBody2D"]
 collision/safe_margin = 1.0
@@ -9,9 +24,12 @@ script = ExtResource( 1 )
 checkColliderContainerPath = NodePath("checkColliderContainer")
 killerContainerPath = NodePath("killerContainer")
 
-[node name="body" type="Polygon2D" parent="."]
-color = Color( 0.164706, 0, 0.211765, 1 )
-polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+[node name="body" type="AnimatedSprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 0.675, 0.675 )
+frames = SubResource( 1 )
+animation = "living"
+offset = Vector2( 0.5, 0.5 )
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -7, -15, 7, -15, 15, -7, 15, 7, 7, 15, -7, 15, -15, 7, -15, -7 )
@@ -19,18 +37,38 @@ polygon = PoolVector2Array( -7, -15, 7, -15, 15, -7, 15, 7, 7, 15, -7, 15, -15, 
 [node name="checkColliderContainer" type="Node2D" parent="."]
 
 [node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.5708
 enabled = true
-cast_to = Vector2( 24, 0 )
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.0472
+enabled = true
+cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
-rotation = 0.523599
-enabled = true
-cast_to = Vector2( 24, 0 )
-
-[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
 rotation = -0.523599
 enabled = true
-cast_to = Vector2( 24, 0 )
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.523599
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider6" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.0472
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider7" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 20, 0 )
 
 [node name="killerContainer" type="Node2D" parent="."]
 
