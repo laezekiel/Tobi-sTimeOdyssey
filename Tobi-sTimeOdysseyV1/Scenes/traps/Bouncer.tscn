@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Elements/Traps/Bouncer.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
+
+[node name="Bouncer" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color( 0.407843, 0.917647, 0.203922, 1 )
+polygon = PoolVector2Array( -36, -11, -32, -11, -32, -32, -28, -32, -24, -28, -24, 28, -28, 32, -32, 32, -32, 11, -36, 11 )
+
+[node name="body2" type="Polygon2D" parent="body"]
+color = Color( 0, 0, 0, 0.501961 )
+polygon = PoolVector2Array( -34, -9, -30, -9, -30, -30, -28, -30, -26, -28, -26, 28, -28, 30, -30, 30, -30, 9, -34, 9 )
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -36, -11, -32, -11, -32, -32, -26, -28, -26, 28, -32, 32, -32, 11, -36, 11 )
+
+[node name="ambiance2" type="Light2D" parent="."]
+position = Vector2( -32, 0 )
+texture = ExtResource( 2 )
+texture_scale = 2.0
+color = Color( 1, 1, 1, 0.25098 )
+mode = 2
+shadow_enabled = true

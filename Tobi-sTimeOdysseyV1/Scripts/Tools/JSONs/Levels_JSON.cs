@@ -15,7 +15,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 		/// </summary>
 		public enum Field
 		{
-			time,
+			era,
 			skin,
 			map
 		}
@@ -24,7 +24,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 			pathToJSON = "res://Scripts/config/leveldesign.json",
 			START_LEVEL = "StartLevel",
 			LEVELS = "levels",
-			TIME = "time",
+			ERA = "era",
 			MAP = "map",
 			SKIN = "skin";
 
@@ -97,8 +97,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             Init();
             switch (pField)
             {
-                case Field.time:
-					return levels[pLevel][TIME];
+                case Field.era:
+					return levels[pLevel][ERA];
 				case Field.skin:
 					return levels[pLevel][SKIN];
 				case Field.map:
