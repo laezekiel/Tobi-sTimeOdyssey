@@ -75,7 +75,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
             {
                 if (check.IsColliding() && !(check.GetCollider() is HeatWall))
                 {
-                    GlobalPosition = FieldManager.GetInstance().GetCellLocation(this);
+                    GlobalPosition = POC.Field_Manager.GetCellLocation(this);
                     break;
                 }
                 else
@@ -117,7 +117,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
                     }
                     else if (check.GetCollider() is NailsWall)
                     {
-                        FieldManager.GetInstance().Retry();
+                        MOC.Retry();
                     }
 
                 }

@@ -29,23 +29,40 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         #region State Machine
         // Mode
         public virtual void SetGameModePlay()
-		{
-			gameState = DoGameModePlay;
-		}
-		public virtual void SetGameModePause()
-		{
-			gameState = DoGameModePause;
-		}
-		// Action
-		protected virtual void DoGameModePlay()
-		{
+        {
+            gameState = DoGameModePlay;
+        }
+        public virtual void SetGameModePause()
+        {
+            gameState = DoGameModePause;
+        }
+        public virtual void SetGameModeLose()
+        {
+            gameState = DoGameModeLose;
+        }
+        public virtual void SetGameModeWin()
+        {
+            gameState = DoGameModeWin;
+        }
+        // Action 
+        protected virtual void DoGameModePlay()
+        {
 
-		}
-		protected virtual void DoGameModePause()
-		{
+        }
+        protected virtual void DoGameModePause()
+        {
 
-		}
+        }
+        protected virtual void DoGameModeLose()
+        {
+
+        }
+        protected virtual void DoGameModeWin()
+        {
+
+        }
 		#endregion
+
 	}
 
 }

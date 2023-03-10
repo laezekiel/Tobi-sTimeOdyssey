@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Managers/PlayerManager.cs" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/traps/NailsWall.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/Managers/SkinManager.cs" type="Script" id=11]
 [ext_resource path="res://Scripts/Managers/EnemyManager.cs" type="Script" id=12]
+[ext_resource path="res://Scripts/Managers/TrapManager.cs" type="Script" id=13]
 
 [node name="GameContainer" type="Node2D"]
 
@@ -31,11 +32,14 @@ bouncerFactory = ExtResource( 8 )
 nailsWallFactory = ExtResource( 10 )
 heatWallFactory = ExtResource( 9 )
 groundPath = NodePath("../../ground")
-trapsPath = NodePath("../../traps")
 
 [node name="EnemyManager" type="Node" parent="GameManager"]
 script = ExtResource( 12 )
 enemiesPath = NodePath("../../enemies")
+
+[node name="TrapManager" type="Node" parent="GameManager"]
+script = ExtResource( 13 )
+trapsPath = NodePath("../../traps")
 
 [node name="SkinManager" type="Node" parent="GameManager"]
 script = ExtResource( 11 )

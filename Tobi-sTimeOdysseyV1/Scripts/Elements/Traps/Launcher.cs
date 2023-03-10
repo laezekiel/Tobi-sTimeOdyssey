@@ -95,7 +95,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
             }
             if (killer.GetCollider() is Player)
             {
-                FieldManager.GetInstance().Retry();
+                MOC.Retry();
             }
         }
         protected override void DoTrapModeOff()

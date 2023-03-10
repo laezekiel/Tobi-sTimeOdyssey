@@ -42,30 +42,60 @@ enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
-rotation = -1.0472
+rotation = -1.309
 enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
-rotation = -0.523599
+rotation = -1.0472
 enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.785398
 enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
-rotation = 0.523599
+rotation = -0.523599
 enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider6" type="RayCast2D" parent="checkColliderContainer"]
-rotation = 1.0472
+rotation = -0.261799
 enabled = true
 cast_to = Vector2( 20, 0 )
 
 [node name="CheckCollider7" type="RayCast2D" parent="checkColliderContainer"]
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider8" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.261799
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider9" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.523599
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider10" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.785398
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider11" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.0472
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider12" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.309
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider13" type="RayCast2D" parent="checkColliderContainer"]
 rotation = 1.5708
 enabled = true
 cast_to = Vector2( 20, 0 )
