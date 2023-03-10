@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/Managers/PlayerManager.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Characters/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/ground/ground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Managers/FieldManager.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/traps/Launcher.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Characters/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/traps/Bouncer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/traps/HeatWall.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/traps/NailsWall.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/Managers/SkinManager.cs" type="Script" id=11]
+[ext_resource path="res://Scripts/Managers/EnemyManager.cs" type="Script" id=12]
 
 [node name="GameContainer" type="Node2D"]
 
@@ -19,15 +25,29 @@ playerContainerPath = NodePath("../../player")
 
 [node name="FieldManager" type="Node" parent="GameManager"]
 script = ExtResource( 5 )
-enemyfactory = ExtResource( 7 )
+enemyFactory = ExtResource( 7 )
+launcherFactory = ExtResource( 6 )
+bouncerFactory = ExtResource( 8 )
+nailsWallFactory = ExtResource( 10 )
+heatWallFactory = ExtResource( 9 )
 groundPath = NodePath("../../ground")
+trapsPath = NodePath("../../traps")
+
+[node name="EnemyManager" type="Node" parent="GameManager"]
+script = ExtResource( 12 )
 enemiesPath = NodePath("../../enemies")
 
+[node name="SkinManager" type="Node" parent="GameManager"]
+script = ExtResource( 11 )
+
 [node name="ground" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 196608, 1, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 1, 0, 262144, 1, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 1, 0, 327680, 1, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 1, 0, 393216, 1, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 1, 0, 458752, 1, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 1, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0 )
 
 [node name="player" type="Node2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="."]
+
+[node name="traps" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )

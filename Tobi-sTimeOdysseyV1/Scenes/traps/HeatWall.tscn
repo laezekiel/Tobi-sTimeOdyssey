@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sight/heatColor.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Elements/Traps/HeatWall.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 0.115057, 0, 1, 1, 0.632813, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="HeatWall" type="KinematicBody2D"]
+script = ExtResource( 2 )
+heatPath = NodePath("heat")
+heatTimerPath = NodePath("heatTimer")
+
+[node name="furnace" type="Polygon2D" parent="."]
+color = Color( 0.352941, 0.0627451, 0.25098, 1 )
+polygon = PoolVector2Array( -36, -11, -28, -11, -28, 11, -36, 11 )
+
+[node name="door" type="Polygon2D" parent="furnace"]
+color = Color( 0, 0, 0, 0.501961 )
+texture = SubResource( 2 )
+polygon = PoolVector2Array( -33, -10, -35, -10, -35, 10, -29, 10, -29, -10, -33, -10, -33, -6.5, -30, -6.5, -30, -3.5, -33, -3.5, -33, -0.5, -32, -0.5, -32, -2.5, -30, -2.5, -30, -0.5, -33, -0.5, -33, 0.5, -30, 0.5, -30, 2.5, -32, 2.5, -32, 0.5, -33, 0.5, -33, 3.5, -30, 3.5, -30, 6.5, -33, 6.5 )
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -36, -11, -32, -11, -32, -32, -28, -32, -28, 32, -32, 32, -32, 11, -36, 11 )
+
+[node name="heat" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+color = Color( 1, 0, 0, 1 )
+mode = 2
+
+[node name="heatTimer" type="Timer" parent="."]
+process_mode = 0
+
+[node name="ambiance2" type="Light2D" parent="."]
+position = Vector2( -32, 0 )
+texture = ExtResource( 3 )
+texture_scale = 2.0
+color = Color( 1, 1, 1, 0.25098 )
+mode = 2
+shadow_enabled = true

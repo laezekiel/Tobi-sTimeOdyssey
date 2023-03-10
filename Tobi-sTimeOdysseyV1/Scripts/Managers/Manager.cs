@@ -11,7 +11,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
 		protected virtual void Init()
         {
-			SetGameModePlay();
+
         }
 
 		public override void _Ready()
