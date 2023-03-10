@@ -70,6 +70,16 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             base.SetGameModePause();
             Player.SetGameModePause();
         }
+        public override void SetGameModeWin()
+        {
+            base.SetGameModeWin();
+            Player.SetGameModeWin();
+        }
+        public override void SetGameModeLose()
+        {
+            base.SetGameModeLose();
+            Player.SetGameModeLose();
+        }
         // Action
         #endregion
 

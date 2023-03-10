@@ -46,7 +46,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             instance = this;
             #endregion
             SetGameModePlay();
-            FieldManager.GetInstance().SetField();
+            POC.Field_Manager.SetField();
         }
 
         #region State Machine
@@ -54,18 +54,34 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         public override void SetGameModePlay()
         {
             base.SetGameModePlay();
-            PlayerManager.GetInstance().SetGameModePlay();
-            EnemyManager.GetInstance().SetGameModePlay();
-            SkinManager.GetInstance().SetGameModePlay();
-            FieldManager.GetInstance().SetGameModePlay();
+            foreach (Manager manager in GetChildren())
+            {
+                manager.SetGameModePlay();
+            }
         }
         public override void SetGameModePause()
         {
             base.SetGameModePause();
-            PlayerManager.GetInstance().SetGameModePause();
-            EnemyManager.GetInstance().SetGameModePause();
-            SkinManager.GetInstance().SetGameModePause();
-            FieldManager.GetInstance().SetGameModePause();
+            foreach (Manager manager in GetChildren())
+            {
+                manager.SetGameModePause();
+            }
+        }
+        public override void SetGameModeWin()
+        {
+            base.SetGameModeWin();
+            foreach (Manager manager in GetChildren())
+            {
+                manager.SetGameModeWin();
+            }
+        }
+        public override void SetGameModeLose()
+        {
+            base.SetGameModeLose();
+            foreach (Manager manager in GetChildren())
+            {
+                manager.SetGameModeLose();
+            }
         }
         // Action
         protected override void DoGameModePlay()
@@ -75,12 +91,12 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             {
                 SetGameModePause();
             }
-            if (EnemyManager.GetInstance().Number == 0)
+            if (POC.Enemy_Manager.Number == 0)
             {
                 Index++;
                 if (Index < AllLevels.GetAllLevel().Count)
                 {
-                    FieldManager.GetInstance().Retry();
+                    MOC.Retry();
                 }
                 else
                 {
@@ -94,6 +110,14 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             if (Input.IsActionJustPressed("pause"))
             {
                 SetGameModePlay();
+            }
+        }
+        protected override void DoGameModeLose()
+        {
+            base.DoGameModeLose();
+            if (Input.IsActionJustPressed("pause"))
+            {
+                MOC.Retry();
             }
         }
         #endregion
