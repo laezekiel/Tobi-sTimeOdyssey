@@ -21,7 +21,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
         public override void _Ready()
 		{
 			base._Ready();
-            TurnAround();
+            Move();
 		}
 
         #region State Machine
@@ -40,7 +40,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
             {
                 if (check.GetCollider() is Player)
                 {
-                    FieldManager.GetInstance().Retry();
+                    MOC.Retry();
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
                 lDelay++;
             }
             lDelay += lMove.GetRuntime();
-            lMove.InterpolateCallback(this, lDelay + 1, nameof(TurnAround));
+            lMove.InterpolateCallback(this, lDelay + 0.5f, nameof(TurnAround));
             lMove.Start();
         }
 

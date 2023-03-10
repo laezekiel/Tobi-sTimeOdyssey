@@ -27,15 +27,9 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         private NodePath
             enemiesPath;
 
-        public Node2D Enemies
-        {
-            get { return GetNode<Node2D>(enemiesPath); }
-        }
+        public Node2D Enemies { get { return GetNode<Node2D>(enemiesPath); } }
 
-        public int Number
-        {
-            get { return Enemies.GetChildren().Count; }
-        }
+        public int Number { get { return Enemies.GetChildren().Count; } }
 
         public override void _Ready()
 		{
@@ -53,12 +47,54 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
+        #region State Machine
+        // Mode
+        public override void SetGameModePlay()
+        {
+            base.SetGameModePlay();
+            foreach (Enemy enemy in Enemies.GetChildren())
+            {
+                enemy.SetGameModePlay();
+            }
+        }
+        public override void SetGameModePause()
+        {
+            base.SetGameModePause();
+            foreach (Enemy enemy in Enemies.GetChildren())
+            {
+                enemy.SetGameModePause();
+            }
+        }
+        public override void SetGameModeWin()
+        {
+            base.SetGameModeWin();
+            foreach (Enemy enemy in Enemies.GetChildren())
+            {
+                enemy.SetGameModeWin();
+            }
+        }
+        public override void SetGameModeLose()
+        {
+            base.SetGameModeLose();
+            foreach (Enemy enemy in Enemies.GetChildren())
+            {
+                enemy.SetGameModeLose();
+            }
+        }
+        // Action 
+        #endregion
+
         public void ResetEnemies()
         {
             foreach (Enemy enemy in Enemies.GetChildren())
             {
                 enemy.QueueFree();
             }
+        }
+
+        public override void _Process(float delta)
+        {
+            base._Process(delta);
         }
 
         protected override void Dispose(bool pDisposing)

@@ -70,10 +70,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
         // Action
         protected override void DoTrapModeOn()
         {
-            if (PlayerManager.GetInstance().Player.GlobalPosition.x < GlobalPosition.x + 32 && PlayerManager.GetInstance().Player.GlobalPosition.x > GlobalPosition.x - 32 &&
-                PlayerManager.GetInstance().Player.GlobalPosition.y < GlobalPosition.y + 32 && PlayerManager.GetInstance().Player.GlobalPosition.y > GlobalPosition.y - 32)
+            if (POC.Player_Manager.Player.GlobalPosition.x < GlobalPosition.x + 32 && POC.Player_Manager.Player.GlobalPosition.x > GlobalPosition.x - 32 &&
+                POC.Player_Manager.Player.GlobalPosition.y < GlobalPosition.y + 32 && POC.Player_Manager.Player.GlobalPosition.y > GlobalPosition.y - 32)
             {
-                FieldManager.GetInstance().Retry();
+                //POC.Player_Manager.
+                MOC.Retry();
             }
             if (1.5f * heatTimer.WaitTime / 10 > heatTimer.TimeLeft && !change)
             {

@@ -1,3 +1,4 @@
+
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters;
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
@@ -35,11 +36,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         [Export]
         private NodePath
-            groundPath,
-            trapsPath;
-
-        private Node2D
-            traps;
+            groundPath;
 
         private TileMap
             ground;
@@ -51,7 +48,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         {
             base.Init();
             ground = GetNode<TileMap>(groundPath);
-            traps = GetNode<Node2D>(trapsPath);
         }
 
         public override void _Ready()
@@ -75,13 +71,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         public void Retry()
         {
-            PlayerManager.GetInstance().ResetPlayer();
             ground.Clear();
-            foreach (Node2D item in traps.GetChildren())
-            {
-                item.QueueFree();
-            }
-            EnemyManager.GetInstance().ResetEnemies();
             SetField();
         }
 
@@ -103,7 +93,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             break;
                         case '-':
                             NailsWall lNailsWall = nailsWallFactory.Instance<NailsWall>();
-                            traps.AddChild(lNailsWall);
+                            POC.Trap_Manager.Traps.AddChild(lNailsWall);
                             lNailsWall.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lNailsWall.GlobalRotationDegrees = GameManager.Level.Nails_Rotation[lNailsWallIndex];
                             ground.SetCell(j, i, 0);
@@ -111,7 +101,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             break;
                         case '*':
                             HeatWall lHeatWall = heatWallFactory.Instance<HeatWall>();
-                            traps.AddChild(lHeatWall);
+                            POC.Trap_Manager.Traps.AddChild(lHeatWall);
                             lHeatWall.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lHeatWall.GlobalRotationDegrees = GameManager.Level.Heat_Rotation[lHeatWallIndex];
                             lHeatWall.HeatSpeed = GameManager.Level.Heat_Time[lHeatWallIndex];
@@ -120,7 +110,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             break;
                         case '$':
                             Bouncer lBouncer = bouncerFactory.Instance<Bouncer>();
-                            traps.AddChild(lBouncer);
+                            POC.Trap_Manager.Traps.AddChild(lBouncer);
                             lBouncer.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lBouncer.GlobalRotationDegrees = GameManager.Level.Bouncer_Rotation[lBouncersIndex];
                             ground.SetCell(j, i, 0);
@@ -128,7 +118,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             break;
                         case '_':
                             Launcher lLauncher = launcherFactory.Instance<Launcher>();
-                            traps.AddChild(lLauncher);
+                            POC.Trap_Manager.Traps.AddChild(lLauncher);
                             lLauncher.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lLauncher.GlobalRotationDegrees = GameManager.Level.Launchers_Rotation[lLauchersIndex];
                             lLauncher.ShotSpeed = GameManager.Level.Laucher_Shot_Speed[lLauchersIndex];
@@ -136,19 +126,18 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             lLauchersIndex++;
                             break;
                         case '@':
-                            PlayerManager.GetInstance().Player.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
+                            POC.Player_Manager.Player.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             ground.SetCell(j, i, 0);
                             break;
                         case '.':
                             Enemy lEnemy = enemyFactory.Instance<Enemy>();
-                            EnemyManager.GetInstance().Enemies.AddChild(lEnemy);
+                            POC.Enemy_Manager.Enemies.AddChild(lEnemy);
                             lEnemy.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lEnemy.GlobalRotationDegrees = GameManager.Level.Enemies_Rotation[lEnemiesIndex][0];
                             lEnemy.rotation = GameManager.Level.Enemies_Rotation[lEnemiesIndex];
-                            lEnemy.path = GameManager.Level.Enemies_Path[lEnemiesIndex];
-                            for (int k = 0; k < lEnemy.path.Count; k++)
+                            foreach (Vector2 path in GameManager.Level.Enemies_Path[lEnemiesIndex])
                             {
-                                lEnemy.path[k] = lEnemy.path[k] * OFFSET * 2 + Vector2.One * OFFSET;
+                                lEnemy.path.Add(path * OFFSET * 2 + Vector2.One * OFFSET);
                             }
                             ground.SetCell(j, i, 0);
                             lEnemiesIndex++;
@@ -184,7 +173,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                 Ypos += 44;
             }
             return new Vector2(Xpos, Ypos);
-
         }
 
         protected override void Dispose(bool pDisposing)

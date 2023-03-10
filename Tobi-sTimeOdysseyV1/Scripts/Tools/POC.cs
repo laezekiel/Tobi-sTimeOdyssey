@@ -1,3 +1,4 @@
+using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,14 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 		/// Get an invisible color
 		/// </summary>
 		static public Color Invisible { get { return invisible; } }
+
+
+		static public FieldManager Field_Manager { get { return FieldManager.GetInstance(); } }
+		static public GameManager Game_Manager { get { return GameManager.GetInstance(); } }
+		static public PlayerManager Player_Manager { get { return PlayerManager.GetInstance(); } }
+		static public EnemyManager Enemy_Manager { get { return EnemyManager.GetInstance(); } }
+		static public TrapManager Trap_Manager { get { return TrapManager.GetInstance(); } }
+		static public SkinManager Skin_Manager { get { return SkinManager.GetInstance(); } }
 	}
 
 }
