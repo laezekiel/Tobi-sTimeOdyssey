@@ -13,7 +13,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
 			heatPath,
 			heatTimerPath;
 
-		private Light2D
+		private Particles2D
 			heat;
 
 		private Timer
@@ -42,10 +42,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
             } 
         }
 
-        protected override void Init()
+        public override void Init()
         {
             base.Init();
-            heat = GetNode<Light2D>(heatPath);
+            heat = GetNode<Particles2D>(heatPath);
 			heatTimer = GetNode<Timer>(heatTimerPath);
 			heatTimer.Connect("timeout", this, nameof(Timeout));
             heatTimer.WaitTime = HeatSpeed;
@@ -74,50 +74,27 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
                 POC.Player_Manager.Player.GlobalPosition.y < GlobalPosition.y + 32 && POC.Player_Manager.Player.GlobalPosition.y > GlobalPosition.y - 32)
             {
                 //POC.Player_Manager.
-                MOC.Retry();
-            }
-            if (1.5f * heatTimer.WaitTime / 10 > heatTimer.TimeLeft && !change)
-            {
-                change = true;
-                ChangeTemperature();
+                MOC.Lose(MOC.LoseType.Burnt);
             }
         }
         protected override void DoTrapModeOff()
         {
-            if (1.5f * heatTimer.WaitTime / 10 > heatTimer.TimeLeft && change)
-            {
-                change = false;
-                ChangeTemperature();
-            }
+
         }
         #endregion
-
-        private void ChangeTemperature()
-        {
-            Tween lHeat = new Tween();
-            AddChild(lHeat);
-            if (trapState == DoTrapModeOn)
-            {
-                lHeat.InterpolateProperty(heat, "color", new Color(1, 0, 0), new Color(0, 0, 1), heatTimer.TimeLeft);
-            }
-            else if (trapState == DoTrapModeOff)
-            {
-                lHeat.InterpolateProperty(heat, "color", new Color(0, 0, 1), new Color(1, 0, 0), heatTimer.TimeLeft);
-            }
-            lHeat.Start();
-        }
 
         private void Timeout()
         {
             if (trapState == DoTrapModeOn)
             {
-                heat.Color = new Color(1, 0, 0);
+                heat.Emitting = false;
                 SetTrapModeOff();
             }
             else if (trapState == DoTrapModeOff)
             {
-                heat.Color = new Color(0, 0, 1);
+                heat.Emitting = true;
                 SetTrapModeOn();
+
             }
         }
     }

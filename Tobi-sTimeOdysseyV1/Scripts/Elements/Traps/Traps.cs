@@ -13,7 +13,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
 		public Action
 			trapState;
 
-        protected override void Init()
+        public override void Init()
         {
             rand.Randomize();
             SetTrapModeOn();

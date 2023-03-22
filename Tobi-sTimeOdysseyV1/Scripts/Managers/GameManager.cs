@@ -32,6 +32,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         protected override void Init()
         {
             base.Init();
+            POC.Player_Manager.Player.Init();
         }
         public override void _Ready()
         {
@@ -47,6 +48,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
             SetGameModePlay();
             POC.Field_Manager.SetField();
+            MOC.Retry();
         }
 
         #region State Machine
@@ -115,7 +117,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         protected override void DoGameModeLose()
         {
             base.DoGameModeLose();
-            if (Input.IsActionJustPressed("pause"))
+            if (Input.IsActionJustPressed("Move_Player"))
             {
                 MOC.Retry();
             }

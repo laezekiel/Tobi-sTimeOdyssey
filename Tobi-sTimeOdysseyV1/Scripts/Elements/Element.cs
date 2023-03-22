@@ -10,7 +10,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
 		protected Action
 			gameState;
 
-		protected virtual void Init()
+		public virtual void Init()
 		{
 			SetGameModePlay();
 		}

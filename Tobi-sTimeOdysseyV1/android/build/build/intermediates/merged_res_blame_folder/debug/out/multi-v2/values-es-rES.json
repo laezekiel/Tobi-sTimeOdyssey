@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\louis\\Documents\\LoOw\\Tobi-sTimeOdyssey\\Tobi-sTimeOdysseyV1\\android\\build\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-es-rES\\values-es-rES.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\louis\\Documents\\LoOw\\Tobi-sTimeOdyssey\\Tobi-sTimeOdysseyV1\\android\\build\\res\\values-es-rES\\godot_project_name_string.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "1",
+                        "startOffsets": "112",
+                        "endColumns": "70",
+                        "endOffsets": "181"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "73",
+                        "endOffsets": "124"
+                    }
+                }
+            ]
+        }
+    ]
+}

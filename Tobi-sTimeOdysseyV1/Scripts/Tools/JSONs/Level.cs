@@ -36,6 +36,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             int lEnemiesIndex = 0;
             _enemyRotation = new List<List<float>>();
             _enemyPath = new List<List<Vector2>>();
+            _enemyType = new List<Vector2>();
             foreach (Godot.Collections.Dictionary enemy in lEnemies)
             {
                 Godot.Collections.Array lEnemyRotation = enemy["rotation"] as Godot.Collections.Array;
@@ -50,6 +51,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
                 {
                     _enemyPath[lEnemiesIndex].Add(new Vector2(path[1].ToString().ToFloat(), path[0].ToString().ToFloat()));
                 }
+                Godot.Collections.Array lEnemyType = enemy["type"] as Godot.Collections.Array;
+                _enemyType.Add(new Vector2(lEnemyType[0].ToString().ToFloat(), lEnemyType[1].ToString().ToFloat()));
                 lEnemiesIndex++;
             }
             Godot.Collections.Dictionary lTraps = lMap["traps"] as Godot.Collections.Dictionary;
@@ -92,6 +95,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             _enemyRotation;
         private List<List<Vector2>>
             _enemyPath;
+        private List<Vector2>
+            _enemyType;
         private List<float>
             _launcherRotation,
             _launcherShotSpeed,
@@ -120,6 +125,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
         /// return the value of Enemys Path in a list of list of Vector 2
         /// </summary>
         public List<List<Vector2>> Enemies_Path { get { return _enemyPath; } }
+        public List<Vector2> Enemies_Type { get { return _enemyType; } }
+
         /// <summary>
         /// return the value of Launchers Rotation in a list of float
         /// </summary>

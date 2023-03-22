@@ -15,18 +15,38 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
         //{
         //    pCaller.GetTree().ChangeScene(PathDic.GetPath(pPath));
         //}
+        public enum LoseType
+        {
+            Caught,
+            Burnt,
+            Killed
+        }
 
         static public void Retry()
         {
             POC.Player_Manager.ResetPlayer();
-            POC.Enemy_Manager.ResetEnemies();
+            POC.Enemy_Manager.ResetCharacter();
             POC.Trap_Manager.ResetTraps();
             POC.Field_Manager.Retry();
             POC.Game_Manager.SetGameModePlay();
         }
 
-        static public void Lose()
+        static public void Lose(LoseType pTypeOfLost)
         {
+            switch (pTypeOfLost)
+            {
+                case LoseType.Caught:
+                    POC.Player_Manager.Player.SetPlayerModeCaught();
+                    break;
+                case LoseType.Burnt:
+                    POC.Player_Manager.Player.SetPlayerModeBurning();
+                    break;
+                case LoseType.Killed:
+                    POC.Player_Manager.Player.SetPlayerModeDying();
+                    break;
+                default:
+                    break;
+            }
             POC.Game_Manager.SetGameModeLose();
         }
 
