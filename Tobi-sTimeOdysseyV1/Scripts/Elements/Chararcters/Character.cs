@@ -15,7 +15,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
 		protected List<RayCast2D>
 			checkCollider = new List<RayCast2D>();
 
-		protected override void Init()
+		public override void Init()
         {
             foreach (RayCast2D check in GetNode<Node2D>(checkColliderContainerPath).GetChildren()) 
             {

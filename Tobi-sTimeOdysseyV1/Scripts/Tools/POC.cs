@@ -10,6 +10,9 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 	/// </summary>
 	static public class POC
 	{
+		static private RandomNumberGenerator
+			rand = new RandomNumberGenerator();
+
 		static private float
 			thousandthS = 0.001f,
 			hundredthS = 0.01f,
@@ -17,6 +20,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 			halfS = 0.5f,
 			oneS = 1f,
 			twoS = 2f;
+
+		static public float RandI
+        {
+			get
+            {
+				rand.Randomize();
+				return rand.Randf();
+            }
+        }
 
 		/// <summary>
 		/// get a thousandth of 1

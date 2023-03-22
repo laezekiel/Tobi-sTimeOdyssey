@@ -1,8 +1,8 @@
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters;
-using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
+using System.Collections.Generic;
 
 namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
 {
@@ -16,7 +16,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
         private NodePath
             shotTimerPath,
             shotContainerPath,
-            sightPath,
+            visorPath,
             killerPath;
 
         private float
@@ -44,10 +44,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
             shotTimer;
 
         private Node2D
-            shotContainer;
-
-        private Light2D
-            sight;
+            shotContainer,
+            visor;
 
         private RayCast2D
             killer;
@@ -55,13 +53,13 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
         private bool
             blinking = false;
 
-        protected override void Init()
+        public override void Init()
         {
             shotTimer = GetNode<Timer>(shotTimerPath);
             shotTimer.Connect("timeout", this, nameof(ChangeMode));
             shotContainer = GetNode<Node2D>(shotContainerPath);
             killer = GetNode<RayCast2D>(killerPath);
-            sight = GetNode<Light2D>(sightPath);
+            visor = GetNode<Node2D>(visorPath);
             shotTimer.WaitTime = ShotSpeed;
             base.Init();
         }
@@ -76,14 +74,14 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
         public override void SetTrapModeOn()
         {
             shotTimer.Start();
-            sight.Visible = true;
+            visor.Visible = true;
             blinking = false;
             base.SetTrapModeOn();
         }
         public override void SetTrapModeOff()
         {
             shotTimer.Start();
-            sight.Visible = false;
+            visor.Visible = false;
             base.SetTrapModeOff();
         }
         // Action
@@ -95,9 +93,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
             }
             if (killer.GetCollider() is Player)
             {
-                MOC.Retry();
+                MOC.Lose(MOC.LoseType.Killed);
             }
         }
+
         protected override void DoTrapModeOff()
         {
             
@@ -108,15 +107,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps
         {
             Tween lBlink = new Tween();
             AddChild(lBlink);
-            lBlink.InterpolateProperty(sight, "visible", true, false, shotTimer.WaitTime / 10 / 5);
+            lBlink.InterpolateProperty(visor, "visible", true, false, shotTimer.WaitTime / 10 / 5);
             float lDelay = lBlink.GetRuntime();
-            lBlink.InterpolateProperty(sight, "visible", false, true, shotTimer.WaitTime / 10 / 5, delay: lDelay);
+            lBlink.InterpolateProperty(visor, "visible", false, true, shotTimer.WaitTime / 10 / 5, delay: lDelay);
             lDelay = lBlink.GetRuntime();
-            lBlink.InterpolateProperty(sight, "visible", true, false, shotTimer.WaitTime / 10 / 5, delay: lDelay);
+            lBlink.InterpolateProperty(visor, "visible", true, false, shotTimer.WaitTime / 10 / 5, delay: lDelay);
             lDelay = lBlink.GetRuntime();
-            lBlink.InterpolateProperty(sight, "visible", false, true, shotTimer.WaitTime / 10 / 5, delay: lDelay);
+            lBlink.InterpolateProperty(visor, "visible", false, true, shotTimer.WaitTime / 10 / 5, delay: lDelay);
             lDelay = lBlink.GetRuntime();
-            lBlink.InterpolateProperty(sight, "visible", true, false, shotTimer.WaitTime / 10 / 5, delay: lDelay);
+            lBlink.InterpolateProperty(visor, "visible", true, false, shotTimer.WaitTime / 10 / 5, delay: lDelay);
             lBlink.Start();
         }
 

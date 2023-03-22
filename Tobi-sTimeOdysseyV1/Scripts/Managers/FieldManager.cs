@@ -130,8 +130,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
                             ground.SetCell(j, i, 0);
                             break;
                         case '.':
-                            Enemy lEnemy = enemyFactory.Instance<Enemy>();
-                            POC.Enemy_Manager.Enemies.AddChild(lEnemy);
+                            Villager lEnemy = POC.Enemy_Manager.SelectCharacter(GameManager.Level.Enemies_Type[lEnemiesIndex]).Instance<Villager>();
+                            if (GameManager.Level.Enemies_Type[lEnemiesIndex].x < 2)
+                            {
+                                POC.Enemy_Manager.Enemies.AddChild(lEnemy);
+                            }
+                            else
+                            {
+                                POC.Enemy_Manager.Villagers.AddChild(lEnemy);
+                            }
                             lEnemy.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
                             lEnemy.GlobalRotationDegrees = GameManager.Level.Enemies_Rotation[lEnemiesIndex][0];
                             lEnemy.rotation = GameManager.Level.Enemies_Rotation[lEnemiesIndex];

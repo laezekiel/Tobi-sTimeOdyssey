@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters;
+using System.Collections.Generic;
 
 namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 {
@@ -25,9 +26,28 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         [Export]
         private NodePath
-            enemiesPath;
+            enemiesPath,
+            villagerspath;
+
+        private List<List<PackedScene>>
+            charactersFactory = new List<List<PackedScene>>() 
+            {
+                new List<PackedScene>()
+                {
+                    (PackedScene)GD.Load("res://Scenes/Characters/Enemy.tscn"),
+                },
+                new List<PackedScene>()
+                {
+                    (PackedScene)GD.Load("res://Scenes/Characters/Daimo.tscn"),
+                },
+                new List<PackedScene>()
+                {
+                    (PackedScene)GD.Load("res://Scenes/Characters/Villager.tscn"),
+                },
+            };
 
         public Node2D Enemies { get { return GetNode<Node2D>(enemiesPath); } }
+        public Node2D Villagers { get { return GetNode<Node2D>(villagerspath); } }
 
         public int Number { get { return Enemies.GetChildren().Count; } }
 
@@ -84,12 +104,21 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         // Action 
         #endregion
 
-        public void ResetEnemies()
+        public void ResetCharacter()
         {
             foreach (Enemy enemy in Enemies.GetChildren())
             {
                 enemy.QueueFree();
             }
+            foreach (Villager villager in Villagers.GetChildren())
+            {
+                villager.QueueFree();
+            }
+        }
+
+        public PackedScene SelectCharacter(Vector2 pEnemyType)
+        {
+            return charactersFactory[(int)pEnemyType.x][(int)pEnemyType.y];
         }
 
         public override void _Process(float delta)

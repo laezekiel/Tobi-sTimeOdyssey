@@ -12,7 +12,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
     {
         [Export]
         private NodePath
-            killerContainerPath;
+            killerContainerPath,
+            bodyPath;
 
         private List<RayCast2D>
             killerContainer = new List<RayCast2D>();
@@ -23,13 +24,20 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
         private Vector2 
             direction = new Vector2();
 
-        protected override void Init()
+        private AnimatedSprite
+            body;
+
+        private bool
+            dying = false;
+
+        public override void Init()
         {
             foreach (RayCast2D killer in GetNode<Node2D>(killerContainerPath).GetChildren())
             {
                 killerContainer.Add(killer);
                 killer.AddException(this);
             }
+            body = GetNode<AnimatedSprite>(bodyPath);
             SetPlayerModeStatic();
             base.Init();
         }
@@ -42,6 +50,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
         #region State Machine
         // Mode 
         #region game State Mode
+        public override void SetGameModeWin()
+        {
+            body.Animation = "happy";
+            base.SetGameModeWin();
+        }
         #endregion
         #region character State mode
         public void SetPlayerModeMove()
@@ -52,7 +65,23 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
         public void SetPlayerModeStatic()
         {
             direction = Vector2.Zero;
+            body.Animation = "living";
             playerState = DoPlayerModeStatic;
+        }
+        public void SetPlayerModeBurning()
+        {
+            body.Animation = "burnt";
+            playerState = DoPlayerModeBurning;
+        }
+        public void SetPlayerModeDying()
+        {
+            body.Animation = "dead";
+            playerState = DoPlayerModeDying;
+        }
+        public void SetPlayerModeCaught()
+        {
+            body.Animation = "caught";
+            playerState = DoPlayerModeCaught;
         }
         #endregion
         // Action 
@@ -65,7 +94,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
 
         protected override void DoGameModeLose()
         {
-            Visible = false;
+            base.DoGameModeLose();
         }
         #endregion
         #region character State action
@@ -95,7 +124,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
                 if (killer.GetCollider() is Enemy)
                 {
                     Enemy target = killer.GetCollider() as Enemy;
-                    target.QueueFree();
+                    target.LoseLife();
+                }
+                else if (killer.GetCollider() is Villager && !(killer.GetCollider() is Enemy))
+                {
+                    MOC.Lose(MOC.LoseType.Caught);
                 }
             }
             if (MoveAndCollide(direction) != null && MoveAndCollide(direction).Collider is Bouncer)
@@ -117,14 +150,54 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
                     }
                     else if (check.GetCollider() is NailsWall)
                     {
-                        MOC.Retry();
+                        MOC.Lose(MOC.LoseType.Killed);
                     }
 
                 }
             }
         }
+        private void DoPlayerModeBurning()
+        {
+            if (dying)
+            {
+                dying = false;
+                Tween lDeath = new Tween();
+                AddChild(lDeath);
+                lDeath.Repeat = true;
+                lDeath.InterpolateProperty(body, "modulate", POC.Visible, Colors.Red, POC.OneS);
+                float lDelay = lDeath.GetRuntime();
+                lDeath.InterpolateProperty(body, "modulate", Colors.Red, POC.Visible, POC.OneS, delay: lDelay);
+                lDeath.Start();
+            }
+        }
+        public void DoPlayerModeDying()
+        {
+            if (dying)
+            {
+                dying = false;
+                Tween lDeath = new Tween();
+                AddChild(lDeath);
+                lDeath.Repeat = true;
+
+                lDeath.Start();
+            }
+        }
+        public void DoPlayerModeCaught()
+        {
+            if (dying)
+            {
+                dying = false;
+                Tween lDeath = new Tween();
+                AddChild(lDeath);
+                lDeath.Repeat = true;
+
+                lDeath.Start();
+            }
+        }
         #endregion
         #endregion
+
+
 
         protected override void Dispose(bool pDisposing)
         {
