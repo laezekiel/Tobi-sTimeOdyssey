@@ -34,15 +34,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             {
                 new List<PackedScene>()
                 {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Enemy.tscn"),
+                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Enemy/Enemy.tscn"),
                 },
                 new List<PackedScene>()
                 {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Daimo.tscn"),
+                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Enemy/Boss/Daimo.tscn"),
                 },
                 new List<PackedScene>()
                 {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Villager.tscn"),
+                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Villager.tscn"),
                 },
             };
 

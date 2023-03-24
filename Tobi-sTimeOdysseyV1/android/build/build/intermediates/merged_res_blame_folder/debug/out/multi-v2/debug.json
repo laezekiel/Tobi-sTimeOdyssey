@@ -195,10 +195,10 @@
                     "from": {
                         "startLines": "3,5",
                         "startColumns": "1,1",
-                        "startOffsets": "53,136",
+                        "startOffsets": "56,141",
                         "endLines": "3,8",
                         "endColumns": "81,9",
-                        "endOffsets": "133,384"
+                        "endOffsets": "136,392"
                     },
                     "to": {
                         "startLines": "123,124",
