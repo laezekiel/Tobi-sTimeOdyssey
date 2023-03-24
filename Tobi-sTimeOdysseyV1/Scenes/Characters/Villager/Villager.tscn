@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sight/guardSight.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Elements/Chararcters/Villager.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Character/Geisha/Geisha.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 closed = false
@@ -16,8 +17,12 @@ checkColliderContainerPath = NodePath("checkColliderContainer")
 [node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -9, -17, 9, -17, 17, -9, 17, 9, 9, 17, -9, 17, -17, 9, -17, -9 )
 
-[node name="body" type="Polygon2D" parent="."]
-polygon = PoolVector2Array( -8, -16, 8, -16, 16, -8, 16, 8, 8, 16, -8, 16, -16, 8, -16, -8 )
+[node name="body" type="AnimatedSprite" parent="."]
+position = Vector2( -1, 0 )
+rotation = -1.5708
+scale = Vector2( 0.75, 0.75 )
+frames = ExtResource( 4 )
+animation = "living"
 
 [node name="checkColliderContainer" type="Node2D" parent="."]
 
