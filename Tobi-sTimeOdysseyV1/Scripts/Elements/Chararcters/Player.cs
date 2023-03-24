@@ -109,7 +109,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
                 }
                 else
                 {
-                    LookAt(GetGlobalMousePosition());
+                    if (Input.IsActionPressed("Look_Player"))
+                    {
+                        Rotation = POC.Camera.RotationPlayer();
+                    }
+                    //LookAt(GetGlobalMousePosition());
                     if (Input.IsActionJustPressed("Move_Player"))
                     {
                         SetPlayerModeMove();
