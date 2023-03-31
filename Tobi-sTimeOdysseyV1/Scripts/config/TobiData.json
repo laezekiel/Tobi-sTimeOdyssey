@@ -1,0 +1,51 @@
+{
+  "StartLevel": [ "Tutorial", "1", "1" ],
+  "Speaker": {
+    "Tobi": "res://Assets/Character/Tobi/TobiBig.tres",
+    "Sifu": "res://Assets/Character/Sifu/SifuBig.tres",
+    "Scientist": "res://Assets/Character/Scientist/BigScientist.tres"
+  },
+  "Tutorial": {
+    "1": {
+      "path": "res://Scripts/config/Tutorial/Tutorial1.json",
+      "text": "res://Scripts/config/Tutorial/Tutorial1TXT.json",
+      "locked": false,
+      "completed": false,
+      "unlock": [ [ "Mission", "1", "1" ] ]
+    },
+    "2": {
+      "path": "res://Scripts/config/Tutorial/Tutorial2.json",
+      "text": "res://Scripts/config/Tutorial/Tutorial2TXT.json",
+      "locked": true,
+      "completed": false,
+      "unlock": [ [ "Mission", "2", "1" ] ]
+    }
+  },
+  "Mission": {
+    "1": {
+      "path": "res://Scripts/config/Mission/Mission1.json",
+      "text": "res://Scripts/config/Mission/Mission1TXT.json",
+      "locked": true,
+      "completed": false,
+      "unlock": [
+
+      ]
+    },
+    "2": {
+      "path": "res://Scripts/config/Mission/Mission2.json",
+      "text": "res://Scripts/config/Mission/Mission2TXT.json",
+      "locked": true,
+      "completed": false,
+      "unlock": []
+    }
+  },
+  "Bonus": {
+    "1": {
+      "path": "res://Scripts/config/Bonus/Bonus1.json",
+      "text": "res://Scripts/config/Bonus/Bonus1TXT.json",
+      "locked": true,
+      "completed": false
+    }
+  }
+
+}

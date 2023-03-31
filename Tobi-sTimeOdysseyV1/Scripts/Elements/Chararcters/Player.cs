@@ -47,6 +47,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters
             base._Ready();
         }
 
+        public override void _Process(float delta)
+        {
+            base._Process(delta);
+        }
+
         #region State Machine
         // Mode 
         #region game State Mode

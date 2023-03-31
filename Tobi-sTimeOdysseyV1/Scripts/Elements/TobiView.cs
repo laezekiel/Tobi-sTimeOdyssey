@@ -1,5 +1,6 @@
 using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
+using Com.IronicEntertainment.TobisTimeOdyssey.UI;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,13 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         [Export]
         private NodePath
             directionCursorPath,
-            centerDirectionPath;
+            centerDirectionPath,
+            directionPath,
+            jumpPath;
+
+        private static PackedScene
+            cutscenesFactory = GD.Load<PackedScene>("res://Scenes/UI/Cutscenes.tscn"),
+            winFactory = GD.Load<PackedScene>("res://Scenes/UI/WinScreen.tscn");
 
         private Position2D
             centerDirection;
@@ -35,10 +42,16 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         private Sprite
             directionCursor;
 
+        private TouchScreenButton
+            direction,
+            jump;
+
         public void Init()
         {
             centerDirection = GetNode<Position2D>(centerDirectionPath);
             directionCursor = GetNode<Sprite>(directionCursorPath);
+            direction = GetNode<TouchScreenButton>(directionPath);
+            jump = GetNode<TouchScreenButton>(jumpPath);
         }
 
 		public override void _Ready()
@@ -61,6 +74,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         {
             base._Process(delta);
             GlobalPosition = POC.Player_Manager.Player.GlobalPosition;
+
             if (Input.IsActionPressed("Look_Player"))
             {
                 directionCursor.GlobalPosition = GetGlobalMousePosition();
@@ -72,6 +86,44 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         {
             Vector2 lPolar = Mathf.Cartesian2Polar(centerDirection.GlobalPosition.DirectionTo(directionCursor.GlobalPosition).x, centerDirection.GlobalPosition.DirectionTo(directionCursor.GlobalPosition).y);
             return lPolar.y;
+        }
+
+        public void HideButton()
+        {
+            direction.Visible = false;
+            jump.Visible = false;
+            directionCursor.Visible = false;
+        }
+
+        public void ShowButton()
+        {
+            direction.Visible = true;
+            jump.Visible = true;
+            directionCursor.Visible = true;
+        }
+
+        public void PlayCutscenes(Cutscenes.Type pType = Cutscenes.Type.begining)
+        {
+            GameManager.GetInstance().SetGameModePause();
+
+            Cutscenes lCut = cutscenesFactory.Instance<Cutscenes>();
+
+            AddChild(lCut);
+
+            HideButton();
+
+            lCut.PlayCutscene(pType);
+        }
+
+        public void AddWinScreen()
+        {
+            GameManager.GetInstance().SetGameModePause();
+
+            WinScreen lWin = winFactory.Instance<WinScreen>();
+
+            AddChild(lWin);
+
+            HideButton();
         }
 
         protected override void Dispose(bool pDisposing)

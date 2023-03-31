@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Elements/Chararcters/Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Character/Tobi/player.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Scenes/direction.tscn" type="PackedScene" id=4]
 
 [node name="player" type="KinematicBody2D"]
 collision/safe_margin = 1.0
@@ -10,6 +11,8 @@ script = ExtResource( 1 )
 checkColliderContainerPath = NodePath("checkColliderContainer")
 killerContainerPath = NodePath("killerContainer")
 bodyPath = NodePath("body")
+
+[node name="direction" parent="." instance=ExtResource( 4 )]
 
 [node name="body" type="AnimatedSprite" parent="."]
 rotation = -1.5708
@@ -89,13 +92,8 @@ cast_to = Vector2( 20, 0 )
 
 [node name="killerContainer" type="Node2D" parent="."]
 
-[node name="killer" type="RayCast2D" parent="killerContainer"]
-position = Vector2( 0, -16 )
-enabled = true
-cast_to = Vector2( 64, 0 )
-
-[node name="killer2" type="RayCast2D" parent="killerContainer"]
-position = Vector2( 0, 16 )
+[node name="killer1" type="RayCast2D" parent="killerContainer"]
+scale = Vector2( 1, 11 )
 enabled = true
 cast_to = Vector2( 64, 0 )
 

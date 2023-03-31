@@ -76,6 +76,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             {
                 enemy.SetGameModePlay();
             }
+            foreach (Villager villager in Villagers.GetChildren())
+            {
+                villager.SetGameModePlay();
+            }
         }
         public override void SetGameModePause()
         {
@@ -83,6 +87,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             foreach (Enemy enemy in Enemies.GetChildren())
             {
                 enemy.SetGameModePause();
+            }
+            foreach (Villager villager in Villagers.GetChildren())
+            {
+                villager.SetGameModePause();
             }
         }
         public override void SetGameModeWin()
@@ -92,6 +100,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             {
                 enemy.SetGameModeWin();
             }
+            foreach (Villager villager in Villagers.GetChildren())
+            {
+                villager.SetGameModeWin();
+            }
         }
         public override void SetGameModeLose()
         {
@@ -99,6 +111,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             foreach (Enemy enemy in Enemies.GetChildren())
             {
                 enemy.SetGameModeLose();
+            }
+            foreach (Villager villager in Villagers.GetChildren())
+            {
+                villager.SetGameModeLose();
             }
         }
         // Action 
