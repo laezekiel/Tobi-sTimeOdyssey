@@ -1,5 +1,6 @@
 using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
+using Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs;
 using Com.IronicEntertainment.TobisTimeOdyssey.UI;
 using Godot;
 using System;
@@ -102,15 +103,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
             directionCursor.Visible = true;
         }
 
-        public void PlayCutscenes(Cutscenes.Type pType = Cutscenes.Type.begining)
+        public void PlayCutscenes(CutscenesText.TypeCutscenes pType = CutscenesText.TypeCutscenes.Begining)
         {
+            HideButton();
+
             GameManager.GetInstance().SetGameModePause();
 
             Cutscenes lCut = cutscenesFactory.Instance<Cutscenes>();
 
             AddChild(lCut);
-
-            HideButton();
 
             lCut.PlayCutscene(pType);
         }

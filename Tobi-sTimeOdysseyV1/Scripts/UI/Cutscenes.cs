@@ -11,12 +11,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 
 	public class Cutscenes : Node2D
 	{
-		public enum Type
-		{
-			begining,
-			end
-        }
-
 		[Export]
 		private NodePath
 			leftPath,
@@ -55,7 +49,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 		public bool
 			set = false;
 
-		private Type
+		private CutscenesText.TypeCutscenes
 			type;
 
 		private string Display { get { return "\n" + speaker + ":\n" + _display; } }
@@ -83,26 +77,26 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 
 		}
 
-		public void PlayCutscene(Type ptype = Type.begining)
+		public void PlayCutscene(CutscenesText.TypeCutscenes ptype = CutscenesText.TypeCutscenes.Begining)
 		{
             if (!set)
 			{
 				switch (ptype)
 				{
-					case Type.begining:
+					case CutscenesText.TypeCutscenes.Begining:
 						Sentences = GameManager.Level.Cutscenes.Sentences[0];
 						Speakers = GameManager.Level.Cutscenes.Sentences_Character[0];
 						Positions = GameManager.Level.Cutscenes.Sentences_Position[0];
 
-						type = Type.begining;
+						type = CutscenesText.TypeCutscenes.Begining;
 						break;
 
-					case Type.end:
+					case CutscenesText.TypeCutscenes.End:
 						Sentences = GameManager.Level.Cutscenes.Sentences[1];
 						Speakers = GameManager.Level.Cutscenes.Sentences_Character[1];
 						Positions = GameManager.Level.Cutscenes.Sentences_Position[1];
 
-						type = Type.end;
+						type = CutscenesText.TypeCutscenes.End;
 						break;
 				}
 
@@ -138,16 +132,24 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 		}
 
 		public void EndCutscenes()
-        {
-            switch (type)
+		{
+
+			Tobi_Data_JSON.WrightoverCinematicsPlayed(type);
+
+			switch (type)
             {
-                case Type.begining:
+                case CutscenesText.TypeCutscenes.Begining:
+
 					TobiView.GetInstance().ShowButton();
 					GameManager.GetInstance().SetGameModePlay();
+
 					QueueFree();
 					break;
-                case Type.end:
+
+                case CutscenesText.TypeCutscenes.End:
+
 					GameManager.GetInstance().WinEffect();
+
 					QueueFree();
                     break;
             }

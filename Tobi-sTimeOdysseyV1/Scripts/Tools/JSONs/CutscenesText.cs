@@ -13,7 +13,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 
     public struct CutscenesText
     {
-        private enum TypeCutscenes
+        public enum TypeCutscenes
         {
             Begining,
             End
@@ -117,19 +117,23 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             _begining,
             _end;
 
+        public Dictionary<FieldCutscenes, object> Begining { get { return _begining; } }
+        public Dictionary<FieldCutscenes, object> End { get { return _end; } }
+
         public List<bool> HasPlayed 
         { 
             get 
             {
                 List<bool> lTemp = new List<bool>();
 
-                if (_begining != null) lTemp.Add(Convert.ToBoolean(_begining[FieldCutscenes.Played]));
+                if (_begining != null && !PlayTest.IgnoreBeginingCutScenes) lTemp.Add(Convert.ToBoolean(_begining[FieldCutscenes.Played]));
                 else lTemp.Add(true);
 
-                if (_end != null) lTemp.Add(Convert.ToBoolean(_end[FieldCutscenes.Played]));
+                if (_end != null && !PlayTest.IgnoreEndCutScenes) lTemp.Add(Convert.ToBoolean(_end[FieldCutscenes.Played]));
                 else lTemp.Add(true);
 
-                return lTemp;
+                if (PlayTest.IgnoreAllCutScenes) return new List<bool>() { true, true };
+                else return lTemp;
             } 
         }
     
@@ -138,9 +142,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             get
             {
                 int lIndex;
-                List<List<string>> ltemp = new List<List<string>>();
-
-                ltemp.Add(new List<string>());
+                List<List<string>> ltemp = new List<List<string>>
+                {
+                    new List<string>()
+                };
 
                 lIndex = Sentences[0].Count;
 
@@ -177,9 +182,10 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             get
             {
                 int lIndex;
-                List<List<string>> ltemp = new List<List<string>>();
-
-                ltemp.Add(new List<string>());
+                List<List<string>> ltemp = new List<List<string>>
+                {
+                    new List<string>()
+                };
 
                 lIndex = Sentences[0].Count;
 
@@ -215,11 +221,17 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
         {
             get
             {
-                List<List<string>> ltemp = new List<List<string>>();
-                ltemp.Add(new List<string>());
+                List<List<string>> ltemp = new List<List<string>>
+                {
+                    new List<string>()
+                };
+
                 foreach (string sentence in _begining[FieldCutscenes.Sentences] as List<string>) ltemp[ltemp.Count - 1].Add(sentence);
+
                 ltemp.Add(new List<string>());
+
                 foreach (string sentence in _end[FieldCutscenes.Sentences] as List<string>) ltemp[ltemp.Count - 1].Add(sentence);
+
                 return ltemp;
             }
         }

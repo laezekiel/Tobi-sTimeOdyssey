@@ -19,8 +19,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 			StartLevel,
 			Speaker,
 			Tutorial,
-			Mission,
-			Bonus
+			Mission_,
+			Bonus___
 		}
 
 		public enum MissionData
@@ -100,7 +100,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 			{
 				if (_mission != null) return _mission;
 
-				_mission = Data_File[TobiData.Mission.ToString()] as Godot.Collections.Dictionary;
+				_mission = Data_File[TobiData.Mission_.ToString()] as Godot.Collections.Dictionary;
 
 				return _mission;
 			}
@@ -141,9 +141,9 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 			{
 				case "Tutorial":
 					return Tutorials[pLevel[1]] as Godot.Collections.Dictionary;
-				case "Mission":
+				case "Mission_":
 					return Missions[pLevel[1]] as Godot.Collections.Dictionary;
-				case "Bonus":
+				case "Bonus___":
 					return Bonus[pLevel[1]] as Godot.Collections.Dictionary;
 				default:
 					return null;
@@ -174,8 +174,65 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
 			Godot.Collections.Dictionary lSpeakers = Data_File[TobiData.Speaker.ToString()] as Godot.Collections.Dictionary;
 			return GD.Load<SpriteFrames>(lSpeakers[pSpeaker].ToString());
         }
+
+		public static void WrightOverLevelStart()
+        {
+			jsonF.Open(pathToJSON, File.ModeFlags.ReadWrite);
+
+			string lText = jsonF.GetAsText();
+			string[] lTextArray = lText.Split("\n");
+			List<string> newStartLevel = GameManager.JSON_Index;
+
+			lTextArray[1] = $"  \"StartLevel\": [ \"{newStartLevel[0]}\", \"{newStartLevel[1]}\", \"{newStartLevel[2]}\" ],";
+
+			lText = "";
+
+			for (int i = 0; i < lTextArray.Length - 1; i++) lText += lTextArray[i] + " \n";
+
+			lText += lTextArray[lTextArray.Length - 1];			
+
+			jsonF.StoreString(lText);
+			jsonF.Close();
+		}
+
+		public static void WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes pType, bool pReset = false)
+		{
+			List<string> newStartLevel = GameManager.JSON_Index;
+			bool isAGo = (GameManager.Level.Cutscenes.Begining != null && pType == CutscenesText.TypeCutscenes.Begining) || (GameManager.Level.Cutscenes.End != null && pType == CutscenesText.TypeCutscenes.End);
+
+			jsonF.Open(GetMissionData(newStartLevel)[MissionData.text.ToString()].ToString(), File.ModeFlags.ReadWrite);
+
+			string lText = jsonF.GetAsText();
+			string[] lTextArray = lText.Split("\n");
+			int lIndex = 0;
+
+			lText = "";
+
+			foreach (string line in lTextArray)
+            {
+				if (line.Contains($"  \"{newStartLevel[2]}\": {{")) break;
+				lIndex++;
+            }
+
+            if (isAGo)
+			{
+				for (int i = lIndex; i < lTextArray.Length; i++)
+				{
+					if (lTextArray[i].Contains(pType.ToString()))
+					{
+						if (!pReset) lTextArray[i + 1] = "      \"Played\": true,";
+						else lTextArray[i + 1] = "      \"Played\": false,";
+						break;
+					}
+				}
+			}
+
+			for (int i = 0; i < lTextArray.Length - 1; i++) lText += lTextArray[i] + " \n";
+
+			lText += lTextArray[lTextArray.Length - 1];
+
+			jsonF.StoreString(lText);
+			jsonF.Close();
+		}
 	}
 }
-		
-    
-

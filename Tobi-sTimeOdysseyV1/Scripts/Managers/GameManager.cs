@@ -55,7 +55,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         protected override void Init()
         {
             base.Init();
-
+            if (PlayTest.StartAtBegining) JSON_Index = new List<string> { "Tutorial", "1", "1" };
             POC.Player_Manager.Player.Init();
         }
         public override void _Ready()
@@ -70,6 +70,14 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             
             instance = this;
             #endregion
+
+            if (PlayTest.ResetAllCutScenes)
+            {
+                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+            }
+            else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
 
             MOC.Retry();
 
@@ -112,20 +120,8 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             if (POC.Enemy_Manager.Number == 0)
             {
                 if (Level.Cutscenes.HasPlayed[1]) WinEffect();
-                else POC.Camera.PlayCutscenes(Cutscenes.Type.end);
+                else POC.Camera.PlayCutscenes(CutscenesText.TypeCutscenes.End);
             }
-        }
-        
-        public void WinEffect()
-        {
-            Level_Index++;
-
-            if (Level_Index > Tobi_Data_JSON.GetMissionLevelNumber()) if( Tobi_Data_JSON.GetUnlockableMission(JSON_Index).Count > 0)  JSON_Index = Tobi_Data_JSON.GetUnlockableMission(JSON_Index)[0]; 
-            else MOC.Quit(this);
-
-            SetGameModeWin();
-
-            POC.Camera.AddWinScreen();
         }
 
         protected override void DoGameModeLose()
@@ -134,6 +130,28 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             if (Input.IsActionJustPressed("Move_Player")) MOC.Retry();
         }
         #endregion
+
+        public void WinEffect()
+        {
+            Level_Index++;
+
+            if (Level_Index > Tobi_Data_JSON.GetMissionLevelNumber()) if (Tobi_Data_JSON.GetUnlockableMission(JSON_Index).Count > 0) JSON_Index = Tobi_Data_JSON.GetUnlockableMission(JSON_Index)[0];
+            else MOC.Quit(this);
+
+            Tobi_Data_JSON.WrightOverLevelStart();
+
+            if (PlayTest.ResetAllCutScenes)
+            {
+                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+            }
+            else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+
+            SetGameModeWin();
+
+            POC.Camera.AddWinScreen();
+        }
 
         protected override void Dispose(bool pDisposing)
         {
