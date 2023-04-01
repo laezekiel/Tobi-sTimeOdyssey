@@ -40,7 +40,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 			if (GameManager.Level.Cutscenes.HasPlayed[0]) POC.Game_Manager.SetGameModePlay();
 			else POC.Camera.PlayCutscenes();
 
-			TobiView.GetInstance().ShowButton();
+			if(GameManager.Level.Cutscenes.HasPlayed[1]) TobiView.GetInstance().ShowButton();
 
 			QueueFree();
 		}
