@@ -1,3 +1,4 @@
+using Com.IronicEntertainment.TobisTimeOdyssey.Elements;
 using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Godot;
 using System;
@@ -76,6 +77,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 		static public EnemyManager Enemy_Manager { get { return EnemyManager.GetInstance(); } }
 		static public TrapManager Trap_Manager { get { return TrapManager.GetInstance(); } }
 		static public SkinManager Skin_Manager { get { return SkinManager.GetInstance(); } }
+		static public TobiView Camera { get { return TobiView.GetInstance(); } }
 	}
 
 }

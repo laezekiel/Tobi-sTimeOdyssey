@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sight/guardSight.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Elements/Chararcters/Villager.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Character/Geisha/Geisha.tres" type="SpriteFrames" id=4]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+closed = false
+cull_mode = 1
+polygon = PoolVector2Array( 17, 7, 17, 9, 9, 17, -9, 17, -17, 9, -17, -9, -9, -17, 9, -17, 17, -9, 17, -7 )
+
+[node name="Villager" type="KinematicBody2D"]
+script = ExtResource( 3 )
+checkColliderContainerPath = NodePath("checkColliderContainer")
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -9, -17, 9, -17, 17, -9, 17, 9, 9, 17, -9, 17, -17, 9, -17, -9 )
+
+[node name="body" type="AnimatedSprite" parent="."]
+position = Vector2( -1, 0 )
+rotation = -1.5708
+scale = Vector2( 0.75, 0.75 )
+frames = ExtResource( 4 )
+animation = "living"
+
+[node name="checkColliderContainer" type="Node2D" parent="."]
+
+[node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
+scale = Vector2( 0.5, 1 )
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.392699
+scale = Vector2( 0.5, 1 )
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.197222
+scale = Vector2( 0.5, 1 )
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.197222
+scale = Vector2( 0.5, 1 )
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.392699
+scale = Vector2( 0.5, 1 )
+enabled = true
+cast_to = Vector2( 272, 0 )
+
+[node name="sight" type="Light2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+color = Color( 0.662745, 1, 0, 1 )
+mode = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="ambiance" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+texture_scale = 0.25
+color = Color( 1, 1, 1, 0.501961 )
+mode = 2
+shadow_enabled = true
+
+[node name="ambiance2" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+color = Color( 1, 1, 1, 0.25098 )
+mode = 2
+shadow_enabled = true
+
+[node name="shadow" type="LightOccluder2D" parent="."]
+light_mask = 2
+occluder = SubResource( 1 )
+light_mask = 2

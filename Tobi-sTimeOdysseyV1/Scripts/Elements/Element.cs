@@ -12,7 +12,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
 
 		public virtual void Init()
 		{
-			SetGameModePlay();
+
 		}
 
 		public override void _Ready()
@@ -25,18 +25,22 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         public virtual void SetGameModePlay()
         {
             gameState = DoGameModePlay;
+             
         }
         public virtual void SetGameModePause()
         {
             gameState = DoGameModePause;
+             
         }
         public virtual void SetGameModeLose()
         {
             gameState = DoGameModeLose;
+             
         }
         public virtual void SetGameModeWin()
         {
             gameState = DoGameModeWin;
+             
         }
         // Action 
         protected virtual void DoGameModePlay()

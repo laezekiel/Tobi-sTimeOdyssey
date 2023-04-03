@@ -1,3 +1,4 @@
+using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools.Dictionarys;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools.Enums;
 using Godot;
@@ -24,11 +25,12 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 
         static public void Retry()
         {
-            POC.Player_Manager.ResetPlayer();
             POC.Enemy_Manager.ResetCharacter();
             POC.Trap_Manager.ResetTraps();
             POC.Field_Manager.Retry();
-            POC.Game_Manager.SetGameModePlay();
+            if (GameManager.Level.Cutscenes.HasPlayed[0]) POC.Game_Manager.SetGameModePlay();
+            else POC.Camera.PlayCutscenes();
+            POC.Player_Manager.ResetPlayer();
         }
 
         static public void Lose(LoseType pTypeOfLost)
