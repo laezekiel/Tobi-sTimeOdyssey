@@ -45,15 +45,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 
             play.Connect("pressed", this, nameof(LoadGame));
 
-            start.Pressed = PlayTest.StartAtBegining;
-            ignoreAllCut.Pressed = PlayTest.IgnoreAllCutScenes;
-            ignoreBeginingCut.Pressed = PlayTest.IgnoreBeginingCutScenes;
-            ignoreEndCut.Pressed = PlayTest.IgnoreEndCutScenes;
-            resetAllCut.Pressed = PlayTest.ResetAllCutScenes;
-            resetBeginingCut.Pressed = PlayTest.ResetBeginingCutScenes;
-            resetEndCut.Pressed = PlayTest.ResetEndCutScenes;
+            //start.Pressed = PlayTest.StartAtBegining;
+            //ignoreAllCut.Pressed = PlayTest.IgnoreAllCutScenes;
+            //ignoreBeginingCut.Pressed = PlayTest.IgnoreBeginingCutScenes;
+            //ignoreEndCut.Pressed = PlayTest.IgnoreEndCutScenes;
+            //resetAllCut.Pressed = PlayTest.ResetAllCutScenes;
+            //resetBeginingCut.Pressed = PlayTest.ResetBeginingCutScenes;
+            //resetEndCut.Pressed = PlayTest.ResetEndCutScenes;
         }
-
+        
 		public override void _Ready()
 		{
             Init();
@@ -62,13 +62,13 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
         public override void _Process(float delta)
         {
             base._Process(delta);
-            PlayTest.StartAtBegining = start.Pressed;
-            PlayTest.IgnoreAllCutScenes = ignoreAllCut.Pressed;
-            PlayTest.IgnoreBeginingCutScenes = ignoreBeginingCut.Pressed;
-            PlayTest.IgnoreEndCutScenes = ignoreEndCut.Pressed;
-            PlayTest.ResetAllCutScenes = resetAllCut.Pressed;
-            PlayTest.ResetBeginingCutScenes = resetBeginingCut.Pressed;
-            PlayTest.ResetEndCutScenes = resetEndCut.Pressed;
+            //PlayTest.StartAtBegining = start.Pressed;
+            //PlayTest.IgnoreAllCutScenes = ignoreAllCut.Pressed;
+            //PlayTest.IgnoreBeginingCutScenes = ignoreBeginingCut.Pressed;
+            //PlayTest.IgnoreEndCutScenes = ignoreEndCut.Pressed;
+            //PlayTest.ResetAllCutScenes = resetAllCut.Pressed;
+            //PlayTest.ResetBeginingCutScenes = resetBeginingCut.Pressed;
+            //PlayTest.ResetEndCutScenes = resetEndCut.Pressed;
 
             if (ignoreAllCut.Pressed) { ignoreBeginingCut.Visible = false; ignoreEndCut.Visible = false; }
             else { ignoreAllCut.Visible = false; ignoreBeginingCut.Visible = true; ignoreEndCut.Visible = true; }

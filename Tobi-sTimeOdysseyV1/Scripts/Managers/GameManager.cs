@@ -5,6 +5,8 @@ using Com.IronicEntertainment.TobisTimeOdyssey.UI;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.IO;
 
 namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 {
@@ -55,29 +57,97 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
         protected override void Init()
         {
             base.Init();
-            if (PlayTest.StartAtBegining) JSON_Index = new List<string> { "Tutorial", "1", "1" };
+            //if (PlayTest.StartAtBegining) JSON_Index = new List<string> { "Tutorial", "1", "1" };
             POC.Player_Manager.Player.Init();
         }
         public override void _Ready()
         {
             base._Ready();
             #region singleton
-            if (instance != null){  
+            if (instance != null) {
                 QueueFree();
                 GD.Print(nameof(GameManager) + " Instance already exist, destroying the last added.");
                 return;
             }
-            
+
             instance = this;
             #endregion
 
-            if (PlayTest.ResetAllCutScenes)
+            string pathdb = @"data source=C:\Users\louis\Documents\LoOw\Tobi-sTimeOdyssey\Tobi-sTimeOdysseyV1\Scripts\config\SQLite\TobiDataBank.db";
+            string tableName = "Tobi_Data";
+            string sqlFileName = "C:\\Users\\louis\\Documents\\LoOw\\Tobi-sTimeOdyssey\\Tobi-sTimeOdysseyV1\\Scripts\\Tools\\SQLs\\Tobi_Data_SQL.sql";
+
+            string sql = System.IO.File.ReadAllText(sqlFileName);
+
+            using (SQLiteConnection connection = new SQLiteConnection(pathdb))
             {
-                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
-                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+                connection.Open();
+
+                using (SQLiteCommand countRow = new SQLiteCommand($"SELECT COUNT(*) FROM {tableName}", connection))
+                {
+                    int count = Convert.ToInt32(countRow.ExecuteScalar());
+                    GD.Print($"The {tableName} table contains {count} rows.");
+                    if (count == 0)
+                    {
+                        List<string> columns = new List<string>();
+                        List<string> values = new List<string>();
+                        string columnsString = "";
+                        string valueString = "";
+                        int value = 0;
+
+                        using (SQLiteCommand command = new SQLiteCommand($"PRAGMA table_info({tableName})", connection))
+                        {
+                            using (SQLiteDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read()) if (reader.GetString(1) != "ID") 
+                                { 
+                                    columns.Add(reader.GetString(1)); 
+                                    values.Add("@value" + (1 + value)); 
+                                    value++; 
+                                }
+
+                                columnsString = columns[0];
+                                valueString = values[0];
+
+                                for (int i = 1; i < value; i++)
+                                {
+                                    columnsString += ", " + columns[i];
+                                    valueString += ", " + values[i];
+                                }
+                            }
+                        } 
+
+                        string query = $"INSERT INTO {tableName} ({columnsString}) VALUES ({valueString})";
+
+                        SQLiteCommand command2 = new SQLiteCommand(query, connection);
+
+                        for (int i = 0; i < value; i++)
+                        {
+                            command2.Parameters.AddWithValue(values[i], JSON_Index[i]);
+                        }
+
+                        command2.ExecuteNonQuery();
+                    }
+                }
+
+                connection.Close();
             }
-            else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
-            else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+
+            //lvGround TEXT,
+            //lvGuards TEXT,
+            //lvVillager TEXT,
+            //lvLauncher TEXT,
+            //lvBouncer TEXT,
+            //lvNails TEXT,
+            //lvHeat TEXT
+
+            //if (PlayTest.ResetAllCutScenes)
+            //{
+            //    Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            //    Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+            //}
+            //else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            //else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
 
             MOC.Retry();
 
@@ -138,15 +208,15 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             if (Level_Index > Tobi_Data_JSON.GetMissionLevelNumber()) if (Tobi_Data_JSON.GetUnlockableMission(JSON_Index).Count > 0) JSON_Index = Tobi_Data_JSON.GetUnlockableMission(JSON_Index)[0];
             else MOC.Quit(this);
 
-            Tobi_Data_JSON.WrightOverLevelStart();
+            //Tobi_Data_JSON.WrightOverLevelStart();
 
-            if (PlayTest.ResetAllCutScenes)
-            {
-                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
-                Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
-            }
-            else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
-            else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+            //if (PlayTest.ResetAllCutScenes)
+            //{
+            //    Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            //    Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
+            //}
+            //else if (PlayTest.ResetBeginingCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.Begining, true);
+            //else if (PlayTest.ResetEndCutScenes) Tobi_Data_JSON.WrightoverCinematicsPlayed(CutscenesText.TypeCutscenes.End, true);
 
             SetGameModeWin();
 

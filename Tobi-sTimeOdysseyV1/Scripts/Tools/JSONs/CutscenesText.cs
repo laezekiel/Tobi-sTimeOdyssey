@@ -126,14 +126,14 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs
             {
                 List<bool> lTemp = new List<bool>();
 
-                if (_begining != null && !PlayTest.IgnoreBeginingCutScenes) lTemp.Add(Convert.ToBoolean(_begining[FieldCutscenes.Played]));
+                if (_begining != null /*&& !PlayTest.IgnoreBeginingCutScenes*/) lTemp.Add(Convert.ToBoolean(_begining[FieldCutscenes.Played]));
                 else lTemp.Add(true);
 
-                if (_end != null && !PlayTest.IgnoreEndCutScenes) lTemp.Add(Convert.ToBoolean(_end[FieldCutscenes.Played]));
+                if (_end != null /*&& !PlayTest.IgnoreEndCutScenes*/) lTemp.Add(Convert.ToBoolean(_end[FieldCutscenes.Played]));
                 else lTemp.Add(true);
 
-                if (PlayTest.IgnoreAllCutScenes) return new List<bool>() { true, true };
-                else return lTemp;
+                /*if (PlayTest.IgnoreAllCutScenes) return new List<bool>() { true, true };
+                else*/ return lTemp;
             } 
         }
     

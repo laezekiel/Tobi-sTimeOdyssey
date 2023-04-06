@@ -134,7 +134,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.UI
 		public void EndCutscenes()
 		{
 
-			Tobi_Data_JSON.WrightoverCinematicsPlayed(type);
+			//Tobi_Data_JSON.WrightoverCinematicsPlayed(type);
 
 			switch (type)
             {
