@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7docoejmnw6c"
-path="res://.godot/imported/shield_fire2.png-ee1c08556e39463533c892caabbaeea9.ctex"
+uid="uid://cyojaxuicmaux"
+path="res://.godot/imported/Past_Tiles_Temp.png-35356f5d1671c64544543b445fb2db4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/legacy/particules/shield_fire2.png"
-dest_files=["res://.godot/imported/shield_fire2.png-ee1c08556e39463533c892caabbaeea9.ctex"]
+source_file="res://Assets/Texture/Map/Past_Tiles_Temp.png"
+dest_files=["res://.godot/imported/Past_Tiles_Temp.png-35356f5d1671c64544543b445fb2db4b.ctex"]
 
 [params]
 

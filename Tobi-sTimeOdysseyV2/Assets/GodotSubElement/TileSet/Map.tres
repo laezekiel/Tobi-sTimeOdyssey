@@ -1,0 +1,25 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://wo7l75n8dvdx"]
+
+[ext_resource type="Texture2D" uid="uid://cyojaxuicmaux" path="res://Assets/Texture/Map/Past_Tiles_Temp.png" id="1_ho5nh"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_obgbe"]
+polygon = PackedVector2Array(-32, -21.5, -21.5, -32, -14.5, -24.5, 0.5, -24, 15, -24.5, 21.5, -32, 32, -21.5, 24.5, -15, 23.5, 0.5, 24, 15, 32, 21.5, 21, 32, 15, 24, 0, 24, -15.5, 24.5, -21.5, 32, -32, 21.5, -24, 15.5, -23.5, 0, -24, -15)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyxcn"]
+texture = ExtResource("1_ho5nh")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_obgbe")
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, -32, -32, 32, -32, 32, 32)
+
+[resource]
+tile_size = Vector2i(64, 64)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_kyxcn")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuyx2fcdnn5nf"]
+
+[ext_resource type="TileSet" uid="uid://wo7l75n8dvdx" path="res://Assets/GodotSubElement/TileSet/Map.tres" id="1_16vko"]
+
+[node name="Map" type="TileMap"]
+tile_set = ExtResource("1_16vko")
+format = 2
