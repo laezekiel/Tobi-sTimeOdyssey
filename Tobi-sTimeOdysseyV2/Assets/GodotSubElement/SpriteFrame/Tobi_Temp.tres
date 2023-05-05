@@ -1,0 +1,84 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://ch4xk2mftyta8"]
+
+[ext_resource type="Texture2D" uid="uid://d37otej3pwfok" path="res://Assets/Texture/Characters/Tobi_Small_Temp.png" id="1_2ycoa"]
+[ext_resource type="Texture2D" uid="uid://dk0xfeffos2sr" path="res://Assets/Texture/Characters/Tobi_Big_Temp.png" id="2_x43af"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfc4m"]
+atlas = ExtResource("1_2ycoa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc511"]
+atlas = ExtResource("1_2ycoa")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf0hb"]
+atlas = ExtResource("1_2ycoa")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b78l"]
+atlas = ExtResource("1_2ycoa")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iks0"]
+atlas = ExtResource("1_2ycoa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qd0q"]
+atlas = ExtResource("2_x43af")
+region = Rect2(250, 0, 250, 250)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfc4m")
+}],
+"loop": true,
+"name": &"burnt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc511")
+}],
+"loop": true,
+"name": &"caught",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf0hb")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b78l")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3iks0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"listenning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qd0q")
+}],
+"loop": true,
+"name": &"speaking",
+"speed": 5.0
+}]

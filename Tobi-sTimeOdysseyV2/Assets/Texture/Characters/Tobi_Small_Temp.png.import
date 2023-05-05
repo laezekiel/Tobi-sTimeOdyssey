@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cibhkk6r3j7u4"
-path="res://.godot/imported/TobiIdle.png-676a4a3203f48bb51816eedec14eda3e.ctex"
+uid="uid://d37otej3pwfok"
+path="res://.godot/imported/Tobi_Small_Temp.png-9027dce543467a112337315b6d9b48f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/legacy/Character/Tobi/TobiIdle.png"
-dest_files=["res://.godot/imported/TobiIdle.png-676a4a3203f48bb51816eedec14eda3e.ctex"]
+source_file="res://Assets/Texture/Characters/Tobi_Small_Temp.png"
+dest_files=["res://.godot/imported/Tobi_Small_Temp.png-9027dce543467a112337315b6d9b48f8.ctex"]
 
 [params]
 

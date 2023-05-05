@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dox21dlho8fpf"
-path="res://.godot/imported/BigTobiSenseiGrey.png-f6101206ad89f324d73aab46b79a9103.ctex"
+uid="uid://dk0xfeffos2sr"
+path="res://.godot/imported/Tobi_Big_Temp.png-1be7086b98d8781b2f80976bcfe3ab73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/legacy/Character/Sifu/BigTobiSenseiGrey.png"
-dest_files=["res://.godot/imported/BigTobiSenseiGrey.png-f6101206ad89f324d73aab46b79a9103.ctex"]
+source_file="res://Assets/Texture/Characters/Tobi_Big_Temp.png"
+dest_files=["res://.godot/imported/Tobi_Big_Temp.png-1be7086b98d8781b2f80976bcfe3ab73.ctex"]
 
 [params]
 
