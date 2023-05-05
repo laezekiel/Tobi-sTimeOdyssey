@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=6 format=3]
+
+[ext_resource type="DynamicFont" path="res://Assets/legacy/Theme/Fonts/Japan1.tres" id="1"]
+[ext_resource type="Texture" uid="uid://4mpncu3u3arf" path="res://Assets/legacy/Theme/VerticalPaper.png" id="2"]
+[ext_resource type="StyleBox" path="res://Assets/legacy/Theme/Container_UI.tres" id="3"]
+[ext_resource type="StyleBox" path="res://Assets/legacy/Theme/buttonWin.tres" id="4"]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 123, 170 )
+margin_left = 22.4331
+margin_right = 18.044
+margin_top = 25.1232
+margin_bottom = 21.9454
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0.317647, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_focus = Color( 0.317647, 0.156863, 0, 1 )
+Button/colors/font_color_hover = Color( 0.317647, 0.156863, 0, 1 )
+Button/colors/font_color_pressed = Color( 0.317647, 0.282353, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = ExtResource( 4 )
+Button/styles/focus = ExtResource( 4 )
+Button/styles/hover = ExtResource( 4 )
+Button/styles/normal = ExtResource( 4 )
+Button/styles/pressed = ExtResource( 4 )
+Label/colors/font_color = Color( 0.317647, 0, 0, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+Panel/styles/panel = ExtResource( 3 )
+PanelContainer/styles/panel = SubResource( 1 )

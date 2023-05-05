@@ -1,0 +1,83 @@
+using Com.IronicEntertainment.TobisTimeOdyssey.Elements;
+using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
+using Godot;
+using System;
+using System.Collections.Generic;
+
+namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
+{
+	/// <summary>
+	/// Propriety On Call
+	/// </summary>
+	static public class POC
+	{
+		static private RandomNumberGenerator
+			rand = new RandomNumberGenerator();
+
+		static private float
+			thousandthS = 0.001f,
+			hundredthS = 0.01f,
+			tenthS = 0.1f,
+			halfS = 0.5f,
+			oneS = 1f,
+			twoS = 2f;
+
+		static public float RandI
+        {
+			get
+            {
+				rand.Randomize();
+				return rand.Randf();
+            }
+        }
+
+		/// <summary>
+		/// get a thousandth of 1
+		/// </summary>
+		static public float ThousandthS { get { return thousandthS; } }
+		/// <summary>
+		/// get a hundredth of 1
+		/// </summary>
+		static public float HundredthS { get { return hundredthS; } }
+		/// <summary>
+		/// get a tenth of 1
+		/// </summary>
+		static public float TenthS { get { return tenthS; } }
+		/// <summary>
+		/// get half of 1
+		/// </summary>
+		static public float HalfS { get { return halfS; } }
+		/// <summary>
+		/// get  1
+		/// </summary>
+		static public float OneS { get { return oneS; } }
+		/// <summary>
+		/// get 2
+		/// </summary>
+		static public float TwoS { get { return twoS; } }
+
+
+		static private Color
+			visible = Colors.White,
+			invisible = new Color(1, 1, 1, 0);
+
+		/// <summary>
+		/// Get a white/visible color
+		/// </summary>
+		static public Color Visible { get { return visible; } }
+		/// <summary>
+		/// Get an invisible color
+		/// </summary>
+		static public Color Invisible { get { return invisible; } }
+
+
+		static public FieldManager Field_Manager { get { return FieldManager.GetInstance(); } }
+		static public GameManager Game_Manager { get { return GameManager.GetInstance(); } }
+		static public PlayerManager Player_Manager { get { return PlayerManager.GetInstance(); } }
+		static public EnemyManager Enemy_Manager { get { return EnemyManager.GetInstance(); } }
+		static public TrapManager Trap_Manager { get { return TrapManager.GetInstance(); } }
+		static public SkinManager Skin_Manager { get { return SkinManager.GetInstance(); } }
+		static public TobiView Camera { get { return TobiView.GetInstance(); } }
+	}
+
+}

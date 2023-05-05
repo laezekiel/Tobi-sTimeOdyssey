@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3]
+
+[ext_resource type="Texture" uid="uid://bhxa7sbstj7ju" path="res://Assets/legacy/Character/Geisha/Civilian_Geisha_Idle_1.png" id="1"]
+[ext_resource type="Texture" uid="uid://36pg81ishw65" path="res://Assets/legacy/Character/Geisha/Geisha_Alerted.png" id="2"]
+
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "living",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "seeing",
+"speed": 5.0
+} ]

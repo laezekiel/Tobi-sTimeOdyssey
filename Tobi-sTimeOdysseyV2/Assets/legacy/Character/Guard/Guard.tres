@@ -1,0 +1,24 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3]
+
+[ext_resource type="Texture" uid="uid://drltck12bgt3m" path="res://Assets/legacy/Character/Guard/EnemyEdoSprite.png" id="1"]
+[ext_resource type="Texture" uid="uid://cqo1d8mv63rq2" path="res://Assets/legacy/Character/Guard/TriggeredEdoEnemy.png" id="2"]
+[ext_resource type="Texture" uid="uid://dtucsrnkuqgi3" path="res://Assets/legacy/Character/Guard/DeadEdoEnemy.png" id="3"]
+
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "dying",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "living",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "seeing",
+"speed": 5.0
+} ]
