@@ -1,0 +1,63 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cpfcmryatygwn"]
+
+[ext_resource type="Texture2D" uid="uid://d37otej3pwfok" path="res://Assets/Texture/Characters/Tobi_Small_Temp.png" id="1_6uqye"]
+[ext_resource type="Texture2D" uid="uid://dk0xfeffos2sr" path="res://Assets/Texture/Characters/Tobi_Big_Temp.png" id="2_32sac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vorr"]
+atlas = ExtResource("1_6uqye")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqk4l"]
+atlas = ExtResource("2_32sac")
+region = Rect2(0, 300, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n10o3"]
+atlas = ExtResource("2_32sac")
+region = Rect2(300, 300, 300, 300)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"burnt",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"caught",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vorr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqk4l")
+}],
+"loop": true,
+"name": &"listenning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n10o3")
+}],
+"loop": true,
+"name": &"speaking",
+"speed": 5.0
+}]

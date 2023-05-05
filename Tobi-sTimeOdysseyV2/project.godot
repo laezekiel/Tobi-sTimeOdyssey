@@ -17,3 +17,7 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="Tobi-s Time Odyssey V 2"
+
+[rendering]
+
+renderer/rendering_method="mobile"
