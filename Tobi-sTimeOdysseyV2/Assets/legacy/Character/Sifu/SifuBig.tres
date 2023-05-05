@@ -1,0 +1,13 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3]
+
+[ext_resource type="Texture" uid="uid://dox21dlho8fpf" path="res://Assets/legacy/Character/Sifu/BigTobiSenseiGrey.png" id="1"]
+[ext_resource type="Texture" uid="uid://cxtnqvayuksru" path="res://Assets/legacy/Character/Sifu/BigTobiSensei.png" id="2"]
+
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]

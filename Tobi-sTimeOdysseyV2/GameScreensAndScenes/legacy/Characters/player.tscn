@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Elements/Chararcters/Player.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sight/ambiance.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Character/Tobi/player.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Scenes/direction.tscn" type="PackedScene" id=4]
+
+[node name="player" type="KinematicBody2D"]
+collision/safe_margin = 1.0
+script = ExtResource( 1 )
+checkColliderContainerPath = NodePath("checkColliderContainer")
+killerContainerPath = NodePath("killerContainer")
+bodyPath = NodePath("body")
+
+[node name="direction" parent="." instance=ExtResource( 4 )]
+
+[node name="body" type="AnimatedSprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 0.675, 0.675 )
+frames = ExtResource( 3 )
+animation = "happy"
+offset = Vector2( 0.5, 0.5 )
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -7, -15, 7, -15, 15, -7, 15, 7, 7, 15, -7, 15, -15, 7, -15, -7 )
+
+[node name="checkColliderContainer" type="Node2D" parent="."]
+
+[node name="CheckCollider" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider2" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.309
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider3" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -1.0472
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider4" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.785398
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider5" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.523599
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider6" type="RayCast2D" parent="checkColliderContainer"]
+rotation = -0.261799
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider7" type="RayCast2D" parent="checkColliderContainer"]
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider8" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.261799
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider9" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.523599
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider10" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 0.785398
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider11" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.0472
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider12" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.309
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="CheckCollider13" type="RayCast2D" parent="checkColliderContainer"]
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 20, 0 )
+
+[node name="killerContainer" type="Node2D" parent="."]
+
+[node name="killer1" type="RayCast2D" parent="killerContainer"]
+scale = Vector2( 1, 11 )
+enabled = true
+cast_to = Vector2( 64, 0 )
+
+[node name="ambiance" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+texture_scale = 0.5
+color = Color( 1, 1, 1, 0.501961 )
+mode = 2
+shadow_enabled = true
+
+[node name="ambiance2" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+texture_scale = 2.0
+color = Color( 1, 1, 1, 0.25098 )
+mode = 2
+shadow_enabled = true

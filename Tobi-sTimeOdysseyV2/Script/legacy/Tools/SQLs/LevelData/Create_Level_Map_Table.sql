@@ -1,0 +1,4 @@
+CREATE TABLE [Level_Map] (
+	ID INT NOT NULL,
+	rowMap TEXT NOT NULL
+);

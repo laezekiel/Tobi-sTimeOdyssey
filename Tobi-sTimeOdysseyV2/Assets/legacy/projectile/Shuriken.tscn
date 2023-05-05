@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture" uid="uid://domvsc7ots0f2" path="res://Assets/legacy/projectile/shuriken.png" id="1"]
+
+[node name="Shuriken" type="Sprite"]
+texture = ExtResource( 1 )

@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sight/launcherSight.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Elements/Traps/Launcher.cs" type="Script" id=3]
+[ext_resource path="res://Assets/projectile/Shuriken.tscn" type="PackedScene" id=4]
+
+[node name="Launcher" type="KinematicBody2D"]
+script = ExtResource( 3 )
+shotFactory = ExtResource( 4 )
+shotTimerPath = NodePath("shotTimer")
+shotContainerPath = NodePath("shurikenContainer")
+visorPath = NodePath("visor")
+killerPath = NodePath("killer")
+
+[node name="endMouth" type="Polygon2D" parent="."]
+color = Color( 0.427451, 0.129412, 0, 1 )
+polygon = PoolVector2Array( -33, -9, -29, -9, -29, -11, -28, -11, -28, 11, -29, 11, -29, 9, -33, 9 )
+
+[node name="mouth" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 0.501961 )
+polygon = PoolVector2Array( -33, -9, -29, -9, -29, 9, -33, 9 )
+
+[node name="shurikenContainer" type="Node2D" parent="."]
+position = Vector2( -34, 0 )
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color( 0.427451, 0.129412, 0, 1 )
+polygon = PoolVector2Array( -36, -11, -29, -11, -29, -9, -33, -9, -33, 9, -29, 9, -29, 11, -36, 11 )
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -36, -11, -28, -11, -28, 11, -36, 11 )
+
+[node name="killer" type="RayCast2D" parent="."]
+position = Vector2( -33, 0 )
+enabled = true
+cast_to = Vector2( 1280, 0 )
+
+[node name="visor" type="Light2D" parent="."]
+position = Vector2( -33, 0 )
+texture = ExtResource( 2 )
+color = Color( 0.627451, 0, 0, 0.501961 )
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="shotTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
