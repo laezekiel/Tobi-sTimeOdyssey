@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="Tobi-sTimeOdysseyV1"
-run/main_scene="res://Scenes/GameContainer.tscn"
+run/main_scene="res://Scenes/LoadingStartScreen.tscn"
 config/icon="res://Assets/Character/Tobi/TobiIdle.png"
 
 [debug]
 
-settings/fps/force_fps=30
+settings/fps/force_fps=120
 
 [display]
 
@@ -41,6 +41,11 @@ Look_Player={
 Next_Line={
 "deadzone": 0.5,
 "events": [  ]
+}
+Reset_Data_Base={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":96,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [input_devices]

@@ -1,4 +1,3 @@
-
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Characters;
 using Com.IronicEntertainment.TobisTimeOdyssey.Elements.Traps;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
@@ -36,18 +35,28 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
 
         [Export]
         private NodePath
-            groundPath;
+            groundPath,
+            environmentPath;
 
-        private TileMap
-            ground;
+        private TileMap Ground { get { return GetNode<TileMap>(groundPath); } } 
+
+        private CanvasModulate Environment { get { return GetNode<CanvasModulate>(environmentPath); } }
+
 
         private const int
             OFFSET = 32;
 
+
+        private int
+            enemiesIndex = 0,
+            lTrapsIndex = 0,
+            xPos = 0,
+            yPos = 0;
+
+
         protected override void Init()
         {
             base.Init();
-            ground = GetNode<TileMap>(groundPath);
         }
 
         public override void _Ready()
@@ -64,97 +73,123 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
-        #region State Machine
-        // Mode
-        // Action
-        #endregion
-
-        public void Retry()
+        public override void _Process(float delta)
         {
-            ground.Clear();
+            base._Process(delta);
             SetField();
         }
-
-        public void SetField()
+        public void Retry()
         {
-            int lEnemiesIndex = 0;
-            int lLauchersIndex = 0;
-            int lBouncersIndex = 0;
-            int lNailsWallIndex = 0;
-            int lHeatWallIndex = 0;
-            for (int i = 0; i < GameManager.Level.Ground.Count; i++)
+            Ground.Clear();
+        }
+
+
+        private void SetField()
+        {
+            if (xPos == 0 && yPos == 0)
             {
-                for (int j = 0; j < GameManager.Level.Ground[i].Length; j++)
+                POC.Player_Manager.Player.GlobalPosition = GameManager.Current_Level.Player * OFFSET * 2 + Vector2.One * OFFSET;
+
+                SQLCommands.dataBase.Open();
+
+                int lNbrEnemies = SQLCommands.GetTableLength(SQLCommands.Table.Level_Enemies);
+                int lNbrTraps = SQLCommands.GetTableLength(SQLCommands.Table.Level_Traps);
+
+                SQLCommands.dataBase.Close();
+
+                for (int i = 1; i <= lNbrEnemies ; i++)
                 {
-                    switch (GameManager.Level.Ground[i][j])
-                    {
-                        case '#':
-                            ground.SetCell(j, i, 1);
-                            break;
-                        case '-':
-                            NailsWall lNailsWall = nailsWallFactory.Instance<NailsWall>();
-                            POC.Trap_Manager.Traps.AddChild(lNailsWall);
-                            lNailsWall.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            lNailsWall.GlobalRotationDegrees = GameManager.Level.Nails_Rotation[lNailsWallIndex];
-                            ground.SetCell(j, i, 0);
-                            lNailsWallIndex++;
-                            break;
-                        case '*':
-                            HeatWall lHeatWall = heatWallFactory.Instance<HeatWall>();
-                            POC.Trap_Manager.Traps.AddChild(lHeatWall);
-                            lHeatWall.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            lHeatWall.GlobalRotationDegrees = GameManager.Level.Heat_Rotation[lHeatWallIndex];
-                            lHeatWall.HeatSpeed = GameManager.Level.Heat_Time[lHeatWallIndex];
-                            ground.SetCell(j, i, 0);
-                            lHeatWallIndex++;
-                            break;
-                        case '$':
-                            Bouncer lBouncer = bouncerFactory.Instance<Bouncer>();
-                            POC.Trap_Manager.Traps.AddChild(lBouncer);
-                            lBouncer.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            lBouncer.GlobalRotationDegrees = GameManager.Level.Bouncer_Rotation[lBouncersIndex];
-                            ground.SetCell(j, i, 0);
-                            lBouncersIndex++;
-                            break;
-                        case '_':
-                            Launcher lLauncher = launcherFactory.Instance<Launcher>();
-                            POC.Trap_Manager.Traps.AddChild(lLauncher);
-                            lLauncher.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            lLauncher.GlobalRotationDegrees = GameManager.Level.Launchers_Rotation[lLauchersIndex];
-                            lLauncher.ShotSpeed = GameManager.Level.Laucher_Shot_Speed[lLauchersIndex];
-                            ground.SetCell(j, i, 0);
-                            lLauchersIndex++;
-                            break;
-                        case '@':
-                            POC.Player_Manager.Player.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            ground.SetCell(j, i, 0);
-                            break;
-                        case '.':
-                            Villager lEnemy = POC.Enemy_Manager.SelectCharacter(GameManager.Level.Enemies_Type[lEnemiesIndex]).Instance<Villager>();
-                            if (GameManager.Level.Enemies_Type[lEnemiesIndex].x < 2)
-                            {
-                                POC.Enemy_Manager.Enemies.AddChild(lEnemy);
-                            }
-                            else
-                            {
-                                POC.Enemy_Manager.Villagers.AddChild(lEnemy);
-                            }
-                            lEnemy.GlobalPosition = new Vector2(j, i) * OFFSET * 2 + Vector2.One * OFFSET;
-                            lEnemy.GlobalRotationDegrees = GameManager.Level.Enemies_Rotation[lEnemiesIndex][0];
-                            lEnemy.rotation = GameManager.Level.Enemies_Rotation[lEnemiesIndex];
-                            foreach (Vector2 path in GameManager.Level.Enemies_Path[lEnemiesIndex])
-                            {
-                                lEnemy.path.Add(path * OFFSET * 2 + Vector2.One * OFFSET);
-                            }
-                            ground.SetCell(j, i, 0);
-                            lEnemiesIndex++;
-                            break;
-                        case ' ':
-                            ground.SetCell(j, i, 0);
-                            break;
-                        default:
-                            break;
-                    }
+                    PackedScene charScene = POC.Enemy_Manager.SelectCharacter(i);
+
+                    Villager lEnemy = charScene.Instance<Villager>();
+
+                    string lEType = (string)GameManager.Current_Level.Enemies[enemiesIndex][Level.EnemyKey.Type];
+
+                    if (lEType == "Villager") POC.Enemy_Manager.Villagers.AddChild(lEnemy);
+                    else POC.Enemy_Manager.Enemies.AddChild(lEnemy);
+
+
+                    lEnemy.GlobalPosition = (Vector2)(GameManager.Current_Level.Enemies[enemiesIndex][Level.EnemyKey.Start_Pos]) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lEnemy.GlobalRotationDegrees = (float)GameManager.Current_Level.Enemies[enemiesIndex][Level.EnemyKey.Start_Rot];
+
+                    Ground.SetCell(xPos, yPos, 0);
+                }
+
+                for (int i = 1; i <= lNbrTraps; i++)
+                {
+                    Traps lTrap = nailsWallFactory.Instance<Traps>();
+                    POC.Trap_Manager.Traps.AddChild(lTrap);
+                    lTrap.GlobalPosition = new Vector2(xPos, yPos) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lTrap.GlobalRotationDegrees = Convert.ToSingle(GameManager.Current_Level.Traps[lTrapsIndex][Level.TrapKey.Start_Rot]);
+                    Ground.SetCell(xPos, yPos, 0);
+                    lTrapsIndex++;
+
+                }
+            }
+
+
+            if (GameManager.Current_Level.Map.Count == yPos) 
+            {
+                Environment.Color = Colors.Black;
+                return; 
+            }
+            else Environment.Color = new Color(Colors.Black, 0.5f);
+
+
+            switch (GameManager.Current_Level.Map[yPos][xPos])
+            {
+                case '#':
+                    Ground.SetCell(xPos, yPos, 1);
+                    break;
+                case '-':
+                    NailsWall lNailsWall = nailsWallFactory.Instance<NailsWall>();
+                    POC.Trap_Manager.Traps.AddChild(lNailsWall);
+                    lNailsWall.GlobalPosition = new Vector2(xPos, yPos) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lNailsWall.GlobalRotationDegrees = Convert.ToSingle(GameManager.Current_Level.Traps[lTrapsIndex][Level.TrapKey.Start_Rot]);
+                    Ground.SetCell(xPos, yPos, 0);
+                    lTrapsIndex++;
+                    break;
+                case '*':
+                    HeatWall lHeatWall = heatWallFactory.Instance<HeatWall>();
+                    POC.Trap_Manager.Traps.AddChild(lHeatWall);
+                    lHeatWall.GlobalPosition = new Vector2(xPos, yPos) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lHeatWall.GlobalRotationDegrees = Convert.ToSingle(GameManager.Current_Level.Traps[lTrapsIndex][Level.TrapKey.Start_Rot]);
+                    Ground.SetCell(xPos, yPos, 0);
+                    lTrapsIndex++;
+                    break;
+                case '$':
+                    Bouncer lBouncer = bouncerFactory.Instance<Bouncer>();
+                    POC.Trap_Manager.Traps.AddChild(lBouncer);
+                    lBouncer.GlobalPosition = new Vector2(xPos, yPos) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lBouncer.GlobalRotationDegrees = Convert.ToSingle(GameManager.Current_Level.Traps[lTrapsIndex][Level.TrapKey.Start_Rot]);
+                    Ground.SetCell(xPos, yPos, 0);
+                    lTrapsIndex++;
+                    break;
+                case '_':
+                    Launcher lLauncher = launcherFactory.Instance<Launcher>();
+                    POC.Trap_Manager.Traps.AddChild(lLauncher);
+                    lLauncher.GlobalPosition = new Vector2(xPos, yPos) * OFFSET * 2 + Vector2.One * OFFSET;
+                    lLauncher.GlobalRotationDegrees = Convert.ToSingle(GameManager.Current_Level.Traps[lTrapsIndex][Level.TrapKey.Start_Rot]);
+                    Ground.SetCell(xPos, yPos, 0);
+                    lTrapsIndex++;
+                    break;
+                case ' ':
+                    Ground.SetCell(xPos, yPos, 0);
+                    break;
+                default:
+                    break;
+            }
+
+            if (GameManager.Current_Level.Map.Count >= yPos + 1)
+            {
+                if (GameManager.Current_Level.Map[yPos].Length > xPos + 1)
+                {
+                    xPos++;
+                }
+                else
+                {
+                    yPos++;
+                    xPos = 0;
                 }
             }
         }

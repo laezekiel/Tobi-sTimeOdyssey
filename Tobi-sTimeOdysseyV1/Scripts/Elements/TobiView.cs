@@ -1,6 +1,5 @@
 using Com.IronicEntertainment.TobisTimeOdyssey.Managers;
 using Com.IronicEntertainment.TobisTimeOdyssey.Tools;
-using Com.IronicEntertainment.TobisTimeOdyssey.Tools.JSONs;
 using Com.IronicEntertainment.TobisTimeOdyssey.UI;
 using Godot;
 using System;
@@ -50,8 +49,11 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         public void Init()
         {
             centerDirection = GetNode<Position2D>(centerDirectionPath);
+
             directionCursor = GetNode<Sprite>(directionCursorPath);
+
             direction = GetNode<TouchScreenButton>(directionPath);
+
             jump = GetNode<TouchScreenButton>(jumpPath);
         }
 
@@ -74,6 +76,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         public override void _Process(float delta)
         {
             base._Process(delta);
+
             GlobalPosition = POC.Player_Manager.Player.GlobalPosition;
 
             if (Input.IsActionPressed("Look_Player"))
@@ -103,22 +106,17 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
             directionCursor.Visible = true;
         }
 
-        public void PlayCutscenes(CutscenesText.TypeCutscenes pType = CutscenesText.TypeCutscenes.Begining)
+        public void PlayCutscenes()
         {
             HideButton();
-
-            GameManager.GetInstance().SetGameModePause();
 
             Cutscenes lCut = cutscenesFactory.Instance<Cutscenes>();
 
             AddChild(lCut);
-
-            lCut.PlayCutscene(pType);
         }
 
         public void AddWinScreen()
         {
-            GameManager.GetInstance().SetGameModePause();
 
             WinScreen lWin = winFactory.Instance<WinScreen>();
 

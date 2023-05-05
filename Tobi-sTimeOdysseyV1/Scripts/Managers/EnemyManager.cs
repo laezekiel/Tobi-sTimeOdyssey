@@ -29,23 +29,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             enemiesPath,
             villagerspath;
 
-        private List<List<PackedScene>>
-            charactersFactory = new List<List<PackedScene>>() 
-            {
-                new List<PackedScene>()
-                {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Enemy/Enemy.tscn"),
-                },
-                new List<PackedScene>()
-                {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Enemy/Boss/Daimo.tscn"),
-                },
-                new List<PackedScene>()
-                {
-                    (PackedScene)GD.Load("res://Scenes/Characters/Villager/Villager.tscn"),
-                },
-            };
-
         public Node2D Enemies { get { return GetNode<Node2D>(enemiesPath); } }
         public Node2D Villagers { get { return GetNode<Node2D>(villagerspath); } }
 
@@ -67,59 +50,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
-        #region State Machine
-        // Mode
-        public override void SetGameModePlay()
-        {
-            base.SetGameModePlay();
-            foreach (Enemy enemy in Enemies.GetChildren())
-            {
-                enemy.SetGameModePlay();
-            }
-            foreach (Villager villager in Villagers.GetChildren())
-            {
-                villager.SetGameModePlay();
-            }
-        }
-        public override void SetGameModePause()
-        {
-            base.SetGameModePause();
-            foreach (Enemy enemy in Enemies.GetChildren())
-            {
-                enemy.SetGameModePause();
-            }
-            foreach (Villager villager in Villagers.GetChildren())
-            {
-                villager.SetGameModePause();
-            }
-        }
-        public override void SetGameModeWin()
-        {
-            base.SetGameModeWin();
-            foreach (Enemy enemy in Enemies.GetChildren())
-            {
-                enemy.SetGameModeWin();
-            }
-            foreach (Villager villager in Villagers.GetChildren())
-            {
-                villager.SetGameModeWin();
-            }
-        }
-        public override void SetGameModeLose()
-        {
-            base.SetGameModeLose();
-            foreach (Enemy enemy in Enemies.GetChildren())
-            {
-                enemy.SetGameModeLose();
-            }
-            foreach (Villager villager in Villagers.GetChildren())
-            {
-                villager.SetGameModeLose();
-            }
-        }
-        // Action 
-        #endregion
-
         public void ResetCharacter()
         {
             foreach (Enemy enemy in Enemies.GetChildren())
@@ -132,9 +62,29 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             }
         }
 
-        public PackedScene SelectCharacter(Vector2 pEnemyType)
+        public PackedScene SelectCharacter(int ptype)
         {
-            return charactersFactory[(int)pEnemyType.x][(int)pEnemyType.y];
+            string playerType;
+            int playerScene = 0;
+            int tableSize;
+
+
+            SQLCommands.dataBase.Open();
+
+            tableSize = SQLCommands.GetTableLength(SQLCommands.Table.Scenes_Charcters);
+
+            SQLCommands.dataBase.Close();
+
+
+            for (int i = 1; i <= tableSize; i++)
+            {
+                playerScene = i;
+                playerType = (string)SQLCommands.GetCell(SQLCommands.Table.Scenes_Charcters, i, "CType");
+
+                if (playerType == (string)GameManager.Current_Level.Enemies[ptype][Level.EnemyKey.Type]) break;
+            }
+
+            return GD.Load<PackedScene>((string)SQLCommands.GetCell(SQLCommands.Table.Scenes_Charcters, playerScene, "GameScene"));
         }
 
         public override void _Process(float delta)

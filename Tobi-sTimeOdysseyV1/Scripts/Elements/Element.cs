@@ -64,7 +64,7 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Elements
         public override void _PhysicsProcess(float delta)
         {
             base._PhysicsProcess(delta);
-            gameState();
+            //gameState();
         }
 
     }

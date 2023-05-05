@@ -48,49 +48,37 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
-        #region State Machine
-        // Mode
-        public override void SetGameModePlay()
-        {
-            base.SetGameModePlay();
-            foreach (Traps traps in Traps.GetChildren())
-            {
-                traps.SetGameModePlay();
-            }
-        }
-        public override void SetGameModePause()
-        {
-            base.SetGameModePause();
-            foreach (Traps traps in Traps.GetChildren())
-            {
-                traps.SetGameModePause();
-            }
-        }
-        public override void SetGameModeWin()
-        {
-            base.SetGameModeWin();
-            foreach (Traps traps in Traps.GetChildren())
-            {
-                traps.SetGameModeWin();
-            }
-        }
-        public override void SetGameModeLose()
-        {
-            base.SetGameModeLose();
-            foreach (Traps traps in Traps.GetChildren())
-            {
-                traps.SetGameModeLose();
-            }
-        }
-        // Action 
-        #endregion
-
         public void ResetTraps()
         {
             foreach (Traps trap in Traps.GetChildren())
             {
                 trap.QueueFree();
             }
+        }
+
+        public PackedScene SelectCharacter(int ptype)
+        {
+            string playerType;
+            int playerScene = 0;
+            int tableSize;
+
+
+            SQLCommands.dataBase.Open();
+
+            tableSize = SQLCommands.GetTableLength(SQLCommands.Table.Scenes_Traps);
+
+            SQLCommands.dataBase.Close();
+
+
+            for (int i = 1; i <= tableSize; i++)
+            {
+                playerScene = i;
+                playerType = (string)SQLCommands.GetCell(SQLCommands.Table.Scenes_Charcters, i, "CType");
+
+                if (playerType == (string)GameManager.Current_Level.Enemies[ptype][Level.EnemyKey.Type]) break;
+            }
+
+            return GD.Load<PackedScene>((string)SQLCommands.GetCell(SQLCommands.Table.Scenes_Charcters, playerScene, "GameScene"));
         }
 
         protected override void Dispose(bool pDisposing)

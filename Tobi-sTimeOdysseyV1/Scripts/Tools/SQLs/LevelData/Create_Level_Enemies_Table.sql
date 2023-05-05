@@ -1,0 +1,9 @@
+CREATE TABLE [Level_Enemies](
+	ID INT NOT NULL,
+	eType TEXT NOT NULL,
+	eXinPos INT NOT NULL,
+	eYinPos INT NOT NULL,
+	eRin INT NOT NULL,
+	eMoves CHAR(1) NOT NULL,
+	eRotates CHAR(1) NOT NULL
+);

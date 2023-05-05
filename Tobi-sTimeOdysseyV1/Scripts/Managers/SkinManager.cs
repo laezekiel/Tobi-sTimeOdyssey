@@ -38,11 +38,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
-        #region State Machine
-        // Mode
-        // Action
-        #endregion
-
         protected override void Dispose(bool pDisposing)
         {
             #region singleton

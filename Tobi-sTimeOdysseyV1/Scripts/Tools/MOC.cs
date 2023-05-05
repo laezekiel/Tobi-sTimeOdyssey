@@ -12,10 +12,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
 	/// </summary>
 	static public class MOC
 	{
-        //static public void LoadScene(AllPath pPath, Node pCaller)
-        //{
-        //    pCaller.GetTree().ChangeScene(PathDic.GetPath(pPath));
-        //}
         public enum LoseType
         {
             Caught,
@@ -23,13 +19,21 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
             Killed
         }
 
+        static public void LoadScene(string pPath, Node pCaller)
+        {
+            pCaller.GetTree().ChangeScene(pPath);
+        }
+
+        static public void LoadScene(PackedScene gameScene, Node pCaller)
+        {
+            pCaller.GetTree().ChangeSceneTo(gameScene);
+        }
+
         static public void Retry()
         {
             POC.Enemy_Manager.ResetCharacter();
             POC.Trap_Manager.ResetTraps();
             POC.Field_Manager.Retry();
-            if (GameManager.Level.Cutscenes.HasPlayed[0]) POC.Game_Manager.SetGameModePlay();
-            else POC.Camera.PlayCutscenes();
             POC.Player_Manager.ResetPlayer();
         }
 
@@ -49,7 +53,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Tools
                 default:
                     break;
             }
-            POC.Game_Manager.SetGameModeLose();
         }
 
         #region Connect

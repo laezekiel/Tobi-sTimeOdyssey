@@ -58,31 +58,6 @@ namespace Com.IronicEntertainment.TobisTimeOdyssey.Managers
             #endregion
         }
 
-        #region State Machine
-        // Mode
-        public override void SetGameModePlay()
-        {
-            base.SetGameModePlay();
-            Player.SetGameModePlay();
-        }
-        public override void SetGameModePause()
-        {
-            base.SetGameModePause();
-            Player.SetGameModePause();
-        }
-        public override void SetGameModeWin()
-        {
-            base.SetGameModeWin();
-            Player.SetGameModeWin();
-        }
-        public override void SetGameModeLose()
-        {
-            base.SetGameModeLose();
-            Player.SetGameModeLose();
-        }
-        // Action
-        #endregion
-
         public void ResetPlayer()
         {
             Player.SetPlayerModeStatic();
