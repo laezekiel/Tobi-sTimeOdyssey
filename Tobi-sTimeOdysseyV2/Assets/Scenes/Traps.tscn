@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhbm6v8ipyu5x"]
+
+[ext_resource type="TileSet" uid="uid://dbj5pb3c8x0pk" path="res://Assets/GodotSubElement/TileSet/Traps.tres" id="1_5uc6s"]
+
+[node name="Traps" type="TileMap"]
+tile_set = ExtResource("1_5uc6s")
+format = 2

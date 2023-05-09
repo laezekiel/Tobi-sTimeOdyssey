@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://shtsv2xjnref"]
+
+[ext_resource type="SpriteFrames" uid="uid://cpfcmryatygwn" path="res://Assets/GodotSubElement/SpriteFrame/Scientist_Temp.tres" id="1_cv4nw"]
+
+[node name="Scientist" type="CharacterBody2D"]
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -18, 8, -18, 18, -8, 18, 8, 8, 18, -8, 18, -18, 8, -18, -8)
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -0.25)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("1_cv4nw")
+animation = &"idle"
+
+[node name="check" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
+
+[node name="sight" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_item_cull_mask = 3

@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://1w43f6xkhuh7"]
+
+[ext_resource type="SpriteFrames" uid="uid://dmdhsitt5yt3u" path="res://Assets/GodotSubElement/SpriteFrame/Sentry_Temp.tres" id="1_pnhsx"]
+[ext_resource type="Shader" path="res://Assets/GodotSubElement/Material/shader/Daïmyo.gdshader" id="1_qpu2u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgr2b"]
+shader = ExtResource("1_qpu2u")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w8m4q"]
+closed = false
+polygon = PackedVector2Array(19.48, 3.957, 19.32, 5.176, 17.3204, 10.0001, 14.1421, 14.1422, 10, 17.3206, 5.17639, 19.3186, 0, 20, -5.17639, 19.3186, -10, 17.3206, -14.1422, 14.1421, -17.3204, 10.0001, -19.3185, 5.17651, -20, 0, -19.318, -5.177, -17.32, -10, -14.142, -14.142, -10, -17.321, -5.176, -19.319, 0, -20, 5.176, -19.319, 10, -17.321, 14.142, -14.142, 17.32, -10, 19.3203, -5.17578, 19.4805, -3.95703)
+
+[node name="Daïmyo" type="CharacterBody2D"]
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2.25, 2.25)
+polygon = PackedVector2Array(-8, -18, 8, -18, 18, -8, 18, 8, 8, 18, -8, 18, -18, 8, -18, -8)
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_jgr2b")
+position = Vector2(-4, -0.25)
+rotation = -1.5708
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1_pnhsx")
+animation = &"idle"
+
+[node name="check" type="CollisionPolygon2D" parent="."]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
+
+[node name="sight" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="ocluder" type="LightOccluder2D" parent="."]
+scale = Vector2(2, 2)
+occluder = SubResource("OccluderPolygon2D_w8m4q")
+occluder_light_mask = 2
+
+[node name="checkAwareness" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, 133, -27, 136, 0, 133, 27)
+
+[node name="awarenessSight" type="Node2D" parent="."]
+
+[node name="sight" type="PointLight2D" parent="awarenessSight"]
+shadow_enabled = true
+shadow_item_cull_mask = 5
+
+[node name="occluder" type="LightOccluder2D" parent="awarenessSight"]
+scale = Vector2(2, 2)
+occluder = SubResource("OccluderPolygon2D_w8m4q")
+occluder_light_mask = 4

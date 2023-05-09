@@ -1,54 +1,39 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://n7a01d8klw16"]
 
-[ext_resource path="res://Assets/cursor/modular_aura05.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Elements/TobiView.cs" type="Script" id=2]
-[ext_resource path="res://Assets/cursor/modular_aura05_dark.png" type="Texture" id=3]
-[ext_resource path="res://Assets/cursor/Dash_button_white.png" type="Texture" id=4]
-
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 radius = 400.0
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id="3"]
 radius = 100.0
 
 [node name="TobiView" type="Camera2D"]
-current = true
-zoom = Vector2( 1.125, 1.125 )
-script = ExtResource( 2 )
-directionCursorPath = NodePath("Control/direction/buttonMove")
-centerDirectionPath = NodePath("Control/direction/Position2D")
-directionPath = NodePath("Control/direction")
-jumpPath = NodePath("Control/Jump")
 
 [node name="Control" type="Control" parent="."]
-material = SubResource( 2 )
-margin_right = 40.0
-margin_bottom = 40.0
+material = SubResource("2")
+layout_mode = 3
+anchors_preset = 0
 
 [node name="direction" type="TouchScreenButton" parent="Control"]
-material = SubResource( 2 )
-position = Vector2( -448, -32 )
-scale = Vector2( 0.5, 0.5 )
-normal = ExtResource( 3 )
-shape = SubResource( 1 )
+material = SubResource("2")
+position = Vector2(-448, -32)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("1")
 passby_press = true
 action = "Look_Player"
 
-[node name="Position2D" type="Position2D" parent="Control/direction"]
-material = SubResource( 2 )
-position = Vector2( 256, 256 )
+[node name="Position2D" type="Marker2D" parent="Control/direction"]
+material = SubResource("2")
+position = Vector2(256, 256)
 
-[node name="buttonMove" type="Sprite" parent="Control/direction"]
-material = SubResource( 2 )
-position = Vector2( 256, 256 )
-texture = ExtResource( 1 )
+[node name="buttonMove" type="Sprite2D" parent="Control/direction"]
+material = SubResource("2")
+position = Vector2(256, 256)
 
 [node name="Jump" type="TouchScreenButton" parent="Control"]
-material = SubResource( 2 )
-position = Vector2( 220, -4 )
-normal = ExtResource( 4 )
-shape = SubResource( 3 )
+material = SubResource("2")
+position = Vector2(220, -4)
+shape = SubResource("3")
 action = "Move_Player"

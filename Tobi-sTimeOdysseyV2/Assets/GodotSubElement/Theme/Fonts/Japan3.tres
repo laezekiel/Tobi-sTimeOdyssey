@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=3]
+
+[ext_resource type="DynamicFontData" uid="uid://chklkjkj4ac0b" path="res://Assets/GodotSubElement/Theme/Fonts/aAsianNinja.otf" id="1"]
+
+[resource]
+size = 160
+outline_size = 1
+outline_color = Color( 0.4, 0.0901961, 0.0901961, 1 )
+font_data = ExtResource( 1 )

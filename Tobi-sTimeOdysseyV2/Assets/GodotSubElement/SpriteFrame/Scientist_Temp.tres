@@ -3,17 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://d37otej3pwfok" path="res://Assets/Texture/Characters/Tobi_Small_Temp.png" id="1_6uqye"]
 [ext_resource type="Texture2D" uid="uid://dk0xfeffos2sr" path="res://Assets/Texture/Characters/Tobi_Big_Temp.png" id="2_32sac"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4vorr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgnee"]
 atlas = ExtResource("1_6uqye")
-region = Rect2(0, 64, 64, 64)
+region = Rect2(0, 256, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rqk4l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqoqk"]
 atlas = ExtResource("2_32sac")
-region = Rect2(0, 300, 300, 300)
+region = Rect2(0, 1200, 300, 300)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n10o3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_shtgj"]
 atlas = ExtResource("2_32sac")
-region = Rect2(300, 300, 300, 300)
+region = Rect2(300, 1200, 300, 300)
 
 [resource]
 animations = [{
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4vorr")
+"texture": SubResource("AtlasTexture_bgnee")
 }],
 "loop": true,
 "name": &"idle",
@@ -47,7 +47,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rqk4l")
+"texture": SubResource("AtlasTexture_iqoqk")
 }],
 "loop": true,
 "name": &"listenning",
@@ -55,7 +55,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n10o3")
+"texture": SubResource("AtlasTexture_shtgj")
 }],
 "loop": true,
 "name": &"speaking",

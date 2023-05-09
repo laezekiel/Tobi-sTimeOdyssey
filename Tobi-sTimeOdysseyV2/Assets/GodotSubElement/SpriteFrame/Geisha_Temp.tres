@@ -1,18 +1,14 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cpc4yrx512ddd"]
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cpc4yrx512ddd"]
 
 [ext_resource type="Texture2D" uid="uid://d37otej3pwfok" path="res://Assets/Texture/Characters/Tobi_Small_Temp.png" id="1_5fw4n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g4kro"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0gmc"]
 atlas = ExtResource("1_5fw4n")
-region = Rect2(256, 128, 64, 64)
+region = Rect2(256, 192, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pqg5g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnudd"]
 atlas = ExtResource("1_5fw4n")
-region = Rect2(128, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qaiuq"]
-atlas = ExtResource("1_5fw4n")
-region = Rect2(0, 128, 64, 64)
+region = Rect2(0, 192, 64, 64)
 
 [resource]
 animations = [{
@@ -23,16 +19,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g4kro")
+"texture": SubResource("AtlasTexture_q0gmc")
 }],
 "loop": true,
 "name": &"caught",
 "speed": 5.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pqg5g")
-}],
+"frames": [],
 "loop": true,
 "name": &"dead",
 "speed": 5.0
@@ -44,7 +37,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qaiuq")
+"texture": SubResource("AtlasTexture_nnudd")
 }],
 "loop": true,
 "name": &"idle",

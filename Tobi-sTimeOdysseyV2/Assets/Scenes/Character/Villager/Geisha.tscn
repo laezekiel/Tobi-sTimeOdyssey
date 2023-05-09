@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg8t6qk65b15x"]
+
+[ext_resource type="SpriteFrames" uid="uid://cpc4yrx512ddd" path="res://Assets/GodotSubElement/SpriteFrame/Geisha_Temp.tres" id="1_q7vpc"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0hli8"]
+closed = false
+polygon = PackedVector2Array(18.3185, 7.5907, 17.3204, 10.0001, 14.1421, 14.1422, 10, 17.3206, 5.17639, 19.3186, 0, 20, -5.17639, 19.3186, -10, 17.3206, -14.1422, 14.1421, -17.3204, 10.0001, -19.3185, 5.17651, -20, 0, -19.318, -5.177, -17.32, -10, -14.142, -14.142, -10, -17.321, -5.176, -19.319, 0, -20, 5.176, -19.319, 10, -17.321, 14.142, -14.142, 17.32, -10, 18.318, -7.591)
+
+[node name="Geisha" type="CharacterBody2D"]
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -18, 8, -18, 18, -8, 18, 8, 8, 18, -8, 18, -18, 8, -18, -8)
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 0)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("1_q7vpc")
+animation = &"idle"
+
+[node name="check" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
+
+[node name="sight" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_0hli8")
+occluder_light_mask = 2
