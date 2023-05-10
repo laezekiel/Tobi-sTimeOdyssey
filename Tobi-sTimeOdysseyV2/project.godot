@@ -11,13 +11,30 @@ config_version=5
 [application]
 
 config/name="Tobi-s Time Odyssey V 2"
-config/features=PackedStringArray("4.0", "Forward Plus")
+run/main_scene="res://GameScreensAndScenes/LevelGenerator.tscn"
+config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Tobi-s Time Odyssey V 2"
 
+[input]
+
+Aim={
+"deadzone": 0.5,
+"events": []
+}
+Dash={
+"deadzone": 0.5,
+"events": []
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

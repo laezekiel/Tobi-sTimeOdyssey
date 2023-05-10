@@ -1,6 +1,0 @@
-CREATE TABLE [Player_Mission_Data] (
-	ID INT PRIMARY KEY NOT NULL,
-	lvType TEXT NOT NULL,
-	lvGroup INT NOT NULL,
-	locked CHAR(1) NOT NULL
-);

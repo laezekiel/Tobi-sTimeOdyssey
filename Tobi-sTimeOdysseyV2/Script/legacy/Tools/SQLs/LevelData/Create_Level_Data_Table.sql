@@ -1,7 +1,0 @@
-CREATE TABLE [Level_Data](
-	ID INT NOT NULL,
-	Era TEXT NOT NULL,
-	Place TEXT NOT NULL,
-	PxPos INT NOT NULL,
-	PyPos INT NOT NULL
-);

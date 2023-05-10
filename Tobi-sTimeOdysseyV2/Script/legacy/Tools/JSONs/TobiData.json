@@ -1,8 +1,0 @@
-{
-  "StartLevel": [ "Tutorial", "1", "1" ],
-  "Speaker": {
-    "Tobi": "res://Assets/Character/Tobi/TobiBig.tres",
-    "Sifu": "res://Assets/Character/Sifu/SifuBig.tres",
-    "Scientist": "res://Assets/Character/Scientist/BigScientist.tres"
-  }
-} 

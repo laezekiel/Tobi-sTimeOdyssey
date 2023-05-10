@@ -1,7 +1,0 @@
-CREATE TABLE [Level_Traps](
-	ID INT NOT NULL,
-	tType TEXT NOT NULL,
-	tXinPos INT NOT NULL,
-	tYinPos INT NOT NULL,
-	tRin INT NOT NULL
-);

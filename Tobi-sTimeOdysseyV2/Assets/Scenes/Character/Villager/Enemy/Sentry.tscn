@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cltpnb2fbb7x"]
+[gd_scene load_steps=4 format=3 uid="uid://cltpnb2fbb7x"]
 
 [ext_resource type="SpriteFrames" uid="uid://dmdhsitt5yt3u" path="res://Assets/GodotSubElement/SpriteFrame/Sentry_Temp.tres" id="1_2ol30"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m7jb3"]
-closed = false
-polygon = PackedVector2Array(18.3185, 7.5907, 17.3204, 10.0001, 14.1421, 14.1422, 10, 17.3206, 5.17639, 19.3186, 0, 20, -5.17639, 19.3186, -10, 17.3206, -14.1422, 14.1421, -17.3204, 10.0001, -19.3185, 5.17651, -20, 0, -19.318, -5.177, -17.32, -10, -14.142, -14.142, -10, -17.321, -5.176, -19.319, 0, -20, 5.176, -19.319, 10, -17.321, 14.142, -14.142, 17.32, -10, 18.318, -7.591)
+[ext_resource type="Texture2D" uid="uid://dk8y3pnkw8qdl" path="res://Assets/Texture/Sight/ambiance.png" id="2_g4q0b"]
+[ext_resource type="OccluderPolygon2D" uid="uid://bkjmm0g15j0b5" path="res://Assets/GodotSubElement/Occluder/5point.tres" id="3_117mx"]
 
 [node name="Sentry" type="CharacterBody2D"]
 
@@ -23,10 +21,13 @@ scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
 
 [node name="sight" type="PointLight2D" parent="."]
+color = Color(1, 1, 0, 1)
+blend_mode = 2
 shadow_enabled = true
 shadow_item_cull_mask = 3
+texture = ExtResource("2_g4q0b")
 
 [node name="occluder" type="LightOccluder2D" parent="."]
 scale = Vector2(1.35, 1.35)
-occluder = SubResource("OccluderPolygon2D_m7jb3")
+occluder = ExtResource("3_117mx")
 occluder_light_mask = 2

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://shtsv2xjnref"]
+[gd_scene load_steps=4 format=3 uid="uid://shtsv2xjnref"]
 
 [ext_resource type="SpriteFrames" uid="uid://cpfcmryatygwn" path="res://Assets/GodotSubElement/SpriteFrame/Scientist_Temp.tres" id="1_cv4nw"]
+[ext_resource type="Texture2D" uid="uid://dk8y3pnkw8qdl" path="res://Assets/Texture/Sight/ambiance.png" id="2_4q3wo"]
+[ext_resource type="OccluderPolygon2D" uid="uid://bkjmm0g15j0b5" path="res://Assets/GodotSubElement/Occluder/5point.tres" id="3_b34m4"]
 
 [node name="Scientist" type="CharacterBody2D"]
 
@@ -18,5 +20,11 @@ animation = &"idle"
 polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
 
 [node name="sight" type="PointLight2D" parent="."]
+color = Color(0, 1, 0, 1)
+blend_mode = 2
 shadow_enabled = true
 shadow_item_cull_mask = 3
+texture = ExtResource("2_4q3wo")
+
+[node name="occluder" type="LightOccluder2D" parent="."]
+occluder = ExtResource("3_b34m4")

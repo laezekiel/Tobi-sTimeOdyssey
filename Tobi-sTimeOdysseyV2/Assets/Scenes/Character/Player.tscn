@@ -1,14 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://te785seimx4n"]
+[gd_scene load_steps=4 format=3 uid="uid://te785seimx4n"]
 
+[ext_resource type="Script" path="res://Scripts/Elements/Characters/Player.cs" id="1_auw2n"]
 [ext_resource type="SpriteFrames" uid="uid://ch4xk2mftyta8" path="res://Assets/GodotSubElement/SpriteFrame/Tobi_Temp.tres" id="1_i1gf1"]
+[ext_resource type="Texture2D" uid="uid://dk8y3pnkw8qdl" path="res://Assets/Texture/Sight/ambiance.png" id="2_derev"]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_auw2n")
+killerPath = NodePath("killer")
+colliderPath = NodePath("collider")
+checkPath = NodePath("check")
+bodyPath = NodePath("body")
+sightPath = NodePath("sight")
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6.5, -14.4, 6.5, -14.4, 14.4, -6.5, 14.4, 6.5, 6.5, 14.4, -6.5, 14.4, -14.4, 6.5, -14.4, -6.5)
 
 [node name="check" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 14.4, 0, 24, 6.25, 23.25, 12, 20.75, 17, 17, 20.75, 12, 23.25, 6.25, 24, 0, 23.25, -6.25, 20.75, -12, 17, -17, 12, -20.75, 6.25, -23.25, 0, -24, 0, -14.4, 6.4, -14.4, 14.4, -6.4, 14.4, 6.4, 6.4, 14.4)
+polygon = PackedVector2Array(12, 20.75, 17, 17, 20.75, 12, 23.25, 6.25, 24, 0, 23.25, -6.25, 20.75, -12, 17, -17, 12, -20.75, 6.4, -14.4, 14.4, -6.4, 14.4, 6.4, 6.4, 14.4)
 
 [node name="body" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.25, -0.5)
@@ -22,4 +30,6 @@ scale = Vector2(1, 11.45)
 target_position = Vector2(64, 0)
 
 [node name="sight" type="PointLight2D" parent="."]
+blend_mode = 2
 shadow_enabled = true
+texture = ExtResource("2_derev")
