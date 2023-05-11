@@ -1,3 +1,4 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
 
@@ -55,8 +56,6 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 			}
 
 			base._Ready();
-
-			GD.Print(nameof(Player) + " is in!");
 		}
 
 
@@ -64,7 +63,11 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
-		}
+
+			POC.Player_Position = GlobalPosition;
+
+			RotationDegrees = POC.Player_Rotation;
+        }
 
 
 

@@ -101,7 +101,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 
 
-		public static Player Player { get { return Player.Instance; } }
+		public static Vector2 Player_Position { get; set; }
+		public static float Player_Rotation { get; set; }
 	}
 }
 

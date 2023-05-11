@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://br7g0a5305ydh"]
+[gd_scene load_steps=9 format=3 uid="uid://br7g0a5305ydh"]
 
-[ext_resource type="Texture2D" uid="uid://bal3f5y0qsk55" path="res://Assets/Texture/cursor/Dash_button_white.png" id="1_6ow04"]
 [ext_resource type="Script" path="res://Scripts/Elements/ViewPlayer.cs" id="1_dtkws"]
 [ext_resource type="Material" uid="uid://cu1hmat6nt334" path="res://Assets/GodotSubElement/Material/CanvasItem/overShadow.tres" id="1_xcmak"]
 [ext_resource type="Texture2D" uid="uid://on2cainiwnpf" path="res://Assets/Texture/cursor/DASH_BUTTON.png" id="2_lxe07"]
@@ -12,7 +11,7 @@
 radius = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uv8ra"]
-radius = 172.0
+radius = 224.0
 
 [node name="ViewPlayer" type="Camera2D"]
 script = ExtResource("1_dtkws")
@@ -24,7 +23,6 @@ dashPath = NodePath("dash")
 material = ExtResource("1_xcmak")
 position = Vector2(256, 4)
 texture_normal = ExtResource("2_lxe07")
-texture_pressed = ExtResource("1_6ow04")
 shape = SubResource("CircleShape2D_66i01")
 action = "Dash"
 

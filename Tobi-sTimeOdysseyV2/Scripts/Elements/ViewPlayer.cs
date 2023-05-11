@@ -1,3 +1,4 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters;
 using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
@@ -80,20 +81,20 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
 
 
 
-			GlobalPosition = POC.Player.GlobalPosition;
+			GlobalPosition = new Vector2(Mathf.Lerp(GlobalPosition.X, POC.Player_Position.X, POC.All_Numbers.TenthS),
+										 Mathf.Lerp(GlobalPosition.Y, POC.Player_Position.Y, POC.All_Numbers.TenthS));
 
 
 
-			if (Input.IsActionPressed("Aim"))
+            if (Input.IsActionPressed("Aim"))
 			{
 				aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, GetGlobalMousePosition().X, POC.All_Numbers.TenthS),
 													   Mathf.Lerp(aimCursor.GlobalPosition.Y, GetGlobalMousePosition().Y, POC.All_Numbers.TenthS));
-			}
+
+				POC.Player_Rotation = Mathf.RadToDeg(aim.GlobalPosition.AngleToPoint(aimCursor.GlobalPosition));
+            }
 			else aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, aim.GlobalPosition.X, POC.All_Numbers.HundredthS),
 														Mathf.Lerp(aimCursor.GlobalPosition.Y, aim.GlobalPosition.Y, POC.All_Numbers.HundredthS));
-
-
-
         }
 
 
