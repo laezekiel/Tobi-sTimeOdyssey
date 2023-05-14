@@ -19,6 +19,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 				_halfS = 0.5f;
 				_oneS = 1f;
 				_twoS = 2f;
+				_threeS = 3f;
+				_fours = 4f;
 			}
 
 
@@ -29,7 +31,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 				_tenthS,
 				_halfS,
 				_oneS,
-				_twoS;
+				_twoS,
+				_threeS,
+				_fours;
 
 
 
@@ -57,6 +61,14 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 			/// get 2
 			/// </summary>
 			public float TwoS { get { return _twoS; } }
+			/// <summary>
+			/// get 3
+			/// </summary>
+			public float ThreeS { get { return _threeS; } }
+			/// <summary>
+			/// get 
+			/// </summary>
+			public float Fours { get { return _fours; } }
 		}
 
 

@@ -18,7 +18,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 
 
         protected CollisionPolygon2D
-            collider,
+            collider;
+
+        protected Area2D
             check;
 
         protected AnimatedSprite2D
@@ -29,11 +31,16 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 
 
 
+        protected float
+            deltaExt;
+
+
+
         public virtual void Init()
         {
             collider = GetNode<CollisionPolygon2D>(colliderPath);
 
-            check = GetNode<CollisionPolygon2D>(checkPath);
+            check = GetNode<Area2D>(checkPath);
 
             body = GetNode<AnimatedSprite2D>(bodyPath);
 
@@ -54,6 +61,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
+
+            deltaExt = (float)delta;
 		}
 	}
 }

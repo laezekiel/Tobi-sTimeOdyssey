@@ -28,12 +28,16 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 
         [Export]
         private NodePath
-            killerPath;
+            killerPath,
+			ambiencePath;
 
 
 
 		private RayCast2D
 			killer;
+
+		private PointLight2D
+			ambience;
 
 
 
@@ -42,6 +46,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
             base.Init();
 
 			killer = GetNode<RayCast2D>(killerPath);
+
+			ambience = GetNode<PointLight2D>(ambiencePath);
         }
 
 

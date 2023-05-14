@@ -7,15 +7,18 @@
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_auw2n")
 killerPath = NodePath("killer")
+ambiencePath = NodePath("ambience")
 colliderPath = NodePath("collider")
-checkPath = NodePath("check")
+checkPath = NodePath("Area2D/check")
 bodyPath = NodePath("body")
 sightPath = NodePath("sight")
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6.5, -14.4, 6.5, -14.4, 14.4, -6.5, 14.4, 6.5, 6.5, 14.4, -6.5, 14.4, -14.4, 6.5, -14.4, -6.5)
 
-[node name="check" type="CollisionPolygon2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="check" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(12, 20.75, 17, 17, 20.75, 12, 23.25, 6.25, 24, 0, 23.25, -6.25, 20.75, -12, 17, -17, 12, -20.75, 6.4, -14.4, 14.4, -6.4, 14.4, 6.4, 6.4, 14.4)
 
 [node name="body" type="AnimatedSprite2D" parent="."]
@@ -28,6 +31,14 @@ animation = &"idle"
 [node name="killer" type="RayCast2D" parent="."]
 scale = Vector2(1, 11.45)
 target_position = Vector2(64, 0)
+
+[node name="ambience" type="PointLight2D" parent="."]
+energy = 0.25
+blend_mode = 2
+shadow_enabled = true
+shadow_item_cull_mask = 0
+texture = ExtResource("2_derev")
+texture_scale = 2.0
 
 [node name="sight" type="PointLight2D" parent="."]
 blend_mode = 2
