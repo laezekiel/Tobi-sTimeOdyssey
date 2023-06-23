@@ -95,6 +95,13 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
             }
 			else aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, aim.GlobalPosition.X, POC.All_Numbers.HundredthS),
 														Mathf.Lerp(aimCursor.GlobalPosition.Y, aim.GlobalPosition.Y, POC.All_Numbers.HundredthS));
+
+			if (Input.IsActionJustPressed("Dash")) GD.Print("dash");
+
+
+                dash.Position = new Vector2(256, 4);
+			aim.Position = new Vector2(-352, 100);
+
         }
 
 

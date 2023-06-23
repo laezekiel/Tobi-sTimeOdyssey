@@ -15,9 +15,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 		/// </summary>
 		public enum Pattern
 		{
-			Static,
-			Patrolling,
-			Surveilling,
+			Static = 1,
+			Patrolling = 2,
+			Surveilling = 3,
 		}
 
 
@@ -27,7 +27,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			occluderPath,
 			leftPath,
 			rightPath,
-			forwardPath;
+			forwardPath,
+			forward2Path;
 
 
 
@@ -40,8 +41,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 		[Export]
 		protected float
 			speed = 64,
-			time = 1f,
-			startRotation;
+			time = 1f;
 
 
 
@@ -51,7 +51,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 		protected RayCast2D
 			left,
 			right,
-			forward;
+			forward,
+			forward2;
 
 
 
@@ -65,6 +66,14 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 
 
 
+		protected bool
+			turningRight = true;
+
+        protected float
+            startRotation;
+
+
+
         public override void Init()
         {
             base.Init();
@@ -74,8 +83,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			left = GetNode<RayCast2D>(leftPath);
 			right = GetNode<RayCast2D>(rightPath);
 			forward = GetNode<RayCast2D>(forwardPath);
+			forward2 = GetNode<RayCast2D>(forward2Path);
 
-			left.ExcludeParent = true; right.ExcludeParent = true; forward.ExcludeParent = true;
+			left.ExcludeParent = true; right.ExcludeParent = true; forward.ExcludeParent = true; forward2.ExcludeParent = true;
         }
 
 
@@ -135,54 +145,20 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 
             float lRotTODO = GlobalRotationDegrees;
 
+
 			switch (pattern)
 			{
 				case Pattern.Static:
 					break;
 				case Pattern.Patrolling:
-                    if (right.GetCollider() == null && forward.GetCollider() != null && !(forward.GetCollider() is Villager))
-                    {
-                        if (lRotTODO == -180) lRotTODO = 180;
-                        else if (lRotTODO == -90) lRotTODO = GlobalRotationDegrees = -90;
-                        else if (lRotTODO == 90) lRotTODO = GlobalRotationDegrees = 90;
-
-
-                        lRotTODO += 90;
-                    }
-                    else if (forward.GetCollider() != null && right.GetCollider() != null && left.GetCollider() == null && !(forward.GetCollider() is Villager))
-                    {
-                        if (lRotTODO == 180) lRotTODO = -180;
-                        else if (lRotTODO == 90) lRotTODO = GlobalRotationDegrees = 90;
-
-
-                        lRotTODO -= 90;
-                    }
-                    else if (forward.GetCollider() != null && right.GetCollider() != null && left.GetCollider() != null || forward.GetCollider() is Villager)
-                    {
-                        if (lRotTODO == -90) lRotTODO = GlobalRotationDegrees = 270;
-                        else if (lRotTODO == -180) lRotTODO = GlobalRotationDegrees = 180;
-
-
-                        lRotTODO -= 180;
-                    }
+					lRotTODO = Patrolling_Rotattion(lRotTODO);
                     break;
 				case Pattern.Surveilling:
-					if (right.GetCollider() == null)
-                    {
-                        if (lRotTODO == -180) lRotTODO = 180;
-                        else if (lRotTODO == -90) lRotTODO = GlobalRotationDegrees = -90;
-                        else if (lRotTODO == 90) lRotTODO = GlobalRotationDegrees = 90;
-
-                        lRotTODO += 90;
-					}
-					else if (left.GetCollider() == null && right.GetCollider() != null) lRotTODO -= 90;
-					else if (left.GetCollider() != null && right.GetCollider() != null) lRotTODO -= 180;
-            
+                    lRotTODO = Surveilling_Rotattion(lRotTODO);
                     break;
 				default:
 					break;
 			}
-
 
 
             Tween lRot = GetTree().CreateTween();
@@ -198,6 +174,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 
 
 			lRot.Dispose();
+
 
 			if (pattern == Pattern.Patrolling) SetModeForward();
 			else SetModeSurveilling();
@@ -221,27 +198,28 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 		{
 			doAction = Turn;
 
+
             Tween lRot = GetTree().CreateTween();
 
 
 			float lRotation = GlobalRotationDegrees;
 
 
-			if ((lRotation < 0 && lRotation > 0 - 2) || (lRotation > 0 && lRotation < 0 + 2)) lRotation = 0;
-			if ((lRotation < 90 && lRotation > 90 - 2) || (lRotation > 90 && lRotation < 90 + 2)) lRotation = 90;
-			if ((lRotation < 180 && lRotation > 180 - 2) || (lRotation > 180 && lRotation < 180 + 2)) lRotation = 180;
-			if ((lRotation < -180 && lRotation > -180 - 2) || (lRotation > -180 && lRotation < -180 + 2)) lRotation = -180;
-			if ((lRotation < -90 && lRotation > -90 - 2) || (lRotation > -90 && lRotation < -90 + 2)) lRotation = -90;
+			if ((lRotation < 0 && lRotation > 0 - 10) || (lRotation > 0 && lRotation < 0 + 10)) lRotation = 0;
+			if ((lRotation < 90 && lRotation > 90 - 10) || (lRotation > 90 && lRotation < 90 + 10)) lRotation = 90;
+			if ((lRotation < 180 && lRotation > 180 - 10) || (lRotation > 180 && lRotation < 180 + 10)) lRotation = 180;
+			if ((lRotation < -180 && lRotation > -180 - 10) || (lRotation > -180 && lRotation < -180 + 10)) lRotation = -180;
+			if ((lRotation < -90 && lRotation > -90 - 10) || (lRotation > -90 && lRotation < -90 + 10)) lRotation = -90;
 
 
-			if (lRotation == -180) lRotation = 180;
+			if (lRotation == -180 && turningRight) lRotation = 180;
+			else if (lRotation == 180 && !turningRight) lRotation = -180;
             else if (lRotation == -90) lRotation = GlobalRotationDegrees = -90;
             else if (lRotation == 90) lRotation = GlobalRotationDegrees = 90;
 
+
             float lRotationMin = lRotation - 45;
 			float lRotationMax = lRotation + 45;
-
-			GD.Print(lRotation);
 
 
             lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotation), time / 2);
@@ -293,5 +271,83 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 		{
 
 		}
+
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pRotTODO"></param>
+		/// <returns></returns>
+		protected virtual float Patrolling_Rotattion(float pRotTODO)
+        {
+            if (right.GetCollider() == null && forward.GetCollider() != null && !(forward.GetCollider() is Villager))
+            {
+                if (pRotTODO == -180) pRotTODO = 180;
+                else if (pRotTODO == -90) pRotTODO = GlobalRotationDegrees = -90;
+                else if (pRotTODO == 90) pRotTODO = GlobalRotationDegrees = 90;
+
+
+                pRotTODO += 90;
+            }
+            else if (forward.GetCollider() != null && right.GetCollider() != null && left.GetCollider() == null && !(forward.GetCollider() is Villager))
+            {
+                if (pRotTODO == 180) pRotTODO = -180;
+                else if (pRotTODO == 90) pRotTODO = GlobalRotationDegrees = 90;
+
+
+                pRotTODO -= 90;
+            }
+            else if (forward.GetCollider() != null && right.GetCollider() != null && left.GetCollider() != null || forward.GetCollider() is Villager)
+            {
+                if (pRotTODO == -90) pRotTODO = GlobalRotationDegrees = 270;
+                else if (pRotTODO == -180) pRotTODO = GlobalRotationDegrees = 180;
+
+
+                pRotTODO -= 180;
+            }
+
+
+			return pRotTODO;
+        }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pRotTODO"></param>
+		/// <returns></returns>
+		protected virtual float Surveilling_Rotattion(float pRotTODO)
+        {
+            if (right.GetCollider() != null && turningRight) turningRight = false;
+            else if (left.GetCollider() != null && !turningRight) turningRight = true;
+
+
+            if (right.GetCollider() == null && turningRight)
+            {
+                if (pRotTODO == -180) pRotTODO = 180;
+                else if (pRotTODO == 180) pRotTODO = -180;
+                else if (pRotTODO == -90) pRotTODO = GlobalRotationDegrees = -90;
+                else if (pRotTODO == 90) pRotTODO = GlobalRotationDegrees = 90;
+
+
+                pRotTODO += 90;
+            }
+            else if (left.GetCollider() == null && right.GetCollider() != null && turningRight) pRotTODO -= 90;
+            if (left.GetCollider() == null && !turningRight)
+            {
+                if (pRotTODO == 180) pRotTODO = -180;
+                else if (pRotTODO == -180) pRotTODO = 180;
+                else if (pRotTODO == -90) pRotTODO = GlobalRotationDegrees = -90;
+                else if (pRotTODO == 90) pRotTODO = GlobalRotationDegrees = 90;
+
+
+                pRotTODO -= 90;
+            }
+            else if (left.GetCollider() != null && right.GetCollider() == null && !turningRight) pRotTODO += 90;
+            else if (left.GetCollider() != null && right.GetCollider() != null) pRotTODO -= 180;
+
+
+            return pRotTODO;
+        }
     }
 }

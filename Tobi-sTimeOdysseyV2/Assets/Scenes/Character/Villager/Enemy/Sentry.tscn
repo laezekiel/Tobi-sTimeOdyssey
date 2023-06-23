@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cltpnb2fbb7x"]
+[gd_scene load_steps=5 format=3 uid="uid://cltpnb2fbb7x"]
 
 [ext_resource type="SpriteFrames" uid="uid://dmdhsitt5yt3u" path="res://Assets/GodotSubElement/SpriteFrame/Sentry_Temp.tres" id="1_2ol30"]
+[ext_resource type="Script" path="res://Scripts/Elements/Characters/Villagers/Enemies/Enemy.cs" id="1_ie0ox"]
 [ext_resource type="Texture2D" uid="uid://dk8y3pnkw8qdl" path="res://Assets/Texture/Sight/ambiance.png" id="2_g4q0b"]
 [ext_resource type="OccluderPolygon2D" uid="uid://bkjmm0g15j0b5" path="res://Assets/GodotSubElement/Occluder/5point.tres" id="3_117mx"]
 
 [node name="Sentry" type="CharacterBody2D"]
+script = ExtResource("1_ie0ox")
+occluderPath = NodePath("occluder")
+leftPath = NodePath("Left")
+rightPath = NodePath("Right")
+forwardPath = NodePath("Straight")
+forward2Path = NodePath("Straight2")
+pattern = 2
+speed = 96.0
+colliderPath = NodePath("collider")
+checkPath = NodePath("Area2D")
+bodyPath = NodePath("body")
+sightPath = NodePath("sight")
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -42,4 +55,9 @@ target_position = Vector2(0, 33)
 target_position = Vector2(0, -33)
 
 [node name="Straight" type="RayCast2D" parent="."]
+position = Vector2(0, -28)
+target_position = Vector2(33, 0)
+
+[node name="Straight2" type="RayCast2D" parent="."]
+position = Vector2(0, 28)
 target_position = Vector2(33, 0)

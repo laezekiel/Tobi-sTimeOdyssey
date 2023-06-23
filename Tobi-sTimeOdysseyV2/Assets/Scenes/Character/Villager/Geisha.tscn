@@ -11,6 +11,8 @@ occluderPath = NodePath("occluder")
 leftPath = NodePath("Left")
 rightPath = NodePath("Right")
 forwardPath = NodePath("Straight")
+forward2Path = NodePath("Straight2")
+pattern = 2
 colliderPath = NodePath("collider")
 checkPath = NodePath("Area2D")
 bodyPath = NodePath("body")
@@ -46,6 +48,11 @@ target_position = Vector2(0, 33)
 target_position = Vector2(0, -33)
 
 [node name="Straight" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+target_position = Vector2(33, 0)
+
+[node name="Straight2" type="RayCast2D" parent="."]
+position = Vector2(0, 20)
 target_position = Vector2(33, 0)
 
 [node name="Area2D" type="Area2D" parent="."]

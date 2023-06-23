@@ -48,6 +48,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 			killer = GetNode<RayCast2D>(killerPath);
 
 			ambience = GetNode<PointLight2D>(ambiencePath);
+
+			killer.ExcludeParent = true;
         }
 
 

@@ -9,7 +9,7 @@ script = ExtResource("1_auw2n")
 killerPath = NodePath("killer")
 ambiencePath = NodePath("ambience")
 colliderPath = NodePath("collider")
-checkPath = NodePath("Area2D/check")
+checkPath = NodePath("Area2D")
 bodyPath = NodePath("body")
 sightPath = NodePath("sight")
 
@@ -29,7 +29,6 @@ sprite_frames = ExtResource("1_i1gf1")
 animation = &"idle"
 
 [node name="killer" type="RayCast2D" parent="."]
-scale = Vector2(1, 11.45)
 target_position = Vector2(64, 0)
 
 [node name="ambience" type="PointLight2D" parent="."]
