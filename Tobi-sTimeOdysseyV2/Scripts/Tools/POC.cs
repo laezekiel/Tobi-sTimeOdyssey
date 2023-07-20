@@ -84,6 +84,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 			public ColorState()
 			{
 				_visible = Colors.White;
+				_red = Colors.Red;
+                _halfVisible = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 				_invisible = new Color(1, 1, 1, 0);
 			}
 
@@ -91,6 +93,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 			private Color
 				_visible,
+				_red,
+				_halfVisible,
 				_invisible;
 
 
@@ -99,6 +103,11 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 			/// Get a white/visible color
 			/// </summary>
 			public Color Visible { get { return _visible; } }
+			public Color Red { get { return _red; } }
+			/// <summary>
+			/// Get an half Visible color
+			/// </summary>
+			public Color HalfVisible { get { return _halfVisible; } }
 			/// <summary>
 			/// Get an invisible color
 			/// </summary>
@@ -115,6 +124,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 		public static Vector2 Player_Position { get; set; }
 		public static float Player_Rotation { get; set; }
+		public static bool Player_Can_Jump { get; set; }
 	}
 }
 

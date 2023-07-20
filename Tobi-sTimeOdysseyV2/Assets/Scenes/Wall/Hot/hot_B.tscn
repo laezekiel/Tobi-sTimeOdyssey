@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgo1ws8rln7sc"]
+
+[ext_resource type="PackedScene" uid="uid://cjf263ymftsds" path="res://Assets/Scenes/Wall/Graph/wall_hot.tscn" id="1_ka0jh"]
+
+[node name="hot_T" type="Node2D"]
+
+[node name="Wall Hot" parent="." instance=ExtResource("1_ka0jh")]
+position = Vector2(0, 32)
+rotation = -1.5708

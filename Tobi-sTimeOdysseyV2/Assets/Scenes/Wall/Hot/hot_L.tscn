@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://8qnaybvahyip"]
+
+[ext_resource type="PackedScene" uid="uid://cjf263ymftsds" path="res://Assets/Scenes/Wall/Graph/wall_hot.tscn" id="1_gafmc"]
+
+[node name="hot_T" type="Node2D"]
+
+[node name="Wall Hot" parent="." instance=ExtResource("1_gafmc")]
+position = Vector2(-32, 0)

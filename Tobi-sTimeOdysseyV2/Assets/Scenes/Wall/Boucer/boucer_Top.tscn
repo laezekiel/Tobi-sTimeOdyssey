@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://qikhihcy06vk"]
+
+[ext_resource type="PackedScene" uid="uid://ce1m0aum0fvml" path="res://Assets/Scenes/Wall/Graph/wall_bouncer.tscn" id="1_o6llk"]
+
+[node name="boucer_Top" type="Node2D"]
+
+[node name="Wall Bouncer" parent="." instance=ExtResource("1_o6llk")]
+position = Vector2(0, -32)
+rotation = 1.5708

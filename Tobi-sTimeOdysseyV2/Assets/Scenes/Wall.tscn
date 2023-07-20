@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b56c32bmrda8"]
+
+[ext_resource type="TileSet" uid="uid://hg48j1tearp0" path="res://Assets/GodotSubElement/TileSet/Walls.tres" id="1_cxe8j"]
+
+[node name="Wall" type="TileMap"]
+tile_set = ExtResource("1_cxe8j")
+cell_quadrant_size = 64
+format = 2

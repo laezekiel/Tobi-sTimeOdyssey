@@ -38,7 +38,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
         private Sprite2D
             aimCursor;
 
-        private TouchScreenButton
+        public TouchScreenButton
             aim,
             dash;
 
@@ -57,20 +57,17 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
 
         public override void _Ready()
 		{
-			Init();
-
-
-
-			if (_instance != null)
+            if (_instance != null)
 			{
 				QueueFree();
 				GD.Print(nameof(ViewPlayer) + " Instance already exist, destroying the last added.");
 				return;
-			}
+            }
+            else _instance = new ViewPlayer();
 			
+			Init();
 
-
-			base._Ready();
+            base._Ready();
 		}
 
 
@@ -79,30 +76,72 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
 		{
 			base._Process(delta);
 
+            GlobalPosition = new Vector2(Mathf.Lerp(GlobalPosition.X, POC.Player_Position.X, POC.All_Numbers.TenthS),
+                                         Mathf.Lerp(GlobalPosition.Y, POC.Player_Position.Y, POC.All_Numbers.TenthS));
 
 
-			GlobalPosition = new Vector2(Mathf.Lerp(GlobalPosition.X, POC.Player_Position.X, POC.All_Numbers.TenthS),
-										 Mathf.Lerp(GlobalPosition.Y, POC.Player_Position.Y, POC.All_Numbers.TenthS));
-
-
-
-            if (Input.IsActionPressed("Aim"))
+            switch (State.Current_State)
 			{
-				aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, GetGlobalMousePosition().X, POC.All_Numbers.TenthS),
-													   Mathf.Lerp(aimCursor.GlobalPosition.Y, GetGlobalMousePosition().Y, POC.All_Numbers.TenthS));
+				case State.GameState.Loading:
+					break;
+				case State.GameState.Player_Aiming:
+					GameStateIsAiming();
+					break;
+                case State.GameState.Player_Dashing:
+                    break;
+				case State.GameState.Player_Caught:
+					break;
+				case State.GameState.Cinematics:
+					break;
+				case State.GameState.Pause:
+					break;
+				default:
+					break;
+			}
 
-				POC.Player_Rotation = Mathf.RadToDeg(aim.GlobalPosition.AngleToPoint(aimCursor.GlobalPosition));
-            }
-			else aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, aim.GlobalPosition.X, POC.All_Numbers.HundredthS),
-														Mathf.Lerp(aimCursor.GlobalPosition.Y, aim.GlobalPosition.Y, POC.All_Numbers.HundredthS));
-
-			if (Input.IsActionJustPressed("Dash")) GD.Print("dash");
-
-
-                dash.Position = new Vector2(256, 4);
-			aim.Position = new Vector2(-352, 100);
 
         }
+
+		public void GameStateIsAiming()
+		{
+			if(!dash.Visible && !aim.Visible) { SwitchHUD(); }
+            if (Input.IsActionPressed("Aim"))
+            {
+                aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, GetGlobalMousePosition().X, POC.All_Numbers.TenthS),
+                                                       Mathf.Lerp(aimCursor.GlobalPosition.Y, GetGlobalMousePosition().Y, POC.All_Numbers.TenthS));
+
+                POC.Player_Rotation = Mathf.RadToDeg(aim.GlobalPosition.AngleToPoint(aimCursor.GlobalPosition));
+            }
+            else aimCursor.GlobalPosition = new Vector2(Mathf.Lerp(aimCursor.GlobalPosition.X, aim.GlobalPosition.X, POC.All_Numbers.HundredthS),
+                                                        Mathf.Lerp(aimCursor.GlobalPosition.Y, aim.GlobalPosition.Y, POC.All_Numbers.HundredthS));
+
+			if (POC.Player_Can_Jump)
+            {
+                dash.Modulate = POC.AllColor.Visible;
+                if (Input.IsActionJustPressed("Dash"))
+                {
+                    State.SetGameToDash();
+
+                    SwitchHUD();
+                }
+            }
+			else
+			{
+				dash.Modulate = POC.AllColor.HalfVisible;
+			}
+
+
+            dash.Position = new Vector2(256, 4);
+            aim.Position = new Vector2(-352, 100);
+        }
+
+
+
+		public void SwitchHUD()
+		{
+            if (dash.Visible) dash.Hide(); else dash.Show();
+            if (aim.Visible) aim.Hide(); else aim.Show();
+        } 
 
 
 

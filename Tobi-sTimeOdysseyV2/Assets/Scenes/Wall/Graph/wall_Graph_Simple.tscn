@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1th6725lrsb"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/Wall.cs" id="1_gxout"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s831u"]
+polygon = PackedVector2Array(-2, -29, -3, -29, -3, -35, 3, -35, 3, -29, 2, -29, 2, 29, 3, 29, 3, 35, -3, 35, -3, 29, -2, 29)
+
+[node name="StaticBody2D2" type="StaticBody2D"]
+script = ExtResource("1_gxout")
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -29, -3, -29, -3, -35, 3, -35, 3, -29, 2, -29, 2, 29, 3, 29, 3, 35, -3, 35, -3, 29, -2, 29)
+
+[node name="body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2, -29, -3, -29, -3, -35, 3, -35, 3, -29, 2, -29, 2, 29, 3, 29, 3, 35, -3, 35, -3, 29, -2, 29)
+
+[node name="shadow" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_s831u")

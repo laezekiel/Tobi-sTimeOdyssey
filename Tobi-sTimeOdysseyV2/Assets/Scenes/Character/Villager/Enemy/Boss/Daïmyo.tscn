@@ -22,7 +22,9 @@ leftPath = NodePath("Left")
 rightPath = NodePath("Right")
 forwardPath = NodePath("Straight")
 forward2Path = NodePath("Straight2")
-pattern = 2
+killerPath = NodePath("killer")
+edo = ExtResource("1_pnhsx")
+present = ExtResource("1_pnhsx")
 speed = 32.0
 colliderPath = NodePath("collider")
 checkPath = NodePath("Area2D")
@@ -75,6 +77,9 @@ scale = Vector2(2, 2)
 occluder = ExtResource("5_b4dt8")
 occluder_light_mask = 4
 
+[node name="killer" type="RayCast2D" parent="awarenessSight"]
+target_position = Vector2(272, 0)
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="check" type="CollisionPolygon2D" parent="Area2D"]
@@ -94,3 +99,6 @@ target_position = Vector2(97, 0)
 [node name="Straight2" type="RayCast2D" parent="."]
 position = Vector2(0, 40)
 target_position = Vector2(97, 0)
+
+[node name="killer" type="RayCast2D" parent="."]
+target_position = Vector2(408, 0)

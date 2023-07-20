@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dreptxie6yhoy"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/Projectiles/Shuriken.cs" id="1_ceh5n"]
+
+[node name="Shuriken" type="Node2D"]
+script = ExtResource("1_ceh5n")
+bodyPath = NodePath("Body")
+killerPath = NodePath("Killer")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="middle" type="Polygon2D" parent="Body"]
+color = Color(0.25098, 0.25098, 0.25098, 1)
+polygon = PackedVector2Array(10, 0, 3, 3, 0, 10, -3, 3, -10, 0, -3, -3, 0, -10, 3, -3, 0.75, -0.75, 0, -1.5, -1.5, 0, 0, 1.5, 1.5, 0, 0.75, -0.75, 3, -3)
+
+[node name="black" type="Polygon2D" parent="Body"]
+color = Color(0.184314, 0.184314, 0.184314, 0.501961)
+polygon = PackedVector2Array(0, -2, 0, -10, 3, -3, 2, -2, 2, 0, 10, 0, 3, 3, 2, 2, 0, 2, 0, 10, -3, 3, -2, 2, -2, 0, -10, 0, -3, -3, -2, -2, 0, -2, 0, -1.5, -1.5, 0, 0, 1.5, 1.5, 0, 0, -1.5)
+
+[node name="white" type="Polygon2D" parent="Body"]
+rotation = 3.14159
+scale = Vector2(1, -1)
+color = Color(0.317647, 0.317647, 0.317647, 0.501961)
+polygon = PackedVector2Array(0, -2, 0, -10, 3, -3, 2, -2, 2, 0, 10, 0, 3, 3, 2, 2, 0, 2, 0, 10, -3, 3, -2, 2, -2, 0, -10, 0, -3, -3, -2, -2, 0, -2, 0, -1.5, -1.5, 0, 0, 1.5, 1.5, 0, 0, -1.5)
+
+[node name="Killer" type="RayCast2D" parent="."]
+target_position = Vector2(10, 0)

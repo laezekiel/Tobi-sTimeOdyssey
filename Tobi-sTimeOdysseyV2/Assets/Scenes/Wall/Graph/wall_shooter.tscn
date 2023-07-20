@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://b502ddoq4jtmd"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/AddOns/Shooter.cs" id="1_idvk5"]
+[ext_resource type="PackedScene" uid="uid://dreptxie6yhoy" path="res://Assets/Scenes/Projectile/shuriken.tscn" id="2_k44x0"]
+
+[node name="Wall Shooter" type="StaticBody2D"]
+script = ExtResource("1_idvk5")
+projectile = ExtResource("2_k44x0")
+cPath = NodePath("spawns/spawn2")
+lPath = NodePath("spawns/spawn1")
+rPath = NodePath("spawns/spawn3")
+tPath = NodePath("Timer")
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color(0.611765, 0.298039, 0.0588235, 1)
+polygon = PackedVector2Array(2, -32, 4, -32, 4, 32, 2, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -34, 6, -34, 6, 34, 0, 34)
+
+[node name="spawns" type="Node2D" parent="."]
+
+[node name="spawn1" type="Marker2D" parent="spawns"]
+position = Vector2(8, -22)
+
+[node name="spawn2" type="Marker2D" parent="spawns"]
+position = Vector2(8, 0)
+
+[node name="spawn3" type="Marker2D" parent="spawns"]
+position = Vector2(8, 22)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

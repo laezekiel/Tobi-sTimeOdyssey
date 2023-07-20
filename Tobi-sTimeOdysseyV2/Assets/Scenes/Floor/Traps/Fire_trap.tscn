@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmg06co7dkkgi"]
+
+[ext_resource type="Texture2D" uid="uid://dk8y3pnkw8qdl" path="res://Assets/Texture/Sight/ambiance.png" id="1_w5elu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45mwa"]
+size = Vector2(60, 60)
+
+[node name="Fire Trap" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_45mwa")
+
+[node name="furnace" type="Polygon2D" parent="."]
+color = Color(0.454902, 0.0470588, 0, 1)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[node name="fire" type="Polygon2D" parent="furnace"]
+color = Color(0.6, 0.12, 0, 1)
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[node name="fire2" type="Polygon2D" parent="furnace/fire"]
+color = Color(0.75, 0.2375, 0, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="fire3" type="Polygon2D" parent="furnace/fire"]
+color = Color(0.9, 0.375, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="PointLight2D" type="PointLight2D" parent="furnace/fire"]
+color = Color(0.898039, 0.372549, 0, 1)
+energy = 2.0
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("1_w5elu")
+texture_scale = 0.25
+
+[node name="bar1" type="Polygon2D" parent="furnace"]
+color = Color(0.294118, 0.294118, 0.294118, 1)
+polygon = PackedVector2Array(-22, 30, -22, -30, -30, -30, -30, 30)
+
+[node name="bar2" type="Polygon2D" parent="furnace"]
+color = Color(0.294118, 0.294118, 0.294118, 1)
+polygon = PackedVector2Array(-13, 30, -13, -30, -5, -30, -5, 30)
+
+[node name="bar3" type="Polygon2D" parent="furnace"]
+color = Color(0.294118, 0.294118, 0.294118, 1)
+polygon = PackedVector2Array(13, 30, 13, -30, 5, -30, 5, 30)
+
+[node name="bar4" type="Polygon2D" parent="furnace"]
+color = Color(0.294118, 0.294118, 0.294118, 1)
+polygon = PackedVector2Array(22, 30, 22, -30, 30, -30, 30, 30)

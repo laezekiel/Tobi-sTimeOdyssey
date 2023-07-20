@@ -1,3 +1,7 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns;
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers;
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies;
+using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
 
@@ -20,10 +24,10 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
         protected CollisionPolygon2D
             collider;
 
-        protected Area2D
+        public Area2D
             check;
 
-        protected AnimatedSprite2D
+        public AnimatedSprite2D
             body;
 
         protected PointLight2D
@@ -63,6 +67,46 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 			base._Process(delta);
 
             deltaExt = (float)delta;
-		}
+
+
+
+            switch (State.Current_State)
+            {
+                case State.GameState.Loading:
+                    GameStateIsLoading();
+                    break;
+                case State.GameState.Player_Aiming:
+                    GameStateIsAiming();
+                    break;
+                case State.GameState.Player_Dashing:
+                    GameStateIsDashing();
+                    break;
+                case State.GameState.Player_Caught:
+                    GameStateIsCaught();
+                    break;
+                case State.GameState.Cinematics:
+                    GameStateIsCinematics();
+                    break;
+                case State.GameState.Pause:
+                    GameStateIsPause();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
+        public virtual void GameStateIsLoading() { }
+
+        public virtual void GameStateIsAiming() { }
+
+        public virtual void GameStateIsDashing() { }
+
+        public virtual void GameStateIsCaught() { }
+
+        public virtual void GameStateIsCinematics() { }
+
+        public virtual void GameStateIsPause() { }
 	}
 }

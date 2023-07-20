@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce1m0aum0fvml"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/AddOns/Bouncer.cs" id="1_nxeuv"]
+
+[node name="Wall Bouncer" type="StaticBody2D"]
+script = ExtResource("1_nxeuv")
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color(0, 0.701961, 0.0705882, 1)
+polygon = PackedVector2Array(2, -32, 4, -32, 4, 32, 2, 32)
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -34, 6, -34, 6, 34, 0, 34)

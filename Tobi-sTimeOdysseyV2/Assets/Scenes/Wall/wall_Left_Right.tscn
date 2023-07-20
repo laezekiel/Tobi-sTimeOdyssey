@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr8xci2yri15y"]
+
+[ext_resource type="PackedScene" uid="uid://x1th6725lrsb" path="res://Assets/Scenes/Wall/Graph/wall_Graph_Simple.tscn" id="1_hh2ja"]
+
+[node name="wall_Top_Bottom" type="Node2D"]
+
+[node name="collider" parent="." instance=ExtResource("1_hh2ja")]
+position = Vector2(32, 0)
+
+[node name="collider2" parent="." instance=ExtResource("1_hh2ja")]
+position = Vector2(-32, 0)

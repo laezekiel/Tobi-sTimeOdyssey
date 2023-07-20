@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bldol3m3e2tr4"]
+
+[ext_resource type="PackedScene" uid="uid://x1th6725lrsb" path="res://Assets/Scenes/Wall/Graph/wall_Graph_Simple.tscn" id="2_vwfhn"]
+
+[node name="StaticBody2D5" type="Node2D"]
+position = Vector2(0, -32)
+rotation = 1.5708
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_vwfhn")]

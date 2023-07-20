@@ -1,0 +1,16 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bbbtxmw5e22cm"]
+
+[ext_resource type="Texture2D" uid="uid://dk1rsbjm7ctqy" path="res://Assets/Texture/Map/Floor_Tiles_Temp.png" id="1_jheoo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbr18"]
+texture = ExtResource("1_jheoo")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_lbr18")

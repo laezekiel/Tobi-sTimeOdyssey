@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv8u4n455pwmx"]
+
+[ext_resource type="PackedScene" uid="uid://b502ddoq4jtmd" path="res://Assets/Scenes/Wall/Graph/wall_shooter.tscn" id="1_sco6q"]
+
+[node name="Shooter_T" type="Node2D"]
+
+[node name="Wall Shooter" parent="." instance=ExtResource("1_sco6q")]
+position = Vector2(32, 0)
+rotation = 3.14159

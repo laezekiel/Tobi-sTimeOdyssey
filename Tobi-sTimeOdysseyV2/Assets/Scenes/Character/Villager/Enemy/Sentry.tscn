@@ -12,7 +12,9 @@ leftPath = NodePath("Left")
 rightPath = NodePath("Right")
 forwardPath = NodePath("Straight")
 forward2Path = NodePath("Straight2")
-pattern = 2
+killerPath = NodePath("killer")
+edo = ExtResource("1_2ol30")
+present = ExtResource("1_2ol30")
 speed = 96.0
 colliderPath = NodePath("collider")
 checkPath = NodePath("Area2D")
@@ -61,3 +63,6 @@ target_position = Vector2(33, 0)
 [node name="Straight2" type="RayCast2D" parent="."]
 position = Vector2(0, 28)
 target_position = Vector2(33, 0)
+
+[node name="killer" type="RayCast2D" parent="."]
+target_position = Vector2(272, 0)

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjf263ymftsds"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/AddOns/Hot.cs" id="1_57dk0"]
+[ext_resource type="Texture2D" uid="uid://cwkots5cket8i" path="res://Assets/Texture/Sight/heatColor.png" id="1_t5gm6"]
+
+[node name="Wall Hot" type="StaticBody2D"]
+script = ExtResource("1_57dk0")
+checkPath = NodePath("check")
+lightPath = NodePath("check/light")
+timePath = NodePath("Timer")
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color(0.752941, 0.0431373, 0, 1)
+polygon = PackedVector2Array(2, -32, 4, -32, 4, 32, 2, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -34, 6, -34, 6, 34, 0, 34)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="check" type="Area2D" parent="."]
+
+[node name="light" type="Sprite2D" parent="check"]
+self_modulate = Color(1, 1, 1, 0.501961)
+texture = ExtResource("1_t5gm6")
+offset = Vector2(32, 0)
+
+[node name="zone" type="CollisionPolygon2D" parent="check"]
+polygon = PackedVector2Array(0, -32, 64, -32, 64, 32, 0, 32)

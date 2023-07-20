@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj3euhf7qxk5f"]
+
+[ext_resource type="TileSet" uid="uid://bbbtxmw5e22cm" path="res://Assets/GodotSubElement/TileSet/Floors.tres" id="1_ohibn"]
+
+[node name="Floor" type="TileMap"]
+tile_set = ExtResource("1_ohibn")
+format = 2

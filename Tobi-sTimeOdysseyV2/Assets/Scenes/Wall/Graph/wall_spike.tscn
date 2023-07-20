@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dblfasj8lot2n"]
+
+[ext_resource type="Script" path="res://Scripts/Elements/AddOns/Spike.cs" id="1_fgmw6"]
+
+[node name="Wall Spike" type="StaticBody2D"]
+script = ExtResource("1_fgmw6")
+
+[node name="body" type="Polygon2D" parent="."]
+color = Color(0.439049, 0.439049, 0.439049, 1)
+polygon = PackedVector2Array(2, -32, 4, -32, 4, 32, 2, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -34, 6, -34, 6, 34, 0, 34)

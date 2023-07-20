@@ -19,7 +19,7 @@ polygon = PackedVector2Array(-6.5, -14.4, 6.5, -14.4, 14.4, -6.5, 14.4, 6.5, 6.5
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="check" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(12, 20.75, 17, 17, 20.75, 12, 23.25, 6.25, 24, 0, 23.25, -6.25, 20.75, -12, 17, -17, 12, -20.75, 6.4, -14.4, 14.4, -6.4, 14.4, 6.4, 6.4, 14.4)
+polygon = PackedVector2Array(19, 14.5, 20.75, 12, 23.25, 6.25, 24, 0, 23.25, -6.25, 20.75, -12, 19, -14.5, 6.4, -14.4, 14.4, -6.4, 14.4, 6.4, 6.4, 14.4)
 
 [node name="body" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.25, -0.5)
@@ -43,3 +43,4 @@ texture_scale = 2.0
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("2_derev")
+texture_scale = 0.75

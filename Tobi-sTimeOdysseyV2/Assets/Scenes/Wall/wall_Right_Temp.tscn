@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4euhg7c83pqa"]
+
+[ext_resource type="PackedScene" uid="uid://x1th6725lrsb" path="res://Assets/Scenes/Wall/Graph/wall_Graph_Simple.tscn" id="2_ekf5b"]
+
+[node name="StaticBody2D5" type="Node2D"]
+position = Vector2(32, 0)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_ekf5b")]

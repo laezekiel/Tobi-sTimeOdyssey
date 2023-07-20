@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bem8jhx6tfv0d"]
+
+[ext_resource type="PackedScene" uid="uid://dblfasj8lot2n" path="res://Assets/Scenes/Wall/Graph/wall_spike.tscn" id="1_716cb"]
+
+[node name="spike_T" type="Node2D"]
+
+[node name="Wall Spike" parent="." instance=ExtResource("1_716cb")]
+position = Vector2(-32, 0)

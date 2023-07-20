@@ -1,5 +1,6 @@
 using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
+using Godot.Collections;
 using System;
 using System.Threading.Tasks;
 
@@ -28,7 +29,15 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			leftPath,
 			rightPath,
 			forwardPath,
-			forward2Path;
+			forward2Path,
+			killerPath;
+
+
+
+		[Export]
+		private SpriteFrames
+			edo,
+			present;
 
 
 
@@ -52,11 +61,15 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			left,
 			right,
 			forward,
-			forward2;
+			forward2,
+			killer;
+
+		protected Tween
+			animation;
 
 
 
-		protected Action
+		public Action
 			doAction;
 
 
@@ -84,8 +97,23 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			right = GetNode<RayCast2D>(rightPath);
 			forward = GetNode<RayCast2D>(forwardPath);
 			forward2 = GetNode<RayCast2D>(forward2Path);
+			killer = GetNode<RayCast2D>(killerPath);
 
 			left.ExcludeParent = true; right.ExcludeParent = true; forward.ExcludeParent = true; forward2.ExcludeParent = true;
+
+			switch (State.Era)
+			{
+				case State.Eras.Edo:
+					body.SpriteFrames = edo;
+                    break;
+				case State.Eras.Present:
+                    body.SpriteFrames = present;
+                    break;
+				default:
+					break;
+			}
+
+			pattern = (Pattern)State.villagerMode;
         }
 
 
@@ -117,7 +145,18 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			base._Process(delta);
 
             doAction();
-        }
+
+			switch (State.Current_State)
+			{
+				case State.GameState.Player_Aiming:
+				case State.GameState.Player_Dashing:
+                    killer.LookAt(POC.Player_Position);
+                    KillPlayer();
+					break;
+				default:
+					break;
+			}
+		}
 
 
 
@@ -161,23 +200,25 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 			}
 
 
-            Tween lRot = GetTree().CreateTween();
+            animation = CreateTween();
 
 
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time);
 
 
-            lRot.Play();
+            animation.Play();
 
 
 			await Task.Delay((int)time * 1000);
 
+			if (doAction == Turn && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing))
+			{
+                if (animation != null) animation.Kill();
 
-			lRot.Dispose();
 
-
-			if (pattern == Pattern.Patrolling) SetModeForward();
-			else SetModeSurveilling();
+                if (pattern == Pattern.Patrolling) SetModeForward();
+                else SetModeSurveilling();
+            }
         }
 
         /// <summary>
@@ -192,14 +233,14 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
         }
 
 		/// <summary>
-        /// Create and play a tween rotating the NPC left and right before stopping straight ahead for 4 * { time } in miliseconds and set doAction to Turn
-        /// </summary>
-        protected virtual async void SetModeSurveilling()
+		/// Create and play a tween rotating the NPC left and right before stopping straight ahead for 4 * { time } in miliseconds and set doAction to Turn
+		/// </summary>
+		protected virtual async void SetModeSurveilling()
 		{
 			doAction = Turn;
 
 
-            Tween lRot = GetTree().CreateTween();
+			animation = CreateTween();
 
 
 			float lRotation = GlobalRotationDegrees;
@@ -214,31 +255,33 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 
 			if (lRotation == -180 && turningRight) lRotation = 180;
 			else if (lRotation == 180 && !turningRight) lRotation = -180;
-            else if (lRotation == -90) lRotation = GlobalRotationDegrees = -90;
-            else if (lRotation == 90) lRotation = GlobalRotationDegrees = 90;
+			else if (lRotation == -90) lRotation = GlobalRotationDegrees = -90;
+			else if (lRotation == 90) lRotation = GlobalRotationDegrees = 90;
 
 
-            float lRotationMin = lRotation - 45;
+			float lRotationMin = lRotation - 45;
 			float lRotationMax = lRotation + 45;
 
 
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotation), time / 2);
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotationMin), time);
-			lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotationMax), time);
-			lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotation), time);
+			animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotation), time / 2);
+			animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotationMin), time);
+			animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotationMax), time);
+			animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotation), time);
 
 
-            lRot.Play();
+			animation.Play();
 
 
-            await Task.Delay((int)(time * POC.All_Numbers.Fours) * 1000);
+			await Task.Delay((int)(time * POC.All_Numbers.Fours) * 1000);
 
 
-            lRot.Dispose();
+			if (doAction == Turn && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing))
+            {
+                if (animation != null) animation.Kill();
 
-
-			SetModeTurn();
-        }
+                SetModeTurn();
+			}
+		}
 
 
 
@@ -348,6 +391,25 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
 
 
             return pRotTODO;
+        }
+
+		protected virtual void KillPlayer()
+		{
+            Array<Node2D> array = check.GetOverlappingBodies();
+
+            foreach (Node2D node in array)
+            {
+				if (node is Player && killer.GetCollider() is Player) 
+				{
+					if (animation != null) animation.Kill();
+
+					body.Animation = "happy";
+
+					State.SetLoseTypeToCaught();
+					State.SetGameToCaught(); 
+				} 
+				else continue;
+            }
         }
     }
 }

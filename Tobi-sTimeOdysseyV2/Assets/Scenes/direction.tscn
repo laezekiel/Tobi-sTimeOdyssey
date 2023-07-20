@@ -1,20 +1,20 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://c5oh7lw8ttwj"]
 
 [node name="direction" type="Node2D"]
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2( 0, -8 )
-points = PoolVector2Array( 0, 0, 1024, 0 )
+position = Vector2(0, -8)
+points = PackedVector2Array(0, 0, 1024, 0)
 width = 2.0
-default_color = Color( 1, 0, 0, 0.25098 )
+default_color = Color(1, 0, 0, 0.25098)
 
 [node name="Line2D3" type="Line2D" parent="."]
-points = PoolVector2Array( 0, 0, 1024, 0 )
+points = PackedVector2Array(0, 0, 1024, 0)
 width = 14.0
-default_color = Color( 1, 0.511719, 0.511719, 0.25098 )
+default_color = Color(1, 0.511719, 0.511719, 0.25098)
 
 [node name="Line2D2" type="Line2D" parent="."]
-position = Vector2( 0, 8 )
-points = PoolVector2Array( 0, 0, 1024, 0 )
+position = Vector2(0, 8)
+points = PackedVector2Array(0, 0, 1024, 0)
 width = 2.0
-default_color = Color( 1, 0, 0, 0.25098 )
+default_color = Color(1, 0, 0, 0.25098)

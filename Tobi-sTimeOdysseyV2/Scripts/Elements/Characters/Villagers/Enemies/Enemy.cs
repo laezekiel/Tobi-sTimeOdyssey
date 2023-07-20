@@ -76,25 +76,111 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies
             }
 
 
-            Tween lRot = GetTree().CreateTween();
+            animation = CreateTween();
 
 
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotOrigin), time / 2);
-            lRot.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotOrigin), time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
 
 
-            lRot.Play();
+            animation.Play();
 
 
             await Task.Delay((int)(1.5f * time * 1000));
 
 
-            lRot.Dispose();
+            if (doAction == Turn && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing))
+            {
+                animation.Kill();
+
+                if (pattern == Pattern.Patrolling) SetModeForward();
+                else SetModeSurveilling();
+            }
+        }
+
+        protected virtual async void SetModeKnockOut(float pRot)
+        {
+            doAction = KnockOut;
+            if (animation != null) animation.Kill();
+
+            SwitchState("dead");
+            check.Monitoring = sight.Enabled = false;
+
+            await Task.Delay((int)(2.5f * time * 1000));
+
+            SwitchState("idle");
+            check.Monitoring = sight.Enabled = true;
+
+            SetModeControl(pRot);
+        }
+
+        protected virtual async void SetModeControl(float pRot)
+        {
+            doAction = Control;
+            animation = CreateTween();
+
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, pRot, time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, pRot - 0.25f * pRot, time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, pRot + 0.25f * pRot, time / 2);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, 0, time / 2);
+
+            await Task.Delay((int)(2 * time * 1000));
+
+            if (doAction == Control && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing))
+            {
+                animation.Kill();
+
+                if (pattern == Pattern.Patrolling) SetModeForward();
+                else SetModeSurveilling();
+            }
+        }
 
 
-            if (pattern == Pattern.Patrolling) SetModeForward();
-            else SetModeSurveilling();
+
+        public virtual void KnockOut()
+        {
+
+        }
+
+        protected virtual void Control()
+        {
+
+        }
+
+
+
+        public void LoseLife()
+        {
+            _currentLife--;
+            if(_currentLife == 0)
+            {
+                if (animation != null) animation.Kill();
+
+                QueueFree();
+            }
+            else
+            {
+                float rotation = GlobalPosition.AngleToPoint(POC.Player_Position);
+                SetModeKnockOut(rotation);
+            }
+        }
+
+        protected virtual void SwitchState(string pState)
+        {
+            switch (pState)
+            {
+                case "dead":
+                    body.Animation = "dead";
+                    check.Monitoring = sight.Enabled = false;
+                    break;
+                case "idle":
+                    body.Animation = "idle";
+                    check.Monitoring = sight.Enabled = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

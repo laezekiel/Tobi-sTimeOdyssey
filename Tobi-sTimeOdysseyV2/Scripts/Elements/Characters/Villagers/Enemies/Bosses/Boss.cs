@@ -1,4 +1,6 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
+using Godot.Collections;
 using System;
 
 
@@ -59,5 +61,43 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies.
 
             awarenessFull.RotationDegrees += .25f;
         }
-	}
+
+
+
+        protected override void SwitchState(string pState)
+        {
+            base.SwitchState(pState);
+
+			switch (pState)
+			{
+				case "dead":
+					awarenessCheck.Monitoring = awarenessSight.Enabled = false;
+					break;
+				case "idle":
+                    awarenessCheck.Monitoring = awarenessSight.Enabled = true;
+                    break;
+                default:
+					break;
+			}
+		}
+
+        protected override void KillPlayer()
+        {
+            base.KillPlayer();
+
+            Array<Node2D> array = awarenessCheck.GetOverlappingBodies();
+
+            foreach (Node2D node in array)
+            {
+                if (node is Player)
+                {
+                    animation.Kill();
+                    body.Animation = "happy";
+                    State.SetLoseTypeToCaught();
+                    State.SetGameToCaught();
+                }
+                else continue;
+            }
+        }
+    }
 }

@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Tobi-s Time Odyssey V 2"
-run/main_scene="res://GameScreensAndScenes/LevelGenerator.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+run/main_scene="res://GameScreensAndScenes/LoadingScreen.tscn"
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [dotnet]
@@ -37,3 +38,4 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

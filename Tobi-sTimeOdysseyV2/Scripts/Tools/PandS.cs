@@ -192,6 +192,42 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 
 
+		public struct AREA_2D_P
+		{
+			public AREA_2D_P() 
+			{
+				_monitoring = "monitoring";
+				_monitorable = "monitorable";
+				_priority = "priority";
+				_gravitySpaceOverride = "gravity_space_override";
+				_linearDampSpaceOverride = "linear_damp_space_override";
+				_angularDampSpaceOverride = "angular_damp_space_override";
+				_override = "audio_bus_override";
+				_name = "audio_bus_name";
+            }
+
+			private string
+				_monitoring,
+				_monitorable,
+				_priority,
+				_gravitySpaceOverride,
+				_linearDampSpaceOverride,
+				_angularDampSpaceOverride,
+				_override,
+				_name;
+
+			public string Monitoring { get { return _monitoring; } }
+			public string Monitorable { get { return _monitorable;} }
+			public string Priority { get { return _priority;} }
+			public string GravityySpaceOverride { get { return _gravitySpaceOverride;} }
+			public string LinearDampSpaceOverride { get { return _linearDampSpaceOverride;} }
+			public string AngularDampSpaceOverride { get { return _angularDampSpaceOverride;} }
+			public string Override { get { return _override;} }
+			public string Name { get { return _name;} }
+		}
+
+
+
 		public struct OBJECT_S
 		{
 			public OBJECT_S()
@@ -273,6 +309,42 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 
 
+		public struct AREA_2D_S
+		{
+			public AREA_2D_S() 
+			{
+				_areaEntered = "area_entered";
+                _areaExited = "area_exited";
+                _areaShapeEntered = "area_shape_entered";
+                _areaShapeExited = "_area_shape_exited";
+                _bodyEntered = "_body_entered";
+                _bodyExited = "_body_exited";
+                _bodyShapeEntered = "_body_shape_entered";
+                _bodyShapeExited = "_body_shape_exited";
+            }
+
+			private string
+				_areaEntered,
+				_areaExited,
+				_areaShapeEntered,
+				_areaShapeExited,
+				_bodyEntered,
+				_bodyExited,
+				_bodyShapeEntered,
+				_bodyShapeExited;
+
+			public string Area_Entered { get { return _areaEntered;} }
+			public string Area_Exited { get { return _areaExited;} }
+			public string Area_Shape_Entered { get { return _areaShapeEntered;} }
+			public string Area_Shape_Exited { get { return _areaShapeExited;} }
+			public string Body_Entered { get { return _bodyEntered;} }
+			public string Body_Exited { get { return _bodyExited;} }
+			public string Body_Shape_Entered { get { return _bodyShapeEntered;} }
+			public string Body_Shape_Exited { get { return _bodyShapeExited;} }
+		}
+
+
+
 		public struct COLLISION_OBJECT_2D_S
 		{
 			public COLLISION_OBJECT_2D_S() 
@@ -315,6 +387,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 				_collisionObject2D = new COLLISION_OBJECT_2D_P();
 
 				_characterBody2D = new CHARACTER_BODY_2D_P();
+
+				_area2D = new AREA_2D_P();
 			}
 
 
@@ -328,6 +402,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 			private CHARACTER_BODY_2D_P _characterBody2D;
 
+			private AREA_2D_P _area2D;
+
 
 			public NODE_P Node { get { return _node; } }
 
@@ -338,6 +414,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 			public COLLISION_OBJECT_2D_P Collision_Object_2D { get { return _collisionObject2D; } }
 	
 			public CHARACTER_BODY_2D_P Character_Body_2D { get { return _characterBody2D; } }
+
+			public AREA_2D_P Area_2D { get { return _area2D; } }
 		}
 
 
@@ -353,6 +431,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 				_canvasItem = new CANVAS_ITEM_S() { };
 
 				_collisionObject2D = new COLLISION_OBJECT_2D_S();
+				
+				_area_2D = new AREA_2D_S();
 			}
 
 
@@ -364,6 +444,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 			private COLLISION_OBJECT_2D_S _collisionObject2D;
 
+			private AREA_2D_S _area_2D;
+
 
 			public OBJECT_S Objects { get { return _objects;} }
 
@@ -372,6 +454,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 			public CANVAS_ITEM_S Canvas_Item { get { return _canvasItem; } }
 
 			public COLLISION_OBJECT_2D_S Collision_Object_2D { get { return _collisionObject2D; }}
+
+			public AREA_2D_S Area_2D { get { return _area_2D; } }
 		}
 
 

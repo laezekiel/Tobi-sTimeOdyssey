@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsc5r40q6sd0o"]
 
-[ext_resource type="TileSet" uid="uid://b7tm3yoflsru3" path="res://Assets/GodotSubElement/TileSet/Character.tres" id="1_xomsx"]
+[ext_resource type="TileSet" uid="uid://vg8cw00dtgld" path="res://Assets/GodotSubElement/TileSet/Characters.tres" id="1_x0kax"]
 
 [node name="Characters" type="TileMap"]
-tile_set = ExtResource("1_xomsx")
+tile_set = ExtResource("1_x0kax")
 format = 2

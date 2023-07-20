@@ -1,0 +1,87 @@
+[gd_resource type="TileSet" load_steps=37 format=3 uid="uid://hg48j1tearp0"]
+
+[ext_resource type="PackedScene" uid="uid://bldol3m3e2tr4" path="res://Assets/Scenes/Wall/wall_Top_Temp.tscn" id="1_7vx0a"]
+[ext_resource type="PackedScene" uid="uid://cjs3qphi8m05r" path="res://Assets/Scenes/Wall/UTurn_Right_Temp.tscn" id="2_8q6dh"]
+[ext_resource type="PackedScene" uid="uid://c4euhg7c83pqa" path="res://Assets/Scenes/Wall/wall_Right_Temp.tscn" id="2_nee4x"]
+[ext_resource type="PackedScene" uid="uid://ddu7765g0lple" path="res://Assets/Scenes/Wall/UTurn_Bottom_Temp.tscn" id="3_1t4h5"]
+[ext_resource type="PackedScene" uid="uid://bp117a45msn3n" path="res://Assets/Scenes/Wall/wall_Bottom_Temp.tscn" id="3_2cuut"]
+[ext_resource type="PackedScene" uid="uid://bx0e6svqt05sa" path="res://Assets/Scenes/Wall/UTurn_Left.tscn" id="4_1ebk2"]
+[ext_resource type="PackedScene" uid="uid://b3veef3rqxcc4" path="res://Assets/Scenes/Wall/wall_Left_Temp.tscn" id="4_uqj3x"]
+[ext_resource type="PackedScene" uid="uid://cvreboq5e31c3" path="res://Assets/Scenes/Wall/Square.tscn" id="5_3lstg"]
+[ext_resource type="PackedScene" uid="uid://b514uqy5v1c2p" path="res://Assets/Scenes/Wall/Corner_RT_Temp.tscn" id="5_lgw2n"]
+[ext_resource type="PackedScene" uid="uid://bjhw7cmjxmaxv" path="res://Assets/Scenes/Wall/wall_Top_Bottom.tscn" id="6_iay46"]
+[ext_resource type="PackedScene" uid="uid://dedithbixqrvb" path="res://Assets/Scenes/Wall/Corner_RB_Temp.tscn" id="6_x01mr"]
+[ext_resource type="PackedScene" uid="uid://u3kchyi1kw7j" path="res://Assets/Scenes/Wall/Corner_LB_Temp.tscn" id="7_gosdn"]
+[ext_resource type="PackedScene" uid="uid://dr8xci2yri15y" path="res://Assets/Scenes/Wall/wall_Left_Right.tscn" id="7_n0vld"]
+[ext_resource type="PackedScene" uid="uid://cug3pg6rbphh4" path="res://Assets/Scenes/Wall/Corner_LT_Temp.tscn" id="8_35fmn"]
+[ext_resource type="PackedScene" uid="uid://bve8ccuwieofx" path="res://Assets/Scenes/Wall/UTurn_Top.tscn" id="15_ifwrp"]
+[ext_resource type="PackedScene" uid="uid://qikhihcy06vk" path="res://Assets/Scenes/Wall/Boucer/boucer_Top.tscn" id="16_k1vqa"]
+[ext_resource type="PackedScene" uid="uid://boaryuw3k78db" path="res://Assets/Scenes/Wall/Boucer/boucer_Right.tscn" id="23_v577f"]
+[ext_resource type="PackedScene" uid="uid://bayk6q6eo2f21" path="res://Assets/Scenes/Wall/Shooter/Shooter_T.tscn" id="24_cdhe5"]
+[ext_resource type="PackedScene" uid="uid://fw3epbeetlny" path="res://Assets/Scenes/Wall/Boucer/boucer_Bottom.tscn" id="24_prci3"]
+[ext_resource type="PackedScene" uid="uid://dv8u4n455pwmx" path="res://Assets/Scenes/Wall/Shooter/Shooter_R.tscn" id="25_lvgd8"]
+[ext_resource type="PackedScene" uid="uid://dhv861csb8gbb" path="res://Assets/Scenes/Wall/Boucer/boucer_Left.tscn" id="25_y5frw"]
+[ext_resource type="PackedScene" uid="uid://cuwdow3xfq71c" path="res://Assets/Scenes/Wall/Shooter/Shooter_B.tscn" id="26_b6yw4"]
+[ext_resource type="PackedScene" uid="uid://btkwbl0ydurbm" path="res://Assets/Scenes/Wall/Shooter/Shooter_L.tscn" id="27_yxoyo"]
+[ext_resource type="PackedScene" uid="uid://8ag4b3v4ga4x" path="res://Assets/Scenes/Wall/Hot/hot_T.tscn" id="28_tjn5b"]
+[ext_resource type="PackedScene" uid="uid://cgrargollfq6t" path="res://Assets/Scenes/Wall/Hot/hot_R.tscn" id="29_0mppx"]
+[ext_resource type="PackedScene" uid="uid://cgo1ws8rln7sc" path="res://Assets/Scenes/Wall/Hot/hot_B.tscn" id="30_gw71i"]
+[ext_resource type="PackedScene" uid="uid://bcoc6oduxxfya" path="res://Assets/Scenes/Wall/Spike/spike_T.tscn" id="31_56t3u"]
+[ext_resource type="PackedScene" uid="uid://8qnaybvahyip" path="res://Assets/Scenes/Wall/Hot/hot_L.tscn" id="31_kccfa"]
+[ext_resource type="PackedScene" uid="uid://bxxcp7nkou85f" path="res://Assets/Scenes/Wall/Spike/spike_R.tscn" id="38_r5lgx"]
+[ext_resource type="PackedScene" uid="uid://bimdwaxe1sk7w" path="res://Assets/Scenes/Wall/Spike/spike_B.tscn" id="39_bbr16"]
+[ext_resource type="PackedScene" uid="uid://bem8jhx6tfv0d" path="res://Assets/Scenes/Wall/Spike/spike_L.tscn" id="40_68gst"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yeqdt"]
+resource_name = "Walls_simple"
+scenes/1/scene = ExtResource("1_7vx0a")
+scenes/2/scene = ExtResource("2_nee4x")
+scenes/3/scene = ExtResource("3_2cuut")
+scenes/4/scene = ExtResource("4_uqj3x")
+scenes/5/scene = ExtResource("5_lgw2n")
+scenes/6/scene = ExtResource("6_x01mr")
+scenes/7/scene = ExtResource("7_gosdn")
+scenes/8/scene = ExtResource("8_35fmn")
+scenes/9/scene = ExtResource("15_ifwrp")
+scenes/10/scene = ExtResource("2_8q6dh")
+scenes/11/scene = ExtResource("3_1t4h5")
+scenes/12/scene = ExtResource("4_1ebk2")
+scenes/13/scene = ExtResource("5_3lstg")
+scenes/14/scene = ExtResource("6_iay46")
+scenes/15/scene = ExtResource("7_n0vld")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jytxg"]
+resource_name = "Bouncer"
+scenes/1/scene = ExtResource("16_k1vqa")
+scenes/2/scene = ExtResource("23_v577f")
+scenes/3/scene = ExtResource("24_prci3")
+scenes/4/scene = ExtResource("25_y5frw")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ughiy"]
+resource_name = "Spike"
+scenes/1/scene = ExtResource("31_56t3u")
+scenes/2/scene = ExtResource("38_r5lgx")
+scenes/3/scene = ExtResource("39_bbr16")
+scenes/4/scene = ExtResource("40_68gst")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0uttu"]
+resource_name = "Shooter"
+scenes/1/scene = ExtResource("24_cdhe5")
+scenes/2/scene = ExtResource("25_lvgd8")
+scenes/3/scene = ExtResource("26_b6yw4")
+scenes/4/scene = ExtResource("27_yxoyo")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_opj7l"]
+resource_name = "Hot"
+scenes/1/scene = ExtResource("28_tjn5b")
+scenes/2/scene = ExtResource("29_0mppx")
+scenes/3/scene = ExtResource("30_gw71i")
+scenes/4/scene = ExtResource("31_kccfa")
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_yeqdt")
+sources/1 = SubResource("TileSetScenesCollectionSource_jytxg")
+sources/2 = SubResource("TileSetScenesCollectionSource_ughiy")
+sources/3 = SubResource("TileSetScenesCollectionSource_0uttu")
+sources/4 = SubResource("TileSetScenesCollectionSource_opj7l")

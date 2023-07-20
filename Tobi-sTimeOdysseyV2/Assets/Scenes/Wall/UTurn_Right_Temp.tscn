@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjs3qphi8m05r"]
+
+[ext_resource type="PackedScene" uid="uid://x1th6725lrsb" path="res://Assets/Scenes/Wall/Graph/wall_Graph_Simple.tscn" id="1_48pjs"]
+
+[node name="StaticBody2D5" type="Node2D"]
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("1_48pjs")]
+position = Vector2(32, 0)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("1_48pjs")]
+position = Vector2(0, 32)
+rotation = 1.5708
+
+[node name="StaticBody2D4" parent="." instance=ExtResource("1_48pjs")]
+position = Vector2(0, -32)
+rotation = 1.5708
