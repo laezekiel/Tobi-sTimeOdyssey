@@ -68,7 +68,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies.
         {
             base.SwitchState(pState);
 
-			switch (pState)
+            switch (pState)
 			{
 				case "dead":
 					awarenessCheck.Monitoring = awarenessSight.Enabled = false;
@@ -89,7 +89,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies.
 
             foreach (Node2D node in array)
             {
-                if (node is Player)
+                if (node is Player && killer.GetCollider() is Player)
                 {
                     animation.Kill();
                     body.Animation = "happy";

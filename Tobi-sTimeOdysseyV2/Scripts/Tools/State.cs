@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Com.BeerAndDev.TobisTimeOdyssey.Data;
 using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters;
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies;
 using Com.BeerAndDev.TobisTimeOdyssey.Scenes;
 using Godot;
 using Godot.Collections;
@@ -19,6 +21,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
             Player_Aiming,
             Player_Dashing,
             Player_Caught,
+            Player_Win,
             Cinematics,
             Pause,
         }
@@ -100,9 +103,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
 
 
 
-        public static LevelIndex Level_Index { get { return _levelIndex; } }
-
-        private static LevelIndex _levelIndex = new LevelIndex(MissionType.Tutorial, 1, 1);
+        public static LevelIndex Level_Index { get { return Database.GetProgressionInfo(); } }
 
 
 
@@ -123,6 +124,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Tools
         public static void SetGameToDash() => _curentState = GameState.Player_Dashing;
         
         public static void SetGameToCaught() => _curentState = GameState.Player_Caught;
+
+        public static void SetGameToWin() => _curentState = GameState.Player_Win;
         
         public static void SetGameToCinematic() => _curentState = GameState.Cinematics;
         

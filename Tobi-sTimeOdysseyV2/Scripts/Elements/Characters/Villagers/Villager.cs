@@ -1,3 +1,5 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns;
+using Com.BeerAndDev.TobisTimeOdyssey.Scenes;
 using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
 using Godot.Collections;
@@ -111,9 +113,11 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
                     break;
 				default:
 					break;
-			}
+            }
 
-			pattern = (Pattern)State.villagerMode;
+            LevelGenerator.Villager_List.Add(this);
+
+			pattern = (Pattern)LevelGenerator.Pattern_List[LevelGenerator.Villager_List.IndexOf(this)];
         }
 
 
@@ -203,7 +207,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
             animation = CreateTween();
 
 
-            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time);
+            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
 
 
             animation.Play();
@@ -293,9 +297,12 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers
             GlobalPosition += direction * speed * deltaExt;
 
 
-            if (forward.GetCollider() != null)
+            if (forward.GetCollider() != null || forward2.GetCollider() != null)
             {
-                SetModeTurn();
+				if (!(forward.GetCollider() is AddOn || forward2.GetCollider() is AddOn))
+                {
+                    SetModeTurn();
+                }
             }
         }
 

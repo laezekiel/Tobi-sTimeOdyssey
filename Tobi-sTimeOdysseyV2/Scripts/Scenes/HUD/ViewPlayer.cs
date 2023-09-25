@@ -6,7 +6,7 @@ using System;
 
 // Author : Ironee
 
-namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
+namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes.HUD
 {
 	public partial class ViewPlayer : Camera2D
 	{
@@ -90,8 +90,10 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
                 case State.GameState.Player_Dashing:
                     break;
 				case State.GameState.Player_Caught:
-					break;
-				case State.GameState.Cinematics:
+                case State.GameState.Player_Win:
+                    if (dash.Visible && aim.Visible) { SwitchHUD(); }
+                    break;
+                case State.GameState.Cinematics:
 					break;
 				case State.GameState.Pause:
 					break;
@@ -117,7 +119,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
 
 			if (POC.Player_Can_Jump)
             {
-                dash.Modulate = POC.AllColor.Visible;
+                dash.Modulate = POC.AllColor.HalfVisible;
                 if (Input.IsActionJustPressed("Dash"))
                 {
                     State.SetGameToDash();
@@ -127,7 +129,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements
             }
 			else
 			{
-				dash.Modulate = POC.AllColor.HalfVisible;
+				dash.Modulate = POC.AllColor.Invisible;
 			}
 
 

@@ -22,6 +22,7 @@ bodyPath = NodePath("body")
 sightPath = NodePath("sight")
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
+scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(-8, -18, 8, -18, 18, -8, 18, 8, 8, 18, -8, 18, -18, 8, -18, -8)
 
 [node name="body" type="AnimatedSprite2D" parent="."]

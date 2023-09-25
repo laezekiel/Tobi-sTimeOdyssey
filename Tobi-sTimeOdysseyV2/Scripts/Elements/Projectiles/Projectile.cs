@@ -61,6 +61,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Projectiles
                     break;
                 case State.GameState.Player_Caught:
                     break;
+                case State.GameState.Player_Win:
+                    break;
                 case State.GameState.Cinematics:
                     break;
                 case State.GameState.Pause:

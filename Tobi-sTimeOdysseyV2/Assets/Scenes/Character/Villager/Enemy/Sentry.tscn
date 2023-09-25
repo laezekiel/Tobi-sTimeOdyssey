@@ -28,6 +28,7 @@ polygon = PackedVector2Array(-8, -18, 8, -18, 18, -8, 18, 8, 8, 18, -8, 18, -18,
 [node name="body" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -0.25)
 rotation = -1.5708
+scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("1_2ol30")
 animation = &"idle"
 
@@ -40,7 +41,6 @@ shadow_item_cull_mask = 3
 texture = ExtResource("2_g4q0b")
 
 [node name="occluder" type="LightOccluder2D" parent="."]
-scale = Vector2(1.35, 1.35)
 occluder = ExtResource("3_117mx")
 occluder_light_mask = 2
 
@@ -51,18 +51,18 @@ scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, 125, -52, 132, -35, 136, 0, 132, 35, 125, 52)
 
 [node name="Right" type="RayCast2D" parent="."]
-target_position = Vector2(0, 33)
+target_position = Vector2(0, 34)
 
 [node name="Left" type="RayCast2D" parent="."]
-target_position = Vector2(0, -33)
+target_position = Vector2(0, -34)
 
 [node name="Straight" type="RayCast2D" parent="."]
-position = Vector2(0, -28)
-target_position = Vector2(33, 0)
+position = Vector2(0, -24)
+target_position = Vector2(34, 0)
 
 [node name="Straight2" type="RayCast2D" parent="."]
-position = Vector2(0, 28)
-target_position = Vector2(33, 0)
+position = Vector2(0, 24)
+target_position = Vector2(34, 0)
 
 [node name="killer" type="RayCast2D" parent="."]
 target_position = Vector2(272, 0)

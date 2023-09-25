@@ -30,6 +30,14 @@ Dash={
 "deadzone": 0.5,
 "events": []
 }
+Retry={
+"deadzone": 0.5,
+"events": []
+}
+Next={
+"deadzone": 0.5,
+"events": []
+}
 
 [input_devices]
 

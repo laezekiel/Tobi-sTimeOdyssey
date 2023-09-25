@@ -112,8 +112,6 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 			}
         }
 
-
-
         public override void GameStateIsCaught()
         {
             base.GameStateIsCaught();
@@ -133,12 +131,21 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 			}
 		}
 
+        public override void GameStateIsWin()
+        {
+            base.GameStateIsWin();
+
+            body.Animation = "happy";
+        }
+
 
 
         public void CheckEntered(Node2D pBody)
         {
             switch (pBody)
             {
+				case Shooter _:
+				case Hot _:
                 case Wall _:
                     CollideWall(pBody as Wall);
                     break;

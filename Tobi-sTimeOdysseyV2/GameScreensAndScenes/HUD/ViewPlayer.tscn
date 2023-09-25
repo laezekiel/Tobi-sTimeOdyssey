@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://br7g0a5305ydh"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/HUD/ViewPlayer.cs" id="1_ed1to"]
+[ext_resource type="Material" uid="uid://cu1hmat6nt334" path="res://Assets/GodotSubElement/Material/CanvasItem/overShadow.tres" id="2_7i3rq"]
+[ext_resource type="Texture2D" uid="uid://on2cainiwnpf" path="res://Assets/Texture/cursor/DASH_BUTTON.png" id="3_ihpvx"]
+[ext_resource type="Texture2D" uid="uid://bpyf4kh3ras2" path="res://Assets/Texture/cursor/arrowBrown_right.png" id="4_b8uwr"]
+[ext_resource type="Texture2D" uid="uid://brk7i6xteb5n5" path="res://Assets/Texture/cursor/iconCircle_brown.png" id="5_tul1t"]
+[ext_resource type="Texture2D" uid="uid://x1cxdp7etdgl" path="res://Assets/Texture/cursor/buttonRound_brown.png" id="6_7rm1k"]
+[ext_resource type="PackedScene" uid="uid://b8bgl1f581xx2" path="res://GameScreensAndScenes/HUD/LoseScreen.tscn" id="7_4gndt"]
+[ext_resource type="PackedScene" uid="uid://dx6i444lr802b" path="res://GameScreensAndScenes/HUD/WinScreen.tscn" id="8_kpwur"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66i01"]
+radius = 96.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uv8ra"]
+radius = 224.0
+
+[node name="ViewPlayer" type="Camera2D"]
+script = ExtResource("1_ed1to")
+aimCursorPath = NodePath("aim/joystick")
+aimPath = NodePath("aim")
+dashPath = NodePath("dash")
+
+[node name="dash" type="TouchScreenButton" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("2_7i3rq")
+position = Vector2(256, 4)
+texture_normal = ExtResource("3_ihpvx")
+shape = SubResource("CircleShape2D_66i01")
+action = "Dash"
+
+[node name="aim" type="TouchScreenButton" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("2_7i3rq")
+position = Vector2(-352, 100)
+shape = SubResource("CircleShape2D_uv8ra")
+passby_press = true
+action = "Aim"
+
+[node name="left" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+scale = Vector2(4, 4)
+texture = ExtResource("4_b8uwr")
+offset = Vector2(36, 0)
+
+[node name="down" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 1.5708
+scale = Vector2(4, 4)
+texture = ExtResource("4_b8uwr")
+offset = Vector2(36, 0)
+
+[node name="right" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("4_b8uwr")
+offset = Vector2(36, 0)
+
+[node name="up" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 4.71239
+scale = Vector2(4, 4)
+texture = ExtResource("4_b8uwr")
+offset = Vector2(36, 0)
+
+[node name="point1" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_tul1t")
+offset = Vector2(416, 416)
+
+[node name="point2" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_tul1t")
+offset = Vector2(416, 416)
+
+[node name="point3" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 3.14159
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_tul1t")
+offset = Vector2(416, 416)
+
+[node name="point4" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+rotation = 4.71239
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_tul1t")
+offset = Vector2(416, 416)
+
+[node name="under" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+texture = ExtResource("5_tul1t")
+offset = Vector2(0, 8)
+
+[node name="joystick" type="Sprite2D" parent="aim"]
+material = ExtResource("2_7i3rq")
+texture = ExtResource("6_7rm1k")
+offset = Vector2(0, 8)
+
+[node name="LoseScreen" parent="." instance=ExtResource("7_4gndt")]
+material = ExtResource("2_7i3rq")
+
+[node name="WinScreen" parent="." instance=ExtResource("8_kpwur")]
+material = ExtResource("2_7i3rq")

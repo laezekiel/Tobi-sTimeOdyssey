@@ -1,3 +1,4 @@
+using Com.BeerAndDev.TobisTimeOdyssey.Scenes;
 using Com.BeerAndDev.TobisTimeOdyssey.Tools;
 using Godot;
 using System;
@@ -37,7 +38,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies
         public override void _Ready()
 		{
 			base._Ready();
-		}
+
+            LevelGenerator.Enemy_List.Add(this);
+        }
 
 
 
@@ -80,14 +83,14 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies
 
 
             animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
-            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotOrigin), time / 2);
-            animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
+            //animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotOrigin), time / 2);
+            //animation.TweenProperty(this, PandS.Properties.Node_2D.Rotation, Mathf.DegToRad(lRotTODO), time / 2);
 
 
             animation.Play();
 
 
-            await Task.Delay((int)(1.5f * time * 1000));
+            await Task.Delay((int)(2f * time * 1000));
 
 
             if (doAction == Turn && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing))
@@ -156,6 +159,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies
             if(_currentLife == 0)
             {
                 if (animation != null) animation.Kill();
+
+                LevelGenerator.Enemy_List.RemoveAt(LevelGenerator.Enemy_List.IndexOf(this));
 
                 QueueFree();
             }

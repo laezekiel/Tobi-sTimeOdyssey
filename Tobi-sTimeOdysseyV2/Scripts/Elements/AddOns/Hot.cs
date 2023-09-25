@@ -80,6 +80,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns
 					}
                     break;
                 case State.GameState.Player_Caught:
+                case State.GameState.Player_Win:
                 case State.GameState.Cinematics:
                 case State.GameState.Loading:
                 case State.GameState.Pause:

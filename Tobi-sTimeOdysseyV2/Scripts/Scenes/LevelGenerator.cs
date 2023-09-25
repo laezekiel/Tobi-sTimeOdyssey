@@ -4,10 +4,9 @@ using System;
 using System.IO;
 using Godot.Collections;
 using System.Collections.Generic;
-using Com.BeerAndDev.TobisTimeOdyssey.Elements;
+using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers.Enemies;
 using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters;
 using Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters.Villagers;
-using System.Security.Cryptography.X509Certificates;
 
 
 // Author : Ironee
@@ -16,7 +15,24 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
 {
 	public partial class LevelGenerator : Node2D
 	{
-		public enum LevelKeys
+        //static private LevelGenerator _instance;
+
+        //static public LevelGenerator Instance
+        //{
+        //    get
+        //    {
+        //        if (_instance == null) _instance = new LevelGenerator();
+        //        return _instance;
+        //    }
+        //}
+
+
+
+        //private LevelGenerator() : base() { }
+
+
+
+        public enum LevelKeys
 		{
 			Era,
 			Place,
@@ -226,6 +242,17 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
 
 
 
+        public static List<Villager>
+            Villager_List;
+
+        public static List<Enemy>
+            Enemy_List;
+
+		public static List<int>
+			Pattern_List;
+
+
+
         public void Init()
 		{
 			floor = GetNode<TileMap>(floorPath);
@@ -238,7 +265,16 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
         public override void _Ready()
 		{
 			base._Ready();
-			Init();
+
+            //if (_instance != null)
+            //{
+            //    QueueFree();
+            //    GD.Print(nameof(LevelGenerator) + " Instance already exist, destroying the last added.");
+            //    return;
+            //}
+            //else _instance = new LevelGenerator();
+
+            Init();
 
             ReadJSONLevel();
 		}
@@ -248,6 +284,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
+
+			if (Enemy_List.Count == 0 && (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing)) State.SetGameToWin();
 		}
 
 
@@ -410,6 +448,10 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
 			}
 
 
+			Enemy_List = new List<Enemy>();
+			Villager_List = new List<Villager>();
+			Pattern_List = new List<int>();
+
 			for (int x = 2; x < 5; x++)
 			{
 				Vector2I test = new Vector2I(x, 1);
@@ -425,9 +467,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Scenes
 						{
 							character.SetCell(x - 1, new Vector2I(i, j), x, Vector2I.Zero, 1);
 
-							State.villagerMode = temp[j][i].ToString().ToInt();
+							Pattern_List.Add(temp[j][i].ToString().ToInt());
                         }
-					}
+                    }
 				}
 			}
 

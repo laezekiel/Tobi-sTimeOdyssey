@@ -72,6 +72,9 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
 
             switch (State.Current_State)
             {
+                case State.GameState.Player_Win:
+                    GameStateIsWin();
+                    break;
                 case State.GameState.Loading:
                     GameStateIsLoading();
                     break;
@@ -104,6 +107,8 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.Characters
         public virtual void GameStateIsDashing() { }
 
         public virtual void GameStateIsCaught() { }
+
+        public virtual void GameStateIsWin() { }
 
         public virtual void GameStateIsCinematics() { }
 

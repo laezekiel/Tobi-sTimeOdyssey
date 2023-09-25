@@ -24,21 +24,72 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns
 			clr,
 			ctl,
 			ctr,
+			ctc,
 			ltc,
 			ltr,
+			ltl,
 			rtl,
 			rtc,
+			rtr,
 			ctrl,
-			cltr,
+            ctcr,
+            ctcl,
+            ctclr,
+            cltr,
+            cltl,
+            cltc,
+            cltlr,
+            cltcr,
+            cltcl,
+            cltclr,
 			crtl,
-			ltrc,
-			lrtc,
+            crtr,
+            crtc,
+            crtlr,
+            crtcr,
+            crtcl,
+            crtclr,
+            ltrc,
+            ltlr,
+            ltcl,
+            ltclr,
+            lrtc,
+			lrtl,
+			lrtr,
+			lrtcl,
+			lrtcr,
+			lrtlr,
+			lrtclr,
 			rtcl,
-			ctltr,
+            rtlr,
+            rtcr,
+            rtclr,
+            ctltr,
+            ctltc,
+            ctltl,
 			ctrtl,
+			ctrtr,
+			ctrtc,
+			ctctc,
+			ctctr,
+			ctctl,
 			ltctr,
+			ltctl,
+			ltctc,
 			ltrtc,
+			ltrtl,
+			ltrtr,
+			ltltr,
+			ltltl,
+			ltltc,
 			rtctl,
+			rtctr,
+			rtctc,
+			rtrtc,
+			rtrtl,
+			rtrtr,
+			rtltr,
+			rtltl,
 			rtltc
 		}
 
@@ -101,13 +152,16 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns
 
 		public override void _Process(double delta)
 		{
-			base._Process(delta); switch (State.Current_State)
+			base._Process(delta); 
+
+			switch (State.Current_State)
             {
                 case State.GameState.Player_Aiming:
                 case State.GameState.Player_Dashing:
                     if (t.Paused) t.Paused = false;
                     break;
                 case State.GameState.Player_Caught:
+                case State.GameState.Player_Win:
                 case State.GameState.Cinematics:
                 case State.GameState.Loading:
                 case State.GameState.Pause:
@@ -130,7 +184,7 @@ namespace Com.BeerAndDev.TobisTimeOdyssey.Elements.AddOns
 				sequence.Add(String);
 			}
 
-            newWaitTime = 0;
+            newWaitTime = 1;
 
 			if (State.Current_State == State.GameState.Player_Aiming || State.Current_State == State.GameState.Player_Dashing) Shoot(sequence);
         }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dreptxie6yhoy"]
+[gd_scene load_steps=3 format=3 uid="uid://dreptxie6yhoy"]
 
 [ext_resource type="Script" path="res://Scripts/Elements/Projectiles/Shuriken.cs" id="1_ceh5n"]
+[ext_resource type="Material" uid="uid://cu1hmat6nt334" path="res://Assets/GodotSubElement/Material/CanvasItem/overShadow.tres" id="2_h3f11"]
 
 [node name="Shuriken" type="Node2D"]
 script = ExtResource("1_ceh5n")
@@ -8,6 +9,12 @@ bodyPath = NodePath("Body")
 killerPath = NodePath("Killer")
 
 [node name="Body" type="Node2D" parent="."]
+material = ExtResource("2_h3f11")
+scale = Vector2(0.83, 0.83)
+
+[node name="border" type="Polygon2D" parent="Body"]
+material = ExtResource("2_h3f11")
+polygon = PackedVector2Array(12, 0, 3.66, 3.66, 0, 12, -3.66, 3.66, -12, 0, -3.66, -3.66, 0, -12, 3.66, -3.66, 3, -3, 0, -10, -3, -3, -10, 0, -3, 3, 0, 10, 3, 3, 10, 0, 3, -3, 3.66, -3.66)
 
 [node name="middle" type="Polygon2D" parent="Body"]
 color = Color(0.25098, 0.25098, 0.25098, 1)
